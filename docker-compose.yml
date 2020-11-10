@@ -24,7 +24,8 @@ services:
       - FTP_PROXY=$FTP_PROXY
       - ftp_proxy=$ftp_proxy
     command: > # コンテナを立ち上げたタイミングで実行されるコマンド
-      npm run dev
+      ash -c "npm i &&
+      npm run dev"
   flask:
     build:
       context: flask/

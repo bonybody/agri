@@ -20,8 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4ecc7315-c7ae-477d-913e-2b9c153bca5c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/data/aria_log.00000001" beforeDir="false" afterPath="$PROJECT_DIR$/db/data/aria_log.00000001" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/data/aria_log_control" beforeDir="false" afterPath="$PROJECT_DIR$/db/data/aria_log_control" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/data/ib_logfile0" beforeDir="false" afterPath="$PROJECT_DIR$/db/data/ib_logfile0" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/data/ibdata1" beforeDir="false" afterPath="$PROJECT_DIR$/db/data/ibdata1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/data/ibtmp1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +88,7 @@
       <workItem from="1604485506337" duration="3528000" />
       <workItem from="1604568487146" duration="5732000" />
       <workItem from="1604623785046" duration="12829000" />
-      <workItem from="1604888714990" duration="3371000" />
+      <workItem from="1604888714990" duration="5410000" />
     </task>
     <servers />
   </component>
