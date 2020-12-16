@@ -432,4 +432,5 @@ npm-debug.log
 !.vscode/extensions.json
 *.code-workspace
 
+db/data
 # End of https://www.toptal.com/developers/gitignore/api/nuxt,nuxtjs,node,vscode,jetbrains+all,python,flask

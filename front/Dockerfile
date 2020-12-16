@@ -4,5 +4,5 @@ EXPOSE 3000
 
 WORKDIR /app
 
-RUN apk update && \
-    apk add git
+RUN apk update
+RUN npm install -g create-nuxt-app
