@@ -7,4 +7,5 @@ WORKDIR /app
 ADD app/requirements.txt /app
 
 
-RUN pip install -r requirements.txt
+RUN pip install --upgrade pip setuptools && \
+pip install -r requirements.txt

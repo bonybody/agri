@@ -7,13 +7,11 @@ services:
       - "8001:3000"
     volumes: # ホストのディレクトリ:コンテナのディレクトリで指定し同期する
       - "./front/app:/app"
+    tty: true
     environment: # コンテナ内に渡される環境変数
-      - HOST=$HOST
-      - TZ=$TZ
+      - HOST
+      - TZ
 
-    command: > # コンテナを立ち上げたタイミングで実行されるコマンド
-      ash -c "npm i &&
-      npm run dev"
   api:
     build:
       context: api/
@@ -22,8 +20,8 @@ services:
     volumes:
       - "./api/app:/app"
     environment:
-      - HOST=$HOST
-      - TZ=$TZ
+      - HOST
+      - TZ
     command: >
       flask run --host 0.0.0.0 --port 5000
   db:
@@ -34,9 +32,11 @@ services:
     - "./db/data:/var/lib/mysql"
     - "./db/initdb.d:/docker-entrypoint-initdb.d"
     environment:
-      - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
-      - MYSQL_DATABASE=$MYSQL_DATABASE
-      - MYSQL_USER=$MYSQL_USER
-      - MYSQL_PASSWORD=$MYSQL_PASSWORD
+      - HOST
+      - TZ
+      - MYSQL_ROOT_PASSWORD
+      - MYSQL_DATABASE
+      - MYSQL_USER
+      - MYSQL_PASSWORD
 
     
