@@ -3,23 +3,37 @@ services:
   front: # Nuxt.js(フロントエンド)の設定
     build: #Docker Imageをbuildするための設定
       context: front/ #Dockerfileの場所
+      args:
+        - http_proxy
+        - https_proxy
+        - ftp_proxy
     ports: # ホスト:コンテナでPortを対応付ける
       - "8001:3000"
     volumes: # ホストのディレクトリ:コンテナのディレクトリで指定し同期する
       - "./front/app:/app"
     tty: true
     environment: # コンテナ内に渡される環境変数
+      - http_proxy
+      - https_proxy
+      - ftp_proxy
       - HOST
       - TZ
 
   api:
     build:
       context: api/
+      args:
+        - http_proxy
+        - https_proxy
+        - ftp_proxy
     ports:
       - "8002:5000"
     volumes:
       - "./api/app:/app"
-    environment:
+    environment: # コンテナ内に渡される環境変数
+      - http_proxy
+      - https_proxy
+      - ftp_proxy
       - HOST
       - TZ
     command: >
@@ -27,11 +41,14 @@ services:
   db:
     image: mariadb:10.5
     ports:
-    - "3306:3306"
+      - "3306:3306"
     volumes:
-    - "./db/data:/var/lib/mysql"
-    - "./db/initdb.d:/docker-entrypoint-initdb.d"
+      - "./db/data:/var/lib/mysql"
+      - "./db/initdb.d:/docker-entrypoint-initdb.d"
     environment:
+      - http_proxy
+      - https_proxy
+      - ftp_proxy
       - HOST
       - TZ
       - MYSQL_ROOT_PASSWORD
