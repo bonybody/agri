@@ -29,7 +29,7 @@ services:
     ports:
       - "8002:5000"
     volumes:
-      - "./api/app:/app"
+      - "./api:/app"
     environment: # コンテナ内に渡される環境変数
       - http_proxy
       - https_proxy

@@ -1,0 +1,9 @@
+flask
+blueprint
+Cerberus
+Flask-RESTful
+Flask-SQLAlchemy
+Flask-SQLAlchemy-Session
+SQLAlchemy
+marshmallow
+marshmallow-sqlalchemy
