@@ -2,7 +2,7 @@ version: "3"
 services:
   front: # Nuxt.js(フロントエンド)の設定
     build: #Docker Imageをbuildするための設定
-      context: front/ #Dockerfileの場所
+      context: ./infra/front/ #Dockerfileの場所
       args:
         - http_proxy
         - https_proxy
@@ -21,7 +21,7 @@ services:
 
   api:
     build:
-      context: api/
+      context: ./infra/api/
       args:
         - http_proxy
         - https_proxy
