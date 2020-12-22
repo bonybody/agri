@@ -10,7 +10,7 @@ services:
     ports: # ホスト:コンテナでPortを対応付ける
       - "8001:3000"
     volumes: # ホストのディレクトリ:コンテナのディレクトリで指定し同期する
-      - "./front/app:/app"
+      - "./front:/app"
     tty: true
     environment: # コンテナ内に渡される環境変数
       - http_proxy
