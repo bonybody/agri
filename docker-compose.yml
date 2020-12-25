@@ -1,4 +1,7 @@
 version: "3"
+volumes:
+  nuxt-dev-directory:
+  node-modules:
 services:
   front: # Nuxt.js(フロントエンド)の設定
     build: #Docker Imageをbuildするための設定
@@ -10,7 +13,9 @@ services:
     ports: # ホスト:コンテナでPortを対応付ける
       - "8001:3000"
     volumes: # ホストのディレクトリ:コンテナのディレクトリで指定し同期する
-      - "./front:/app"
+      - ./front:/app
+      - nuxt-dev-directory:/app/.nuxt
+      - node-modules:/app/node_modules
     tty: true
     environment: # コンテナ内に渡される環境変数
       - http_proxy
