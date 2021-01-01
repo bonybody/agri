@@ -2,7 +2,7 @@ version: "3"
 volumes:
   volume-nuxt-dev:
   volume-node-modules:
-  volme-db-data:
+  volume-db-data:
 services:
   front: # Nuxt.js(フロントエンド)の設定
     build: #Docker Imageをbuildするための設定
@@ -12,7 +12,7 @@ services:
         - https_proxy
         - ftp_proxy
     ports: # ホスト:コンテナでPortを対応付ける
-      - "8001:3000"
+      - "8001:80"
     volumes: # ホストのディレクトリ:コンテナのディレクトリで指定し同期する
       - ./front:/app
       - volume-nuxt-dev:/app/.nuxt
@@ -23,7 +23,11 @@ services:
       - https_proxy
       - ftp_proxy
       - HOST
+      - PORT
       - TZ
+    command: >
+      bash -c "npm install && npm run dev"
+
 
   api:
     build:
@@ -33,7 +37,7 @@ services:
         - https_proxy
         - ftp_proxy
     ports:
-      - "8002:5000"
+      - "8002:80"
     volumes:
       - "./api:/app"
     environment: # コンテナ内に渡される環境変数
@@ -41,9 +45,10 @@ services:
       - https_proxy
       - ftp_proxy
       - HOST
+      - PORT
       - TZ
     command: >
-      flask run --host 0.0.0.0 --port 5000
+      flask run --host=0.0.0.0 --port=80
   db:
     image: mariadb:10.5
     ports:
