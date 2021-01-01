@@ -31,8 +31,9 @@
 export default {}
 </script>
 
-<style>
+<style lang="scss">
 .container {
+  background-color: $primary-color;
   margin: 0 auto;
   min-height: 100vh;
   display: flex;
