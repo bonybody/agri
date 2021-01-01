@@ -1,7 +1,8 @@
 version: "3"
 volumes:
-  nuxt-dev-directory:
-  node-modules:
+  volume-nuxt-dev:
+  volume-node-modules:
+  volme-db-data:
 services:
   front: # Nuxt.js(フロントエンド)の設定
     build: #Docker Imageをbuildするための設定
@@ -14,8 +15,8 @@ services:
       - "8001:3000"
     volumes: # ホストのディレクトリ:コンテナのディレクトリで指定し同期する
       - ./front:/app
-      - nuxt-dev-directory:/app/.nuxt
-      - node-modules:/app/node_modules
+      - volume-nuxt-dev:/app/.nuxt
+      - volume-node-modules:/app/node_modules
     tty: true
     environment: # コンテナ内に渡される環境変数
       - http_proxy
@@ -48,7 +49,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - "./db/data:/var/lib/mysql"
+      - "volume-db-data:/var/lib/mysql"
       - "./db/initdb.d:/docker-entrypoint-initdb.d"
     environment:
       - http_proxy
