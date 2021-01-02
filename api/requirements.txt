@@ -4,6 +4,8 @@ Cerberus
 Flask-RESTful
 Flask-SQLAlchemy
 Flask-SQLAlchemy-Session
+Flask-JWT
+flask-cors
 SQLAlchemy
 marshmallow
 marshmallow-sqlalchemy

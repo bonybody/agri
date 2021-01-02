@@ -14,21 +14,20 @@
         >
           Documentation
         </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
+        <nuxt-link to="/login">
+          ログイン
+        </nuxt-link>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  mounted() {
+    console.log(this.$auth.loggedIn);
+  },
+}
 </script>
 
 <style lang="scss">
