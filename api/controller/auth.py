@@ -1,5 +1,4 @@
 from flask import Blueprint, request
-from flask_restful import Resource, Api
 
 app = Blueprint('auth', __name__)
 api = Api(app)
