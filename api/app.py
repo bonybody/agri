@@ -17,7 +17,8 @@ from flask_cors import CORS
 CORS(app)
 
 # JWT認証を追加
-from plugin.auth import *
+from plugin import auth
+jwt = auth.set_jwt(app)
 
 # 各コントローラーをルーティングに追加
 import routing
