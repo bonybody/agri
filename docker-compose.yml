@@ -14,9 +14,9 @@ services:
     ports: # ホスト:コンテナでPortを対応付ける
       - "8001:80"
     volumes: # ホストのディレクトリ:コンテナのディレクトリで指定し同期する
-      - ./front:/app
-      - volume-nuxt-dev:/app/.nuxt
-      - volume-node-modules:/app/node_modules
+      - ./front:/front
+      - volume-nuxt-dev:/front/.nuxt
+      - volume-node-modules:/front/node_modules
     tty: true
     environment: # コンテナ内に渡される環境変数
       - http_proxy
@@ -39,7 +39,7 @@ services:
     ports:
       - "8002:80"
     volumes:
-      - "./api:/app"
+      - "./api:/api"
     environment: # コンテナ内に渡される環境変数
       - http_proxy
       - https_proxy
