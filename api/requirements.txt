@@ -6,6 +6,9 @@ Flask-SQLAlchemy
 Flask-SQLAlchemy-Session
 Flask-JWT
 flask-cors
+flask-script
+flask_debugtoolbar
 SQLAlchemy
+mysqlclient
 marshmallow
 marshmallow-sqlalchemy
