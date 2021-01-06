@@ -1,5 +1,6 @@
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
+  ssr: false,
   head: {
     title: 'agri',
     meta: [
@@ -17,7 +18,10 @@ export default {
   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
-  css: [],
+  css: [
+    '@assets/css/destyle.css',
+    '@assets/css/common.scss'
+  ],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [],
@@ -36,6 +40,7 @@ export default {
     '@nuxtjs/style-resources'
   ],
   auth: {
+    watchLoggedIn: true,
     redirect: {
       login: '/login',   // 未ログイン時に認証ルートへアクセスした際のリダイレクトURL
       logout: '/',  // ログアウト時のリダイレクトURL
@@ -47,21 +52,26 @@ export default {
         token: {
           property: 'access_token'
         },
+        user: {
+          property: false
+        },
         endpoints: {
           login: {url: 'auth', method: 'post'},
-          user: false,
+          user: {url: 'user/', method: 'get'},
           logout: false
         },
       }
     }
   },
   styleResources: {
-    scss: ['~/assets/css/variables.scss']
+    scss: [
+      '~/assets/css/variables.scss'
+    ]
   },
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
-    baseURL: 'http://localhost:8002'
+    baseURL: 'http://localhost:8002',
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
