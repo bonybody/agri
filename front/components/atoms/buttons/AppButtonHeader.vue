@@ -1,20 +1,29 @@
 <template>
-  <button>
+  <nuxt-link :to="to" class="link">
     <slot></slot>
-  </button>
+  </nuxt-link>
 </template>
 
 <script>
 export default {
-  name: "AppHeaderButton"
+  name: "AppButtonHeader",
+  props: {
+    to: {
+      type: String,
+      default: '/'
+    }
+  }
 }
 </script>
 
 <style scoped lang="scss">
-button {
-  display: inline-block;
-  height: 40px;
-  border: 1px solid $base-font-color;
+.link {
+  display: block;
+  line-height: 35px;
+  margin: 0 10px;
+  border: 1px solid $main-font-color;
   border-radius: 10px;
+  color: $main-font-color;
+  padding: 0 10px;
 }
 </style>

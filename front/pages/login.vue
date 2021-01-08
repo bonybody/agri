@@ -27,6 +27,7 @@ export default {
                 console.log("成功");
                 console.log(response);
                 console.log(this.$auth.loggedIn);
+                console.log(this.$auth.user);
                 return response
               },
               (error) => {
