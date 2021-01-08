@@ -1,9 +1,6 @@
 from flask_jwt import JWT, jwt_required, current_identity
 from werkzeug.security import safe_str_cmp
 
-JWT_AUTH_HEADER_PREFIX = 'Bearer'
-
-
 def set_jwt(app):
     users = [
         User(1, 'user1', 'user1'),

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <the-header></the-header>
     <Nuxt />
   </div>
 </template>
@@ -60,3 +61,9 @@ html {
   background-color: #35495e;
 }
 </style>
+<script>
+import TheHeader from "~/components/organisms/common/TheHeader";
+export default {
+  components: {TheHeader}
+}
+</script>
