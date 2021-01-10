@@ -15,6 +15,11 @@ export default {
   router: {
     middleware: ['auth']
   },
+  loading: {
+    color: 'green',
+    failedColor: 'red',
+    height: '5px'
+  },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
