@@ -4,7 +4,7 @@
     <div class="bar"></div>
     <div class="content">
       <nuxt-link :to="links.home"><h1>アグリー</h1></nuxt-link>
-      <search-form></search-form>
+      <search-bar></search-bar>
       <app-button-header :to="links.signUp">新規登録</app-button-header>
       <app-button-header :to="links.login">ログイン</app-button-header>
     </div>
@@ -13,11 +13,11 @@
 
 <script>
 import AppButtonHeader from "~/components/atoms/buttons/AppButtonHeader";
-import SearchForm from "~/components/molecules/searchForm";
+import SearchBar from "~/components/molecules/searchBar";
 
 export default {
   name: "TheHeader",
-  components: {SearchForm, AppButtonHeader},
+  components: {SearchBar, AppButtonHeader},
   data() {
     return {
       links: {
@@ -52,7 +52,7 @@ h1 {
 .bar {
   display: block;
   content: "";
-  height: 3px;
-  background-color: $main-font-color;
+  height: 5px;
+  background: linear-gradient(90deg, $gradient-color-start, $gradient-color-end);
 }
 </style>

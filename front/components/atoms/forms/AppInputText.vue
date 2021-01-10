@@ -48,6 +48,10 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+input {
+  border: 1px solid $main-font-color;
+  border-radius: 10px;
+  line-height: 30px;
+}
 </style>

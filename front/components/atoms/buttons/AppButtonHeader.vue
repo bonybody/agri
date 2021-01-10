@@ -19,7 +19,7 @@ export default {
 <style scoped lang="scss">
 .link {
   display: block;
-  line-height: 35px;
+  line-height: 30px;
   margin: 0 10px;
   border: 1px solid $main-font-color;
   border-radius: 10px;
