@@ -10,8 +10,7 @@
     "clear-build-cache": "rm -rf node_modules/.cache/hard-source/"
   },
   "dependencies": {
-    "@nuxtjs/auth-next": "^5.0.0-1607967355.df8f01e",
-    "@nuxtjs/axios": "^5.12.2",
+    "@nuxtjs/auth-next": "5.0.0-1610115973.9fdaa66",
     "core-js": "^3.6.5",
     "nuxt": "^2.14.6"
   },

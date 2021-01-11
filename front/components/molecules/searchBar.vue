@@ -37,7 +37,6 @@ export default {
   justify-content: center;
 }
 .searchBar__text {
-  width: 500px;
   display: block;
   border: 1px solid $main-font-color;
   line-height: 30px;
