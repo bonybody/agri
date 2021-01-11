@@ -2,7 +2,7 @@
   <div>
     <input type="text" v-model="email">
     <input type="password" v-model="password">
-    <button @click="loginWithAuthModule">ログイン</button>
+    <button @click="login">ログイン</button>
   </div>
 </template>
 
@@ -16,23 +16,8 @@ export default {
     }
   },
   methods: {
-    async loginWithAuthModule() {
-      await this.$auth.loginWith('local', {
-        data: {
-          username: this.email,
-          password: this.password
-        }
-      })
-          .then((response) => {
-                console.log("成功");
-                console.log(response);
-                console.log(this.$auth.loggedIn);
-                console.log(this.$auth.user);
-                return response
-              },
-              (error) => {
-                return error
-              })
+    async login() {
+      await this.$myAuth.login(this.email, this.password)
     }
   }
 }

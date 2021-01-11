@@ -1,5 +1,6 @@
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
+  ssr: false,
   head: {
     title: 'agri',
     meta: [
@@ -28,7 +29,9 @@ export default {
   ],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-  plugins: [],
+  plugins: [
+    // '~/plugins/my-auth/my-auth'
+  ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,
@@ -44,7 +47,7 @@ export default {
     '@nuxtjs/style-resources'
   ],
   auth: {
-    watchLoggedIn: true,
+    plugins: [ '~/plugins/my-auth/my-auth.js' ],
     redirect: {
       login: '/login',   // 未ログイン時に認証ルートへアクセスした際のリダイレクトURL
       logout: '/',  // ログアウト時のリダイレクトURL
