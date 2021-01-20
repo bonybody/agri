@@ -22,7 +22,6 @@ export default {
   @include border-radius-box;
   height: 30px;
   vertical-align: middle;
-  margin: 0 10px;
   color: $main-font-color;
   padding: 0 10px;
 }

@@ -13,6 +13,6 @@ $gradient-color-end: #45B649;
 }
 
 @mixin border-radius-box() {
-  border-radius: 5px;
+  border-radius: 4px;
   border: 1px solid $main-font-color;
 }
