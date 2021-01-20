@@ -1,5 +1,4 @@
 <template>
-
   <header>
     <div class="bar"></div>
     <div class="content">
@@ -12,6 +11,7 @@
 </template>
 
 <script>
+
 import AppButtonHeader from "~/components/atoms/buttons/AppButtonHeader";
 import SearchBar from "~/components/molecules/searchBar";
 

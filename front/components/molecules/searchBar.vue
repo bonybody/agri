@@ -43,8 +43,10 @@ export default {
   width: 370px;
   height: 30px;
 
-  border: 1px solid $main-font-color;
-  border-radius: 10px 0 0 10px;
+  @include border-radius-box;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+
   padding: 0 5px;
 
   letter-spacing: normal;
@@ -54,7 +56,9 @@ export default {
   height: 30px;
   width: 30px;
   vertical-align: middle;
-  border-radius: 0 10px 10px 0;
+  @include border-radius-box;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
   border: 1px solid $main-font-color;
   border-left: 0;
 
