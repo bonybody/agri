@@ -5,3 +5,14 @@ $main-background-color: #fff;
 $gradient-color-start: #DCE35B;
 $gradient-color-end: #45B649;
 //$accent-color:
+
+@mixin center-flex() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin border-radius-box() {
+  border-radius: 5px;
+  border: 1px solid $main-font-color;
+}

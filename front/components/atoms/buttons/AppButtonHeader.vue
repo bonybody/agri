@@ -18,11 +18,11 @@ export default {
 
 <style scoped lang="scss">
 .link {
-  display: block;
-  line-height: 30px;
+  @include center-flex();
+  @include border-radius-box;
+  height: 30px;
+  vertical-align: middle;
   margin: 0 10px;
-  border: 1px solid $main-font-color;
-  border-radius: 10px;
   color: $main-font-color;
   padding: 0 10px;
 }

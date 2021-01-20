@@ -14,7 +14,7 @@
         >
           Documentation
         </a>
-        <nuxt-link to="/login">
+        <nuxt-link to="/login" class="button--green">
           ログイン
         </nuxt-link>
       </div>
