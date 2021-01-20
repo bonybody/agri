@@ -32,7 +32,7 @@ export default {
 
 <style lang="scss">
 .container {
-  background-color: $primary-color;
+  //background-color: $primary-color;
   margin: 0 auto;
   min-height: 100vh;
   display: flex;
