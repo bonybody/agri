@@ -12,7 +12,7 @@
           rel="noopener noreferrer"
           class="button--green"
         >
-          Documentation
+          <kuro-334/>
         </a>
         <nuxt-link to="/login" class="button--green">
           ログイン
@@ -23,7 +23,9 @@
 </template>
 
 <script>
+import kuro334 from '../components/test/kuro334.vue';
 export default {
+  components: { kuro334 },
   mounted() {
     console.log(this.$auth.loggedIn);
   },
