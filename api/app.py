@@ -17,12 +17,12 @@ from flask_cors import CORS
 CORS(app)
 
 # JWT認証を追加
-from plugin import auth
-jwt = auth.set_jwt(app)
+from .plugin.auth import set_jwt
+jwt = set_jwt(app)
 
 # 各コントローラーをルーティングに追加
-import routing
-routing.register_controller_blueprint(app)
+from api.routing import register_controller_blueprint
+register_controller_blueprint(app)
 
 if __name__ == '__main__':
   app.run()

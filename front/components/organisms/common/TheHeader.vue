@@ -4,8 +4,10 @@
     <div class="content">
       <nuxt-link :to="links.home"><h1>アグリー</h1></nuxt-link>
       <search-bar></search-bar>
-      <app-button-header :to="links.signUp">新規登録</app-button-header>
-      <app-button-header :to="links.login">ログイン</app-button-header>
+      <div class="header__button-box">
+        <app-button-header :to="links.signUp">新規登録</app-button-header>
+        <app-button-header :to="links.login">ログイン</app-button-header>
+      </div>
     </div>
   </header>
 </template>
@@ -38,11 +40,11 @@ header {
 }
 
 .content {
-  width: 1024px;
+  max-width: 1024px;
   height: 45px;
   margin: 0 auto;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -57,5 +59,12 @@ h1 {
   content: "";
   height: 5px;
   background: linear-gradient(90deg, $gradient-color-start, $gradient-color-end);
+}
+
+.header__button-box {
+  display: flex;
+  width: 200px;
+  justify-content: space-around;
+  align-items: center;
 }
 </style>
