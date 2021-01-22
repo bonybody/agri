@@ -1,5 +1,5 @@
 <template>
-  <p>kurokawa</p>
+  <p>kurokawataisei</p>
 </template>
 
 <script>
