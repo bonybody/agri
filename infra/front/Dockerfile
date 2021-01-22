@@ -6,3 +6,4 @@ WORKDIR /front
 
 RUN apt update
 RUN npm install -g create-nuxt-app
+RUN npm install
