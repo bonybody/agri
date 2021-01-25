@@ -1,20 +1,20 @@
 <template>
   <input
       class="input__text"
-      :type="type"
+      type="password"
       :name="name"
-      v-model="inputValue"
+      :value="value"
       :placeholder="placeholder"
   >
 </template>
 
 <script>
 export default {
-  name: "AppInputText",
+  name: "AppInputPassword",
   props: {
     name: {
       type: String,
-      default: "text"
+      default: "password"
     },
     value: {
       type: String,
@@ -23,10 +23,6 @@ export default {
     placeholder: {
       type: "",
       default: "文字を入力してください。"
-    },
-    type: {
-      type: String,
-      default: 'text'
     }
   },
   computed: {

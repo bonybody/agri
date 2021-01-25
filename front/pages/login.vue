@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="login">
+    <site-icon/>
     <login-form></login-form>
     <input type="text" v-model="email">
     <input type="password" v-model="password">
@@ -9,9 +10,10 @@
 
 <script>
 import LoginForm from "~/components/organisms/form/login/LoginForm";
+import SiteIcon from "~/components/icons/SiteIcon";
 export default {
   name: "login",
-  components: {LoginForm},
+  components: {SiteIcon, LoginForm},
   data() {
     return {
       password: 'user1',
@@ -27,5 +29,14 @@ export default {
 </script>
 
 <style scoped>
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
 
+.login > div {
+  margin: 30px 0;
+}
 </style>
