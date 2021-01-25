@@ -24,6 +24,7 @@
 
 <script>
 export default {
+  auth: 'guest',
   mounted() {
     console.log(this.$auth.loggedIn);
   },

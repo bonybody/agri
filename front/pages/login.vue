@@ -1,5 +1,6 @@
 <template>
   <div>
+    <login-form></login-form>
     <input type="text" v-model="email">
     <input type="password" v-model="password">
     <button @click="login">ログイン</button>
@@ -7,8 +8,10 @@
 </template>
 
 <script>
+import LoginForm from "~/components/organisms/form/login/LoginForm";
 export default {
   name: "login",
+  components: {LoginForm},
   data() {
     return {
       password: 'user1',

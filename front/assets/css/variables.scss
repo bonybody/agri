@@ -1,5 +1,8 @@
 $primary-color: #55c500;
+$primary-color-rgb: 115, 167, 31;
 $primary-on-font-color: #fff;
+$accent-color: red;
+$accent-color-on-font-color: #fff;
 $main-font-color: #333;
 $main-background-color: #fff;
 $gradient-color-start: #DCE35B;
@@ -12,7 +15,7 @@ $gradient-color-end: #45B649;
   justify-content: center;
 }
 
-@mixin border-radius-box() {
+@mixin border-radius-box($color: $main-font-color) {
   border-radius: 4px;
-  border: 1px solid $main-font-color;
+  border: 1px solid $color;
 }
