@@ -42,6 +42,7 @@ export default {
   display: inline-block;
   width: 370px;
   height: 30px;
+  font-size: 14px;
 
   @include border-radius-box;
   border-top-right-radius: 0;

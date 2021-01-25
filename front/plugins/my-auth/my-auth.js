@@ -1,4 +1,4 @@
-export default function ({ $auth, redirect }, inject) {
+export default function ({$auth, redirect}, inject) {
   console.log($auth.loggedIn)
   console.log($auth.$storage.getCookies())
   const myAuth = new MyAuth($auth, redirect)
@@ -11,10 +11,7 @@ class MyAuth {
     this.redirect = redirect
   }
 
-  login (email, password) {
-    // if (this.auth.loggedIn) {
-    //   this.redirect('/')
-    // }
+  login(email, password) {
     this.auth.loginWith('local', {
       data: {
         username: email,
@@ -31,5 +28,13 @@ class MyAuth {
         (error) => {
           return error
         })
+  }
+
+  user() {
+    return this.auth.user
+  }
+
+  loggedIn() {
+    return this.auth.loggedIn
   }
 }
