@@ -4,7 +4,8 @@
 
 <script>
 export default {
-name: "search"
+  name: "search",
+  auth: "guest"
 }
 </script>
 

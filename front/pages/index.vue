@@ -25,6 +25,7 @@
 <script>
 import kuro334 from '../components/test/kuro334.vue';
 export default {
+  auth: "guest",
   components: { kuro334 },
   mounted() {
     console.log(this.$auth.loggedIn);
