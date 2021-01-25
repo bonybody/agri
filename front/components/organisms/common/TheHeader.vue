@@ -15,8 +15,9 @@
           </p>
         </nuxt-link>
         <nuxt-link to="/setting/profile" class="logged-in__item">
-          <p class="profile__img">
-            <img src="" alt="">
+          <p class="profile__img" :class="{'image': getUserImage, 'noImage': !getUserImage}">
+            <img v-if="getUserImage" :src="getUserImage" alt="ユーザー画像">
+            <no-user-image-icon v-if="!getUserImage" />
           </p>
         </nuxt-link>
       </div>
@@ -34,10 +35,11 @@
 import AppButtonHeader from "~/components/atoms/buttons/AppButtonHeader";
 import SearchBar from "~/components/molecules/searchBar";
 import NotificationIcon from "~/components/icons/NotificationIcon";
+import NoUserImageIcon from "~/components/icons/NoUserImageIcon";
 
 export default {
   name: "TheHeader",
-  components: {NotificationIcon, SearchBar, AppButtonHeader},
+  components: {NoUserImageIcon, NotificationIcon, SearchBar, AppButtonHeader},
   data() {
     return {
       links: {
@@ -52,6 +54,10 @@ export default {
     getLoggedIn() {
       console.log(this.$myAuth.loggedIn())
       return this.$myAuth.loggedIn()
+    },
+    getUserImage() {
+      console.log(this.$myAuth.user.image)
+      return this.$myAuth.user.image
     },
   }
 }
@@ -98,7 +104,15 @@ h1 {
   height: 30px;
   width: 30px;
   border-radius: 100%;
-  background-color: $primary-color;
+  background-color: $shadow-color;
+  @include center-flex;
+}
+.profile__img svg {
+  fill: $main-background-color;
+}
+
+.noImage {
+  padding: 7px;
 }
 
 .not-logged-in {
