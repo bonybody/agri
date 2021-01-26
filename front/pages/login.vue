@@ -8,6 +8,7 @@
 <script>
 import LoginForm from "~/components/organisms/form/login/LoginForm";
 import SiteIcon from "~/components/icons/SiteIcon";
+
 export default {
   name: "login",
   components: {SiteIcon, LoginForm},
@@ -20,8 +21,10 @@ export default {
   methods: {
     async login() {
       await this.$myAuth.login(this.email, this.password)
-    }
-  }
+    },
+
+  },
+
 }
 </script>
 
