@@ -37,4 +37,7 @@ class MyAuth {
   loggedIn() {
     return this.auth.loggedIn
   }
+  async logout() {
+    return await this.auth.logout()
+  }
 }

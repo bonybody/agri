@@ -1,13 +1,23 @@
 <template>
-  <nuxt-link :to="to" class="link" :class="{'primary': primary, 'notPrimary': !primary }">
-    <slot></slot>
-  </nuxt-link>
+  <div>
+    <button v-if="type === 'button'" @click="$emit('myClick')" class="link"
+            :class="{'primary': primary, 'notPrimary': !primary }">
+      <slot></slot>
+    </button>
+    <nuxt-link v-if="type === 'link'" :to="to" class="link" :class="{'primary': primary, 'notPrimary': !primary }">
+      <slot></slot>
+    </nuxt-link>
+  </div>
 </template>
 
 <script>
 export default {
   name: "AppButtonHeader",
   props: {
+    type: {
+      type: String,
+      default: 'button'
+    },
     to: {
       type: String,
       default: '/'
@@ -15,7 +25,7 @@ export default {
     primary: {
       type: Boolean,
       default: false
-    }
+    },
   },
 }
 </script>

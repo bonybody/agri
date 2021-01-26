@@ -20,11 +20,12 @@
             <no-user-image-icon v-if="!getUserImage" />
           </p>
         </nuxt-link>
+        <app-button-header type="button" @myClick="logout()">ログアウト</app-button-header>
       </div>
 
       <div v-if="!getLoggedIn" class="not-logged-in">
-        <app-button-header :to="links.login">ログイン</app-button-header>
-        <app-button-header :to="links.signUp" :primary="true">新規登録</app-button-header>
+        <app-button-header :type="'link'" :to="links.login">ログイン</app-button-header>
+        <app-button-header :type="'link'" :to="links.signUp" :primary="true">新規登録</app-button-header>
       </div>
     </div>
   </header>
@@ -59,6 +60,11 @@ export default {
       console.log(this.$myAuth.user.image)
       return this.$myAuth.user.image
     },
+  },
+  methods: {
+    async logout() {
+      await this.$myAuth.logout()
+    }
   }
 }
 </script>
