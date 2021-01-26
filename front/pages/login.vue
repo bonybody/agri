@@ -2,9 +2,6 @@
   <div class="login">
     <site-icon/>
     <login-form></login-form>
-    <input type="text" v-model="email">
-    <input type="password" v-model="password">
-    <button @click="login">ログイン</button>
   </div>
 </template>
 
