@@ -3,7 +3,7 @@
     <div>
       <Logo />
       <h1 class="title">
-        takasima
+        agri
       </h1>
       <div class="links">
         <a
