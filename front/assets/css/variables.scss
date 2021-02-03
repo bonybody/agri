@@ -1,14 +1,21 @@
-$primary-color: #55c500;
+//$primary-color: #55c500;
+$primary-color: #50b490;
 $primary-color-rgb: 115, 167, 31;
 $primary-on-font-color: #fff;
-$accent-color: red;
+$accent-color: #f7470e;
 $accent-color-on-font-color: #fff;
-$main-font-color: #333;
-$main-background-color: #fff;
+$weak-color: #e9eb2e;
+$main-font-color: #555;
+$weak-font-color: #777;
+$base-font-size: 14px;
+$main-background-color: #eff0f3;
+//$main-background-color: #fff;
+//$base-color: #f5f5f5;
 $base-color: #f5f5f5;
 $shadow-color: #777;
-$gradient-color-start: #DCE35B;
-$gradient-color-end: #45B649;
+$gradient-color-start: $primary-color;
+$gradient-color-end: $weak-color;
+$box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 5px;
 //$accent-color:
 
 @mixin center-flex() {
