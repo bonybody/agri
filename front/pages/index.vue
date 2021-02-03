@@ -1,32 +1,16 @@
 <template>
   <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">
-        agri
-      </h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          <kuro-334/>
-        </a>
-        <nuxt-link to="/login" class="button--green">
-          ログイン
-        </nuxt-link>
-      </div>
-    </div>
+    <p class="section-header">新着商品</p>
+    <new-item-boxies />
   </div>
 </template>
 
 <script>
 import kuro334 from '../components/test/kuro334.vue';
+import NewItemBoxies from "~/components/organisms/ItemBoxies/NewItemBoxies";
 export default {
   auth: "guest",
-  components: { kuro334 },
+  components: {NewItemBoxies, kuro334 },
   mounted() {
     console.log(this.$auth.loggedIn);
   },
@@ -37,40 +21,12 @@ export default {
 .container {
   //background-color: $primary-color;
   margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  width: 1024px;
 }
 
-.title {
-  font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
+.section-header {
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
 </style>
