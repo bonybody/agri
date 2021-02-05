@@ -4,6 +4,7 @@ Cerberus
 Flask-RESTful
 Flask-SQLAlchemy
 Flask-SQLAlchemy-Session
+Flask-Migrate
 Flask-JWT
 flask-cors
 flask-script
