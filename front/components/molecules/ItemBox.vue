@@ -8,9 +8,9 @@
         <p class="item-box__item-image-wrap">
           <img v-if="image" class="item-box__item-image" src="" alt="">
         </p>
-        <p class="item-box__user-image-wrap">
+        <nuxt-link :to="'nuxt'" class="item-box__user-image-wrap">
           <img v-if="userImage" class="item-box__user-image" src="" alt="">
-        </p>
+        </nuxt-link>
       </div>
       <div class="item-box__text-wrap">
         <div class="line-wrap">

@@ -1,20 +1,22 @@
 <template>
-  <div class="password-form">
-    <label for="password">パスワード</label>
+  <div class="user-name-form">
+    <app-form-label :name="'user_name'">ユーザー名</app-form-label>
     <app-input-text
-      :type="'password'"
-      :name="'password'"
-      :placeholder="'パスワードを入力してください。'"
-      v-model="inputValue"
+        :type="'text'"
+        :placeholder="'１５文字以内で入力してください。'"
+        :name="'user_name'"
+        v-model="inputValue"
     />
   </div>
 </template>
 
 <script>
 import AppInputText from "~/components/atoms/forms/input/AppInputText";
+import AppFormLabel from "~/components/atoms/forms/label/AppFormLabel";
+
 export default {
-name: "PasswordForm",
-  components: {AppInputText},
+  name: "UserNameForm",
+  components: {AppFormLabel, AppInputText},
   props: {
     value: {
       type: String,
@@ -36,8 +38,7 @@ name: "PasswordForm",
 </script>
 
 <style scoped lang="scss">
-.password-form {
+.user-name-form {
   margin-bottom: $form-parts-margin-bottom;
-
 }
 </style>

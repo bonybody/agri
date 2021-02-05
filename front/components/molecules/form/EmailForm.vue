@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import AppInputText from "~/components/atoms/forms/AppInputText";
+import AppInputText from "~/components/atoms/forms/input/AppInputText";
 
 export default {
   name: "EmailForm",
@@ -39,6 +39,8 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+.email-form {
+  margin-bottom: $form-parts-margin-bottom;
+}
 </style>
