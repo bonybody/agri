@@ -25,6 +25,7 @@ services:
       - HOST
       - PORT
       - TZ
+      - API_URL
     command: >
       bash -c "npm run dev"
 

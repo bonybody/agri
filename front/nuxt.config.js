@@ -1,5 +1,9 @@
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
+  env: {
+    apiUrl: process.env.API_URL
+  },
+
   ssr: false,
   head: {
     title: 'agri',
@@ -30,7 +34,8 @@ export default {
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
-    // '~/plugins/my-auth/my-auth'
+    '~/plugins/axios/axios.js',
+    '~/plugins/axios/index.js'
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -72,14 +77,13 @@ export default {
   },
   styleResources: {
     scss: [
-      '~/assets/css/variables.scss'
+      '~/assets/css/variables.scss',
+      '~/assets/css/mixins/*.scss',
+      // '~/assets/css/mixins/*.scss'
     ]
   },
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
-  axios: {
-    baseURL: 'http://localhost:8002',
-  },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {

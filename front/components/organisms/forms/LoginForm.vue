@@ -9,8 +9,8 @@
 
 <script>
 import AppInputText from "~/components/atoms/forms/input/AppInputText";
-import EmailForm from "~/components/molecules/form/EmailForm";
-import PasswordForm from "~/components/molecules/form/PasswordForm";
+import EmailForm from "~/components/molecules/forms/EmailForm";
+import PasswordForm from "~/components/molecules/forms/PasswordForm";
 import AppFormButton from "~/components/atoms/forms/button/AppFormButton";
 import AppFormHeading from "~/components/atoms/headings/AppFormHeading";
 

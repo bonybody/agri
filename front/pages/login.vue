@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import LoginForm from "~/components/organisms/form/LoginForm";
+import LoginForm from "~/components/organisms/forms/LoginForm";
 import SiteIcon from "~/components/icons/SiteIcon";
 
 export default {

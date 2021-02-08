@@ -16,8 +16,11 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .myLabel {
-  padding-bottom: 3px;
+  display: inline-block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: $main-font-color;
 }
 </style>

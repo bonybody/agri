@@ -40,4 +40,8 @@ class MyAuth {
   async logout() {
     return await this.auth.logout()
   }
+
+  getToken() {
+    return this.auth.strategy.token.get()
+  }
 }

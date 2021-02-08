@@ -42,7 +42,7 @@
 import MapIcon from "~/components/icons/MapIcon";
 import HeartIcon from "~/components/icons/HeartIcon";
 import FavoriteButton from "~/components/atoms/buttons/FavoriteButton";
-import PasswordForm from "~/components/molecules/form/PasswordForm";
+import PasswordForm from "~/components/molecules/forms/PasswordForm";
 
 export default {
   name: "ItemBox",

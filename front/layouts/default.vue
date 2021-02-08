@@ -62,7 +62,7 @@ html {
 }
 </style>
 <script>
-import TheHeader from "~/components/organisms/common/TheHeader";
+import TheHeader from "~/components/organisms/commons/TheHeader";
 export default {
   components: {TheHeader}
 }
