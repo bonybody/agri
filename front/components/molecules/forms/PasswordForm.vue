@@ -10,6 +10,7 @@
         :placeholder="'パスワードを入力してください。'"
         v-model="inputValue"
     />
+    <app-error-message>{{ error }}</app-error-message>
   </div>
 </template>
 
@@ -18,15 +19,20 @@ import AppInputText from "~/components/atoms/forms/input/AppInputText";
 import AppFormLabel from "~/components/atoms/forms/label/AppFormLabel";
 import input from "~/mixins/input";
 import AppRequireMark from "~/components/atoms/forms/marks/AppRequireMark";
+import AppErrorMessage from "~/components/atoms/forms/error/AppErrorMessage";
 
 export default {
   name: "PasswordForm",
-  components: {AppRequireMark, AppFormLabel, AppInputText},
+  components: {AppErrorMessage, AppRequireMark, AppFormLabel, AppInputText},
   mixins: [input],
   props: {
     require: {
       type: Boolean,
       default: false
+    },
+    error: {
+      type: String,
+      default: null
     }
   }
 }
