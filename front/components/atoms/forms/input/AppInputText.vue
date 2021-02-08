@@ -47,7 +47,7 @@ export default {
   display: block;
   height: 30px;
   width: 100%;
-  padding: 8px;
+  padding: 0 8px;
   text-align: left;
   color: $main-font-color;
   background-color: $main-background-color;
