@@ -1,15 +1,16 @@
 <template>
   <div class="sign-up-form">
     <app-form-heading>新規登録</app-form-heading>
-    <display-name-form v-model="displayName.value" :require="displayName.require"/>
-    <email-form v-model="email.value" :require="email.require"/>
-    <password-form v-model="password.value" :require="password.require"/>
+    <display-name-form v-model="displayName.value" :require="displayName.require" :error="displayName.error"/>
+    <email-form v-model="email.value" :require="email.require" :error="email.error"/>
+    <password-form v-model="password.value" :require="password.require" :error="password.error"/>
     <app-separation/>
     <div class="user-name">
       <div class="user-name__label">
         <app-form-label>氏名</app-form-label>
         <app-require-mark v-show="userName.require"/>
       </div>
+      <app-error-message>{{ userName.error }}</app-error-message>
       <div class="user-name__line">
         <family-name-form v-model="userName.value.familyName"/>
         <given-name-form v-model="userName.value.givenName"/>
@@ -24,7 +25,7 @@
         <app-form-label>生年月日</app-form-label>
         <app-require-mark v-show="birthday.require"/>
       </div>
-
+      <app-error-message>{{ birthday.error }}</app-error-message>
       <div class="birthday__form">
         <year-form v-model="birthday.value.year"/>
         <month-form v-model="birthday.value.month"/>
@@ -52,10 +53,12 @@ import MonthForm from "~/components/molecules/forms/MonthForm";
 import DayForm from "~/components/molecules/forms/DayForm";
 import AppFormLabel from "~/components/atoms/forms/label/AppFormLabel";
 import AppRequireMark from "~/components/atoms/forms/marks/AppRequireMark";
+import AppErrorMessage from "~/components/atoms/forms/error/AppErrorMessage";
 
 export default {
   name: "SignUpForm",
   components: {
+    AppErrorMessage,
     AppRequireMark,
     AppFormLabel,
     DayForm,
@@ -69,19 +72,23 @@ export default {
   data() {
     return {
       displayName: {
-        value: null,
+        value: '',
+        error: '',
         require: true
       },
       email: {
-        value: null,
+        value: '',
+        error: '',
         require: true
       },
       password: {
-        value: null,
+        value: '',
+        error: '',
         require: true
       },
       userName: {
         require: true,
+        error: '',
         value: {
           familyName: '',
           familyNameRuby: '',
@@ -91,16 +98,27 @@ export default {
       },
       birthday: {
         require: true,
-        value: {
-          year: 1980,
-          month: 1,
-          day: 1
-        }
+        error: '',
+        value:
+            {
+              year: 1981,
+              month: 1,
+              day: 1
+            }
       }
     }
   },
   methods: {
     send: function () {
+      let errorFlg = false
+      !this.requireValidate(this.displayName) ? errorFlg = true : '';
+      !this.requireValidate(this.email) ? errorFlg = true: '';
+      !this.requireValidate(this.password) ? errorFlg = true : '';
+      !this.requireValidate(this.userName) ? errorFlg = true : '';
+      !this.requireValidate(this.birthday) ?  errorFlg = true : '';
+      if (errorFlg) {
+        return
+      }
       const params = {
         display_name: this.displayName,
         email: this.email,
@@ -117,9 +135,25 @@ export default {
           day: this.birthday.day
         }
       }
-      console.log(params);
-      console.log(this.$api);
       this.$api['user'].signUp(params);
+    },
+    requireValidate: function (form) {
+      if (form.require) {
+        if (typeof form.value === 'object') {
+          Object.keys(form.value).forEach(function (key) {
+            if (form.value[key] === '') {
+              form.error = '入力必須です。';
+              return false
+            }
+          }, form.value);
+        } else {
+          if (!form.value) {
+            form.error = "入力必須です。";
+            return false
+          }
+        }
+      }
+      return true;
     },
   }
 }
@@ -149,6 +183,7 @@ export default {
   &__label {
     @include left-right-alignment-mixin;
   }
+
   &__form {
     @include left-right-alignment-mixin;
   }
