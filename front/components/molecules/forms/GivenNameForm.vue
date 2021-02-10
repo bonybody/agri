@@ -5,6 +5,7 @@
         :name="'given_name'"
         :type="'text'"
         :placeholder="'例：太郎'"
+        v-model="inputValue"
     />
   </div>
 </template>

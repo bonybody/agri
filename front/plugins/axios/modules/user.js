@@ -7,6 +7,7 @@ export default class User {
 
   async signUp(params) {
     console.log(params);
-    const res = await this.api.post(this.prefix + 'signup', params);
+    const res = await this.api.post(this.prefix, params);
+    console.log(res);
   }
 }

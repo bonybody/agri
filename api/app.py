@@ -2,15 +2,19 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import sys
+import os
 import codecs
-sys.stdout = codecs.getwriter('utf_8')(sys.stdout)
+from api.database.database import init_db
+import api.models
+# sys.stdout = codecs.getwriter('utf_8')(sys.stdout)
 
 # アプリケーションの初期化
 from flask import Flask
 app = Flask(__name__)
 
 # 設定ファイルの読み込み
-app.config.from_pyfile("config/base_setting.py")
+app.config.from_pyfile("config/base_config.py")
+app.config.from_object('api.config.database_config.DatabaseConfig')
 
 # CORSを適応
 from flask_cors import CORS
@@ -24,8 +28,10 @@ jwt = set_jwt(app)
 from api.routing import register_controller_blueprint
 register_controller_blueprint(app)
 
-if __name__ == '__main__':
-  app.run()
+init_db(app)
 
-from flask_sqlalchemy import SQLAlchemy
-db = SQLAlchemy
+# アプリケーションの開始
+if __name__ == '__main__':
+  host = os.environ['HOST']
+  port = os.environ['PORT']
+  app.run(host=host, port=port)
