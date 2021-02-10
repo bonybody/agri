@@ -76,6 +76,11 @@ export default {
         error: '',
         require: true
       },
+      image: {
+        value: '',
+        error: '',
+        require: false
+      },
       email: {
         value: '',
         error: '',
@@ -112,28 +117,23 @@ export default {
     send: function () {
       let errorFlg = false
       !this.requireValidate(this.displayName) ? errorFlg = true : '';
-      !this.requireValidate(this.email) ? errorFlg = true: '';
+      !this.requireValidate(this.email) ? errorFlg = true : '';
       !this.requireValidate(this.password) ? errorFlg = true : '';
       !this.requireValidate(this.userName) ? errorFlg = true : '';
-      !this.requireValidate(this.birthday) ?  errorFlg = true : '';
+      !this.requireValidate(this.birthday) ? errorFlg = true : '';
       if (errorFlg) {
         return
       }
       const params = {
-        display_name: this.displayName,
-        email: this.email,
-        password: this.password,
-        user_name: {
-          family_name: this.userName.value.familyName,
-          given_name: this.userName.value.givenName,
-          family_name_ruby: this.userName.value.familyNameRuby,
-          given_name_ruby: this.userName.value.givenNameRuby,
-        },
-        birthday: {
-          year: this.birthday.year,
-          month: this.birthday.month,
-          day: this.birthday.day
-        }
+        display_name: this.displayName.value,
+        email: this.email.value,
+        image: this.image.value,
+        password: this.password.value,
+        name: this.userName.value.familyName + this.userName.value.givenName,
+        name_ruby: this.userName.value.familyNameRuby + this.userName.value.givenNameRuby,
+        birthday: this.birthday.value.year + '-' +
+            ('00' + this.birthday.value.month).slice(-2) + '-' +
+            ('00' + this.birthday.value.day).slice(-2)
       }
       this.$api['user'].signUp(params);
     },

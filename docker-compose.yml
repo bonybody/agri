@@ -48,8 +48,13 @@ services:
       - HOST
       - PORT
       - TZ
+      - DB_URL
+      - DB_HOST
+      - MYSQL_DATABASE
+      - MYSQL_USER
+      - MYSQL_PASSWORD
     command: >
-      bash -c "pip install -r requirements.txt && flask run --host=0.0.0.0 --port=80"
+      bash -c "/entrypoint.sh"
   db:
     image: mariadb:10.5
     ports:

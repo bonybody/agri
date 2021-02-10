@@ -5,6 +5,7 @@
         :type="'text'"
         :name="'family_name_ruby'"
         :placeholder="'例：ヤマダ'"
+        v-model="inputValue"
     />
   </div>
 </template>

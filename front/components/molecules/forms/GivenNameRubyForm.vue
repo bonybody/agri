@@ -5,6 +5,7 @@
         :name="'given_name_ruby'"
         :type="'text'"
         :placeholder="'例：タロウ'"
+        v-model="inputValue"
     />
   </div>
 </template>
