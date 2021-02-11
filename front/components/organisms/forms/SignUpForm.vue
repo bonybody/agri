@@ -33,7 +33,7 @@
       </div>
     </div>
 
-    <app-form-button @my-click="send()">新規登録</app-form-button>
+    <app-form-button @my-click="signUp()">新規登録</app-form-button>
   </div>
 </template>
 
@@ -114,7 +114,7 @@ export default {
     }
   },
   methods: {
-    send: function () {
+    signUp: function () {
       let errorFlg = false
       !this.requireValidate(this.displayName) ? errorFlg = true : '';
       !this.requireValidate(this.email) ? errorFlg = true : '';
@@ -135,7 +135,13 @@ export default {
             ('00' + this.birthday.value.month).slice(-2) + '-' +
             ('00' + this.birthday.value.day).slice(-2)
       }
-      this.$api['user'].signUp(params);
+      this.$api['user'].signUp(params).then(() => {
+        console.log(this.email.value, this.password.value)
+        this.$myAuth.login(this.email.value, this.password.value)
+      }).catch((e) => {
+        console.log(e)
+      });
+
     },
     requireValidate: function (form) {
       if (form.require) {
