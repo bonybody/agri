@@ -60,7 +60,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - "volume-db-data:/var/lib/mysql"
+#      - "volume-db-data:/var/lib/mysql"
       - "./db/initdb.d:/docker-entrypoint-initdb.d"
     environment:
       - http_proxy

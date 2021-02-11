@@ -1,34 +1,29 @@
+from datetime import datetime
 from flask_jwt import JWT, jwt_required, current_identity
 from werkzeug.security import safe_str_cmp
+from api.models import Auth, User
+import hashlib
+
 
 def set_jwt(app):
-    users = [
-        User(1, 'user1', 'user1'),
-        User(2, 'user2', 'abcxyz'),
-    ]
-    username_table = {u.username: u for u in users}
-    userid_table = {u.id: u for u in users}
-
     def authenticate(username, password):
-        user = username_table.get(username, None)
-        if user and safe_str_cmp(user.password.encode('utf-8'), password.encode('utf-8')):
-            return user
+        auth = Auth.getRecordByEmail(email=username)
+        if auth.password == hashlib.sha256(password.encode('utf-8')).hexdigest():
+            return auth
 
     def identity(payload):
-            user_id = payload['identity']
-            return userid_table.get(user_id, None)
+        user_id = payload['identity']
+        user = User.getUserInfo(user_id=user_id)
+        return user
 
-    return JWT(app, authenticate, identity)
+    jwt = JWT(app, authenticate, identity)
 
+    @jwt.jwt_payload_handler
+    def make_payload(identity):
+        iat = datetime.utcnow()
+        exp = iat + app.config.get('JWT_EXPIRATION_DELTA')
+        nbf = iat + app.config.get('JWT_NOT_BEFORE_DELTA')
+        identity = getattr(identity, 'user_id')
+        return {'exp': exp, 'iat': iat, 'nbf': nbf, 'identity': identity}
 
-class User(object):
-    def __init__(self, id, username, password):
-        self.id = id
-        self.username = username
-        self.password = password
-
-    def __str__(self):
-        return "User(id='%s')" % self.id
-
-
-
+    return jwt
