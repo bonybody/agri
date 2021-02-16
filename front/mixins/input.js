@@ -13,6 +13,11 @@ export default {
       set(value) {
         this.$emit('input', value);
       }
+    },
+  },
+  methods: {
+    raiseEvent: function (event, value) {
+      $emit(event, value);
     }
   }
 }
