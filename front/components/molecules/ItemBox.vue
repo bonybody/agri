@@ -1,7 +1,7 @@
 <template>
-  <div class="item-box">
+  <nuxt-link :to="{ path: 'item', query: { itemId: itemId } }" class="item-box">
     <p class="item-box__state">
-      {{ state }}
+      残り{{ format }}日
     <p/>
     <div class="item-box__content-wrap">
       <div class="item-box__image-area">
@@ -27,7 +27,7 @@
         </div>
         <div class="line-wrap">
           <p class="item-box__price">&yen;{{ price }}~</p>
-          <p class="item-box__format">{{ format }}</p>
+          <p class="item-box__format">{{ state }}</p>
         </div>
         <div class="tags">
           <p class="tag"></p>
@@ -35,7 +35,7 @@
       </div>
 
     </div>
-  </div>
+  </nuxt-link>
 </template>
 
 <script>
@@ -60,6 +60,10 @@ export default {
     userImage: {
       type: String,
       default: ""
+    },
+    itemId: {
+      type: Number,
+      default: 1
     },
     favorite: {
       type: Boolean,
@@ -87,11 +91,13 @@ export default {
     },
     format: {
       type: String,
-      default: '週間販売'
+      default: '1'
     },
     tags: {
       type: Object,
-      default: {}
+      default: () => {
+        return {}
+      }
     }
   },
   methods: {

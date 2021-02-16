@@ -7,7 +7,6 @@ $accent-color-on-font-color: #fff;
 $weak-color: #e9eb2e;
 $main-font-color: #555;
 $weak-font-color: #aaa;
-$base-font-size: 14px;
 $main-background-color: #fff;
 $base-background-color: #f0f0f0;
 $base-color: #f5f5f5;
@@ -15,10 +14,12 @@ $shadow-color: #777;
 $gradient-color-start: $primary-color;
 $gradient-color-end: $weak-color;
 $box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 5px;
-
 // margin
 $form-parts-margin-bottom: 30px;
 
+// font-size
+$base-font-size: 14px;
+$emphasis-font-size: 20px;
 
 // mixin
 @mixin center-flex() {
