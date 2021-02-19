@@ -23,5 +23,9 @@ export default {
   width: 100%;
   background-color: $primary-color;
   color: $primary-on-font-color;
+
+  &:hover {
+    opacity: $hover-opacity;
+  }
 }
 </style>

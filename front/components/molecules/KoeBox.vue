@@ -19,12 +19,12 @@
     <div class="header-text-separation">
     </div>
     <div class="body">
-      <p class="body__title">{{ koeTitle }}</p>
+      <p class="body__title" v-line-clamp="2">{{ koeTitle }}</p>
       <p class="bony__text">{{ koeText }}</p>
     </div>
     <app-separation/>
     <div class="footer">
-      <p class="footer__info">{{ itemName }}</p>
+      <p class="footer__info" v-line-clamp="2">{{ itemName }}</p>
       <p class="footer__bottom">
         <app-form-button @my-click="itemLink">商品を見に行く</app-form-button>
       </p>
@@ -72,7 +72,7 @@ export default {
     },
     itemName: {
       type: String,
-      default: '豊橋の美味しいキャベツ！'
+      default: '豊橋の美味しいキャベツ！あああああああああああああああああああああああ'
     },
   },
   methods: {
@@ -89,7 +89,7 @@ export default {
   @include min-box-padding-mixin();
   background-color: $main-background-color;
   border-radius: $box-border-radius;
-  width: 200px;
+  width: 180px;
 
   .heading {
     @include left-right-alignment-mixin;
@@ -120,7 +120,8 @@ export default {
 
     &__title {
       font-weight: bold;
-      font-size: 1.1em;
+      font-size: 1em;
+      height: 2rem;
       margin-bottom: $medium-parts-margin;
     }
 
@@ -134,12 +135,12 @@ export default {
 
     &__info {
       margin-bottom: $min-parts-margin;
-      text-align: center;
+      text-align: left;
       font-weight: bold;
       //width: 300px;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      overflow: hidden;
+      //white-space: nowrap;
+      //text-overflow: ellipsis;
+      //overflow: hidden;
     }
 
     &__buttom {

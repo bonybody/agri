@@ -34,6 +34,10 @@ export default {
   font-size: 1rem;
   border-radius: 100px;
 
+  &:hover {
+    opacity: $hover-opacity;
+  }
+
   svg {
     height: 1em;
     transition: all 0.2s;
