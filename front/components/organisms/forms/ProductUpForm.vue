@@ -3,39 +3,11 @@
     <app-form-heading>商品出品</app-form-heading>
     <product-photo-form v-model="displayName.value" :require="displayName.require" :error="displayName.error"/>
     <product-name-form v-model="displayName.value" :require="displayName.require" :error="displayName.error"/>
-    <email-form v-model="email.value" :require="email.require" :error="email.error"/>
+    <product-description-form v-model="displayName.value" :require="displayName.require" :error="displayName.error"/>
     <password-form v-model="password.value" :require="password.require" :error="password.error"/>
     <app-separation/>
 
-    <div class="user-name">
-      <div class="user-name__label">
-        <app-form-label>氏名</app-form-label>
-        <app-require-mark v-show="userName.require"/>
-      </div>
-      <app-error-message>{{ userName.error }}</app-error-message>
-      <div class="user-name__line">
-        <family-name-form v-model="userName.value.familyName"/>
-        <given-name-form v-model="userName.value.givenName"/>
-      </div>
-      <div class="user-name__line">
-        <family-name-ruby-form v-model="userName.value.familyNameRuby"/>
-        <given-name-ruby-form v-model="userName.value.givenNameRuby"/>
-      </div>
-    </div>
-    <div class="birthday">
-      <div class="birthday__label">
-        <app-form-label>生年月日</app-form-label>
-        <app-require-mark v-show="birthday.require"/>
-      </div>
-      <app-error-message>{{ birthday.error }}</app-error-message>
-      <div class="birthday__form">
-        <year-form v-model="birthday.value.year"/>
-        <month-form v-model="birthday.value.month"/>
-        <day-form v-model="birthday.value.day" :year="birthday.value.year" :month="birthday.value.month"/>
-      </div>
-    </div>
-
-    <app-form-button @my-click="signUp()">次へ進む</app-form-button>
+    <app-form-button @my-click="signUp()">次へ進むよ</app-form-button>
   </div>
 </template>
 
