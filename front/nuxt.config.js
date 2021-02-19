@@ -35,7 +35,8 @@ export default {
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
     '~/plugins/axios/axios.js',
-    '~/plugins/axios/index.js'
+    '~/plugins/axios/index.js',
+    '~/plugins/vue-line-clamp/index.js'
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)

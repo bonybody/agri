@@ -27,9 +27,11 @@ export default {
 .new-koe-boxes {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: left;
+
   &__box {
-    margin-bottom: $semi-large-margin;
-   }
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
 }
 </style>

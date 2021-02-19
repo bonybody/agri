@@ -1,7 +1,9 @@
 <template>
   <div class="new-items">
     <template v-for="n in numbers">
-      <item-box/>
+      <div class="new-items__item">
+        <item-box/>
+      </div>
     </template>
   </div>
 </template>
@@ -15,18 +17,20 @@ export default {
   data() {
     return {
       numbers: [1, 2, 3, 4, 5],
-      item: {
-        name: '【今週限りの販売】豊橋の美味しいキャベツ',
-      }
     }
   }
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .new-items {
   display: flex;
   flex-wrap: wrap;
   justify-content: left;
+
+  &__item {
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
 }
 </style>
