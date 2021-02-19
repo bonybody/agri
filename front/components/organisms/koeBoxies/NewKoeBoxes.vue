@@ -1,34 +1,35 @@
 <template>
-  <div class="new-items">
+  <div class="new-koe-boxes">
     <template v-for="n in numbers">
-      <div class="new-items__item">
-        <item-box/>
+      <div class="new-koe-boxes__box">
+        <koe-box/>
       </div>
     </template>
   </div>
 </template>
 
 <script>
-import ItemBox from "~/components/molecules/ItemBox";
+import KoeBox from "~/components/molecules/KoeBox";
 
 export default {
-  name: "NewItemBoxies",
-  components: {ItemBox},
+  name: "NewKoeBoxes",
+  components: {KoeBox},
   data() {
     return {
       numbers: [1, 2, 3, 4, 5],
     }
   }
+
 }
 </script>
 
 <style scoped lang="scss">
-.new-items {
+.new-koe-boxes {
   display: flex;
   flex-wrap: wrap;
   justify-content: left;
 
-  &__item {
+  &__box {
     margin-right: 10px;
     margin-bottom: 10px;
   }

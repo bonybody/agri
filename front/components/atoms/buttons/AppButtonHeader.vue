@@ -38,6 +38,10 @@ export default {
   font-weight: bold;
   vertical-align: middle;
   padding: 0 10px;
+
+  &:hover {
+    opacity: $hover-opacity;
+  }
 }
 
 .primary {

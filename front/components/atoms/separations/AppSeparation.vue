@@ -11,6 +11,5 @@ name: "AppSeparation"
 <style scoped lang="scss">
 .app-separation {
   color: $weak-font-color;
-  margin-bottom: $form-parts-margin-bottom;
 }
 </style>

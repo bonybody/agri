@@ -1,17 +1,17 @@
 <template>
-  <div class="item-box">
+  <div  class="item-box">
     <p class="item-box__state">
-      {{ state }}
+      残り{{ format }}日
     <p/>
     <div class="item-box__content-wrap">
-      <div class="item-box__image-area">
+      <nuxt-link :to="getItemDetailLink" class="item-box__image-area">
         <p class="item-box__item-image-wrap">
           <img v-if="image" class="item-box__item-image" src="" alt="">
         </p>
         <nuxt-link :to="'nuxt'" class="item-box__user-image-wrap">
           <img v-if="userImage" class="item-box__user-image" src="" alt="">
         </nuxt-link>
-      </div>
+      </nuxt-link>
       <div class="item-box__text-wrap">
         <div class="line-wrap">
           <p class="item-box__address">
@@ -22,12 +22,12 @@
             <favorite-button :state="getFavorite" @myClick="favoriteClick()"></favorite-button>
           </div>
         </div>
-        <div class="line-wrap">
-          <p class="item-box__name">{{ name }}</p>
+        <div class="line-wrap" >
+          <nuxt-link :to="getItemDetailLink" class="item-box__name" ><span v-line-clamp="2">{{ name }}</span></nuxt-link>
         </div>
         <div class="line-wrap">
           <p class="item-box__price">&yen;{{ price }}~</p>
-          <p class="item-box__format">{{ format }}</p>
+          <p class="item-box__format">{{ state }}</p>
         </div>
         <div class="tags">
           <p class="tag"></p>
@@ -61,6 +61,10 @@ export default {
       type: String,
       default: ""
     },
+    itemId: {
+      type: Number,
+      default: 1
+    },
     favorite: {
       type: Boolean,
       default: false
@@ -87,11 +91,13 @@ export default {
     },
     format: {
       type: String,
-      default: '週間販売'
+      default: '1'
     },
     tags: {
       type: Object,
-      default: {}
+      default: () => {
+        return {}
+      }
     }
   },
   methods: {
@@ -103,6 +109,13 @@ export default {
   computed: {
     getFavorite() {
       return this.thisFavorite
+    },
+    getItemDetailLink() {
+      return {
+        path: 'item', query: {
+          itemId: this.itemId
+        }
+      }
     }
   }
 }
@@ -110,8 +123,8 @@ export default {
 
 <style scoped lang="scss">
 .item-box {
+  display: block;
   width: 180px;
-  margin: 10px;
   text-align: right;
 
 
@@ -120,7 +133,7 @@ export default {
     position: relative;
     z-index: 100;
     box-sizing: border-box;
-    box-shadow: $box-shadow;
+    //box-shadow: $box-shadow;
     padding: 5px 10px;
     color: $primary-on-font-color;
     border-radius: 4px 4px 0 0;
@@ -132,17 +145,22 @@ export default {
     z-index: 101;
     text-align: center;
     background-color: $main-background-color;
-    box-shadow: $box-shadow;
+    //box-shadow: $box-shadow;
     border-radius: 4px 0 4px 4px;
   }
 
   &__image-area {
+    display: block;
     border-radius: 4px 0 0 0;
     width: 180px;
     height: 180px;
     background-color: $shadow-color;
     color: $primary-on-font-color;
     position: relative;
+
+    &:hover {
+      opacity: $hover-opacity;
+    }
   }
 
   &__item-image {
@@ -185,13 +203,21 @@ export default {
   }
 
   &__favorite-button {
+    position: relative;
+    z-index: 999;
     fill: $shadow-color;
     height: 1.3em;
   }
 
   &__name {
+    display: block;
     text-align: left;
     font-weight: bold;
+    height: 2rem;
+
+    &:hover {
+      opacity: $hover-opacity;
+    }
   }
 
   &__text-wrap {
