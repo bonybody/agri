@@ -10,9 +10,9 @@
     </div>
     <div class="item-detail__right">
       <item-text
-        :set-count.sync="setCount"
-        @buy="buy()"
-        @edit="edit()"
+          :set-count.sync="setCount"
+          @buy="buy()"
+          @edit="edit()"
       />
     </div>
   </div>

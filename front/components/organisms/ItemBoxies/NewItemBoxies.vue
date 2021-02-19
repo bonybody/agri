@@ -14,7 +14,7 @@ export default {
   components: {ItemBox},
   data() {
     return {
-      numbers: [1, 2, 3, 4, 5, 6],
+      numbers: [1, 2, 3, 4, 5],
       item: {
         name: '【今週限りの販売】豊橋の美味しいキャベツ',
       }
