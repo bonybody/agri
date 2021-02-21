@@ -6,10 +6,11 @@
 
 <script>
 import ItemDetail from "~/components/organisms/items/ItemDetail";
+
 export default {
   name: "item",
   components: {ItemDetail},
-  auth: 'guest'
+  auth: false
 }
 </script>
 

@@ -72,9 +72,9 @@ export default {
 <style scoped lang="scss">
 header {
   position: relative;
+  z-index: 1000;
   background-color: $main-background-color;
   box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.3);
-  margin-bottom: 30px;
 }
 
 .header__content {
