@@ -12,7 +12,7 @@
                 query: { category: category.id }
               }"
           >
-            <img class="category__image" :src="category.image" :alt="name">
+            <img class="category__image" :src="category.image" :alt="category.name">
             <span class="category__name">{{ category.name }}</span>
           </nuxt-link>
         </template>
@@ -36,6 +36,7 @@ import NewKoeBoxes from "~/components/organisms/koeBoxes/NewKoeBoxes";
 import ImagesSwiper from "~/components/molecules/images/ImagesSwiper";
 
 export default {
+  name: "index",
   layout: 'home',
   auth: "guest",
   components: {ImagesSwiper, NewKoeBoxes, NewItemBoxies, kuro334},
@@ -102,6 +103,11 @@ section {
   position: relative;
   width: 200px;
   height: 100px;
+  &:hover {
+    filter: brightness(60%);
+  }
+
+
   &__image {
     position: absolute;
     z-index: 1;
@@ -111,8 +117,9 @@ section {
     height: 100%;
     object-fit: cover;
     border-radius: $box-border-radius;
-    filter: brightness(20%);
+    filter: brightness(40%);
   }
+
   &__name {
     position: absolute;
     display: inline-block;
