@@ -29,10 +29,7 @@ export default {
   },
   computed: {
     getToLink: function () {
-      if (this.myProfile === true) {
-        return '/setting/profile'
-      }
-      return '/user/' + this.userId
+      return '/user/' + this.id
     }
   }
 }
@@ -59,6 +56,7 @@ export default {
     &--no-image {
       svg {
         fill: $main-background-color;
+        border-radius: 1000px;
       }
     }
   }

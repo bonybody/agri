@@ -1,24 +1,26 @@
 <template>
-  <div class="container">
-    <section class="new-item">
-      <h1 class="section-header">新着商品</h1>
-      <new-item-boxies/>
-    </section>
-    <section>
-      <h1 class="section-header">新しいみんなのコエ</h1>
-      <new-koe-boxes/>
-    </section>
-  </div>
+    <div class="container">
+      <section class="new-item">
+        <h1 class="section-header">新着商品</h1>
+        <new-item-boxies/>
+      </section>
+      <section>
+        <h1 class="section-header">新しいみんなのコエ</h1>
+        <new-koe-boxes/>
+      </section>
+    </div>
 </template>
 
 <script>
 import kuro334 from '../components/test/kuro334.vue';
-import NewItemBoxies from "~/components/organisms/ItemBoxies/NewItemBoxies";
-import NewKoeBoxes from "~/components/organisms/koeBoxies/NewKoeBoxes";
+import NewItemBoxies from "~/components/organisms/ItemBoxes/NewItemBoxies";
+import NewKoeBoxes from "~/components/organisms/koeBoxes/NewKoeBoxes";
+import ImagesSwiper from "~/components/molecules/images/ImagesSwiper";
 
 export default {
+  layout: 'home',
   auth: "guest",
-  components: {NewKoeBoxes, NewItemBoxies, kuro334},
+  components: {ImagesSwiper, NewKoeBoxes, NewItemBoxies, kuro334},
   mounted() {
     console.log(this.$auth.loggedIn);
   },
@@ -40,5 +42,6 @@ section {
   font-weight: bold;
   margin-bottom: $large-margin;
 }
+
 
 </style>

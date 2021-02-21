@@ -8,7 +8,7 @@
         <p class="item-box__item-image-wrap">
           <img v-if="image" class="item-box__item-image" src="" alt="">
         </p>
-        <nuxt-link :to="'nuxt'" class="item-box__user-image-wrap">
+        <nuxt-link :to="getUserProfileLink" class="item-box__user-image-wrap">
           <img v-if="userImage" class="item-box__user-image" src="" alt="">
         </nuxt-link>
       </nuxt-link>
@@ -55,7 +55,7 @@ export default {
   props: {
     userId: {
       type: Number,
-      default: 0
+      default: 1
     },
     userImage: {
       type: String,
@@ -112,9 +112,14 @@ export default {
     },
     getItemDetailLink() {
       return {
-        path: 'item', query: {
+        path: '/item', query: {
           itemId: this.itemId
         }
+      }
+    },
+    getUserProfileLink() {
+      return {
+        path: '/user/' + this.userId
       }
     }
   }
