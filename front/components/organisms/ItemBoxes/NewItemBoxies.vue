@@ -29,8 +29,12 @@ export default {
   justify-content: left;
 
   &__item {
-    margin-right: 10px;
-    margin-bottom: 10px;
+    margin-right: 25px;
+    margin-bottom: 25px;
+
+    &:last-child {
+      margin-right: 0;
+    }
   }
 }
 </style>
