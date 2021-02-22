@@ -16,7 +16,7 @@ export default {
   components: {ItemBox},
   data() {
     return {
-      numbers: [1, 2, 3, 4, 5],
+      numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     }
   }
 }
@@ -29,12 +29,8 @@ export default {
   justify-content: left;
 
   &__item {
-    margin-right: 25px;
-    margin-bottom: 25px;
-
-    &:last-child {
-      margin-right: 0;
-    }
+    margin-right: 20px;
+    margin-bottom: 20px;
   }
 }
 </style>
