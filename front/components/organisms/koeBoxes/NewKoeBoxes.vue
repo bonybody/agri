@@ -16,7 +16,7 @@ export default {
   components: {KoeBox},
   data() {
     return {
-      numbers: [1, 2, 3, 4, 5],
+      numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     }
   }
 
@@ -30,8 +30,11 @@ export default {
   justify-content: left;
 
   &__box {
-    margin-right: 10px;
-    margin-bottom: 10px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+
+
   }
+
 }
 </style>
