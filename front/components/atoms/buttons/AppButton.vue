@@ -4,8 +4,7 @@
 
 <script>
 export default {
-  name: "search",
-  auth: false
+name: "AppButton"
 }
 </script>
 

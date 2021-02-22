@@ -244,7 +244,7 @@ export default {
     }
 
     &__price {
-      font-size: $emphasis-font-size;
+      font-size: $large-font-size;
       font-weight: bold;
     }
   }
@@ -266,7 +266,7 @@ export default {
 
   .delivery-deadline {
     text-align: center;
-    font-size: $emphasis-font-size;
+    font-size: $large-font-size;
   }
 }
 
