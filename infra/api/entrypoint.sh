@@ -1,6 +1,6 @@
 #!/bin/sh
 
-sleep 5
+sleep 10
 
 flask db init
 flask db migrate

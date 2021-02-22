@@ -14,7 +14,7 @@ def set_jwt(app):
     def identity(payload):
         user_id = payload['identity']
         user = User.getUserInfo(user_id=user_id)
-        return user
+        return user.__dict__
 
     jwt = JWT(app, authenticate, identity)
 
