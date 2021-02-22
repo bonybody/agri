@@ -32,12 +32,13 @@ export default {
 
 <style scoped lang="scss">
 .user-follow-button {
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
   background-color: $main-background-color;
   text-align: center;
-  vertical-align: middle;
   border: 2px solid $primary-color;
   border-radius: 1000px;
 }

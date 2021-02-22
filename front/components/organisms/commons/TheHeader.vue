@@ -14,7 +14,7 @@
             <span v-text="notification"></span>
           </p>
         </nuxt-link>
-        <nuxt-link to="/setting/profile" class="logged-in__item">
+        <nuxt-link to="/mypage" class="logged-in__item">
           <p class="profile__img" :class="{'image': getUserImage, 'noImage': !getUserImage}">
             <img v-if="getUserImage" :src="getUserImage" alt="ユーザー画像">
             <no-user-image-icon v-if="!getUserImage" />
