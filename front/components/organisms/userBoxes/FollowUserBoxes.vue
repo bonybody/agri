@@ -1,8 +1,8 @@
 <template>
-  <div class="new-koe-boxes">
+  <div class="follow-user-boxes">
     <template v-for="n in numbers">
-      <div class="new-koe-boxes__box">
-        <koe-box/>
+      <div class="follow-user-boxes__box">
+        <user-box/>
       </div>
     </template>
   </div>
@@ -10,10 +10,11 @@
 
 <script>
 import KoeBox from "~/components/molecules/KoeBox";
+import UserBox from "~/components/molecules/user/UserBox";
 
 export default {
-  name: "FavoriteKoeBoxes",
-  components: {KoeBox},
+  name: "FollowUserBoxes",
+  components: {UserBox, KoeBox},
   data() {
     return {
       numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
@@ -24,7 +25,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.new-koe-boxes {
+.follow-user-boxes {
   display: flex;
   flex-wrap: wrap;
   justify-content: left;

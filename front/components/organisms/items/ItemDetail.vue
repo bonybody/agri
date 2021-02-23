@@ -28,7 +28,7 @@ export default {
   components: {ItemText, FavoriteDetailBotton, ImageList},
   data() {
     return {
-      favorite: false,
+      favorite: true,
       setCount: 1
     }
   },

@@ -29,7 +29,7 @@ def post():
     )
     postUser = user.postRecord()
     auth = Auth(
-        user_id=postUser['id'],
+        user_id=postUser.id,
         email=userData['email'],
         password=userData['password']
     )

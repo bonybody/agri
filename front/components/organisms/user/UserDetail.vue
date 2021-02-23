@@ -7,16 +7,14 @@
       <div class="user-detail__tab">
         <app-tab-button
             :state="tabs.item.state"
-            :value="tabs.item.value"
             @myClick="tabChange"
-        />
+        >{{ tabs.item.value }}</app-tab-button>
       </div>
       <div class="user-detail__tab">
         <app-tab-button
             :state="tabs.koe.state"
-            :value="tabs.koe.value"
             @myClick="tabChange"
-        />
+        >{{ tabs.koe.value }}</app-tab-button>
       </div>
     </div>
     <div v-if="tabs.item.state" class="user-detail__items">

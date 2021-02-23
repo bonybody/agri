@@ -1,10 +1,10 @@
 <template>
-    <button v-if="!state" class="tab-button" @click="$emit('myClick')">
-      {{ value }}
-    </button>
-    <button v-else="state" class="tab-button active" disabled>
-      {{ value }}
-    </button>
+  <button v-if="!state" class="tab-button" @click="$emit('myClick')">
+    <slot></slot>
+  </button>
+  <button v-else="state" class="tab-button active" disabled>
+    <slot></slot>
+  </button>
 </template>
 
 <script>
@@ -15,10 +15,6 @@ export default {
       type: Boolean,
       default: false
     },
-    value: {
-      type: String,
-      default: 'タブ'
-    }
   },
 }
 </script>

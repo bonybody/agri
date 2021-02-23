@@ -1,6 +1,8 @@
 <template>
   <div class="my-page-menus">
-    <p class="my-page-menus__title">マイページメニュー</p>
+    <p class="my-page-menus__title">
+      <app-heading>マイページメニュー</app-heading>
+    </p>
     <div class="my-page-menus__content">
       <template v-for="menu in menus">
         <div class="my-page-menu" :key="menu.id">
@@ -24,10 +26,11 @@
 import AppMenuLabel from "~/components/atoms/menu/AppMenuLabel";
 import AppMenuLink from "~/components/atoms/menu/AppMenuLink";
 import AppSeparation from "~/components/atoms/separations/AppSeparation";
+import AppHeading from "~/components/atoms/headings/AppHeading";
 
 export default {
   name: "MyPageMenu",
-  components: {AppSeparation, AppMenuLink, AppMenuLabel},
+  components: {AppHeading, AppSeparation, AppMenuLink, AppMenuLabel},
   data() {
     return {
       menus: [
@@ -37,17 +40,17 @@ export default {
           links: [
             {id: 1, text: 'マイページ', link: {path: '/mypage'}},
             {id: 2, text: 'プロフィール', link: {path: '/user/' + this.$myAuth.user().id}},
-            {id: 3, text: 'お気に入り', link: {path: '/favorite'}},
-            {id: 4, text: 'お知らせ', link: {path: '/notice'}},
-            {id: 5, text: 'フォローユーザー', link: {path: '/follow'}},
+            {id: 3, text: 'お気に入り', link: {path: '/mypage/favorite'}},
+            {id: 4, text: 'お知らせ', link: {path: '/mypage/notice'}},
+            {id: 5, text: 'フォローユーザー', link: {path: '/mypage/follow'}},
           ]
         },
         {
           id: 2,
           name: '購入',
           links: [
-            {id: 1, text: '購入履歴', link: {path: '/buy_history'}},
-            {id: 2, text: '購入履歴 - 取引中', link: {path: '/user/' + this.$myAuth.user().id}},
+            {id: 1, text: '購入履歴', link: {path: '/mypage/buy_history'}},
+            {id: 2, text: '購入履歴 - 取引中', link: {path: '/mypage/buy_history', query: {now: true}}},
           ]
         },
         {
@@ -87,9 +90,8 @@ export default {
 .my-page-menus {
   width: 200px;
   margin: 0 auto;
+
   &__title {
-    font-size: $large-font-size;
-    font-weight: bold;
     margin-bottom: $semi-large-margin;
   }
 
