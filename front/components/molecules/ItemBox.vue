@@ -67,7 +67,7 @@ export default {
     },
     favorite: {
       type: Boolean,
-      default: false
+      default: true
     },
     state: {
       type: String,
@@ -103,12 +103,12 @@ export default {
   methods: {
     favoriteClick() {
       console.log('クリック')
-      this.thisFavorite = !this.thisFavorite
+      this.favorite = !this.favorite
     }
   },
   computed: {
     getFavorite() {
-      return this.thisFavorite
+      return this.favorite
     },
     getItemDetailLink() {
       return {

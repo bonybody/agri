@@ -1,5 +1,5 @@
 <template>
-  <button class="favorite-button" :class="{'favorite': getState, 'no-favorite': !getState}" @click="click()">
+  <button class="favorite-button" :class="{'favorite': state, 'no-favorite': !state}" @click="$emit('myClick')">
     <heart-icon></heart-icon>
   </button>
 </template>
@@ -13,33 +13,9 @@ export default {
   props: {
     state: {
       type: Boolean,
-      default: false
+      default: true
     }
   },
-  data() {
-    return {
-      thisState: undefined
-    }
-  },
-  methods: {
-    click() {
-      if (this.thisState === undefined) {
-        this.thisState = this.state
-      }
-      this.thisState = !this.thisState
-
-
-      this.$emit('myClick')
-    }
-  },
-  computed: {
-    getState() {
-      if (this.thisState === undefined) {
-        return this.state
-      }
-      return this.thisState
-    }
-  }
 }
 </script>
 

@@ -26,8 +26,8 @@ export default {
   justify-content: left;
 
   &__box {
-    margin-right: 25px;
-    margin-bottom: 25px;
+    margin-right: 20px;
+    margin-bottom: 20px;
 
     &:last-child {
       margin-right: 0;

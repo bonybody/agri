@@ -1,7 +1,7 @@
 <template>
-  <div class="new-koe-boxes">
+  <div class="favorite-koe-boxes">
     <template v-for="n in numbers">
-      <div class="new-koe-boxes__box">
+      <div class="favorite-koe-boxes__box">
         <koe-box/>
       </div>
     </template>
@@ -12,7 +12,7 @@
 import KoeBox from "~/components/molecules/KoeBox";
 
 export default {
-  name: "FavoriteKoeBoxes",
+  name: "NewKoeBoxes",
   components: {KoeBox},
   data() {
     return {
@@ -24,7 +24,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.new-koe-boxes {
+.favorite-koe-boxes {
   display: flex;
   flex-wrap: wrap;
   justify-content: left;
