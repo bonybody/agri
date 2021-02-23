@@ -19,8 +19,8 @@ export default {
   components: {AppFormHeading, AppFormButton, PasswordForm, EmailForm, AppInputText},
   data() {
     return {
-      password: 'user1',
-      email: 'user1'
+      password: 'test',
+      email: 'test@test.com'
     }
   },
   methods: {
