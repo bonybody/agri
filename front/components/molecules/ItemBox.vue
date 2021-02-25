@@ -1,16 +1,16 @@
 <template>
   <div  class="item-box">
     <p class="item-box__state">
-      残り{{ format }}日
+      残り{{ period }}日
     <p/>
     <div class="item-box__content-wrap">
       <nuxt-link :to="getItemDetailLink" class="item-box__image-area">
         <p class="item-box__item-image-wrap">
-          <img v-if="image" class="item-box__item-image" src="" alt="">
+          <img v-if="image" class="item-box__item-image" :src="image" :alt="name">
         </p>
-        <nuxt-link :to="getUserProfileLink" class="item-box__user-image-wrap">
-          <img v-if="userImage" class="item-box__user-image" src="" alt="">
-        </nuxt-link>
+        <div class="item-box__user-image-wrap">
+          <user-icon :image="userImage" />
+        </div>
       </nuxt-link>
       <div class="item-box__text-wrap">
         <div class="line-wrap">
@@ -27,7 +27,7 @@
         </div>
         <div class="line-wrap">
           <p class="item-box__price">&yen;{{ price }}~</p>
-          <p class="item-box__format">{{ state }}</p>
+          <p class="item-box__format">{{ remaining }}</p>
         </div>
         <div class="tags">
           <p class="tag"></p>
@@ -43,10 +43,11 @@ import MapIcon from "~/components/icons/MapIcon";
 import HeartIcon from "~/components/icons/HeartIcon";
 import FavoriteButton from "~/components/atoms/buttons/FavoriteButton";
 import PasswordForm from "~/components/molecules/forms/PasswordForm";
+import UserIcon from "~/components/icons/UserIcon";
 
 export default {
   name: "ItemBox",
-  components: {PasswordForm, FavoriteButton, HeartIcon, MapIcon},
+  components: {UserIcon, PasswordForm, FavoriteButton, HeartIcon, MapIcon},
   data() {
     return {
       thisFavorite: false
@@ -69,7 +70,7 @@ export default {
       type: Boolean,
       default: true
     },
-    state: {
+    remaining: {
       type: String,
       default: '今週残り1つ'
     },
@@ -89,9 +90,9 @@ export default {
       type: Number,
       default: 2000
     },
-    format: {
-      type: String,
-      default: '1'
+    period: {
+      type: Number,
+      default: 1
     },
     tags: {
       type: Object,
@@ -171,6 +172,9 @@ export default {
   &__item-image {
     width: 100%;
     height: 100%;
+    object-fit: cover;
+    border-radius: 4px 0 0 0;
+
   }
 
   &__item-image-wrap {

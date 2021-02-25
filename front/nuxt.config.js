@@ -1,7 +1,8 @@
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
   env: {
-    apiUrl: process.env.API_URL
+    apiUrl: process.env.API_URL,
+    HostFrontUrl: process.env.HOST_FRONT_URL
   },
 
   ssr: false,
@@ -38,7 +39,11 @@ export default {
     '~/plugins/axios/axios.js',
     '~/plugins/axios/index.js',
     '~/plugins/vue-line-clamp/index.js',
-    '~/plugins/vue-awesome-swiper/index.js'
+    '~/plugins/vue-awesome-swiper/index.js',
+    {
+      src: '~/plugins/vue-social-share/index.js',
+      mode: 'client'
+    }
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -52,10 +57,11 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
-    '@nuxtjs/style-resources'
+    '@nuxtjs/style-resources',
+    'vue-social-sharing/nuxt'
   ],
   auth: {
-    plugins: [ '~/plugins/my-auth/my-auth.js' ],
+    plugins: ['~/plugins/my-auth/my-auth.js'],
     redirect: {
       login: '/login',   // 未ログイン時に認証ルートへアクセスした際のリダイレクトURL
       logout: '/',  // ログアウト時のリダイレクトURL

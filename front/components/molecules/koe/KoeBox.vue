@@ -22,9 +22,16 @@
       <p class="body__title" v-line-clamp="2">{{ koeTitle }}</p>
       <p class="bony__text">{{ koeText }}</p>
     </div>
-    <app-separation/>
     <div class="footer">
       <p class="footer__info" v-line-clamp="2">{{ itemName }}</p>
+      <div class="separation">
+        <app-separation/>
+      </div>
+      <div class="footer__detail">
+        <div class="favorite">
+          <favorite-button :state="favorite"/>
+        </div>
+      </div>
       <p class="footer__bottom">
         <app-form-button @my-click="itemLink">商品を見に行く</app-form-button>
       </p>
@@ -36,11 +43,16 @@
 import UserIcon from "~/components/icons/UserIcon";
 import AppSeparation from "~/components/atoms/separations/AppSeparation";
 import AppFormButton from "~/components/atoms/forms/button/AppFormButton";
+import FavoriteButton from "~/components/atoms/buttons/FavoriteButton";
 
 export default {
   name: "KoeBox",
-  components: {AppFormButton, AppSeparation, UserIcon},
+  components: {FavoriteButton, AppFormButton, AppSeparation, UserIcon},
   props: {
+    id: {
+      type: Number,
+      default: 1
+    },
     userId: {
       type: Number,
       default: 1,
@@ -74,10 +86,14 @@ export default {
       type: String,
       default: '豊橋の美味しいキャベツ！あああああああああああああああああああああああ'
     },
+    favorite: {
+      type: Boolean,
+      default: true
+    }
   },
   methods: {
     itemLink: function () {
-      this.$router.push({ name: 'item', query: { itemId: this.itemId } })
+      this.$router.push({name: 'item', query: {itemId: this.itemId}})
     }
   }
 }
@@ -121,7 +137,6 @@ export default {
     &__title {
       font-weight: bold;
       font-size: 1em;
-      height: 2rem;
       margin-bottom: $medium-parts-margin;
     }
 
@@ -147,5 +162,16 @@ export default {
 
     }
   }
+}
+
+.favorite {
+  margin-left: auto;
+  width: 18px;
+  height: 18px;
+  margin-bottom: $medium-parts-margin;
+}
+
+.separation {
+  margin-bottom: $medium-parts-margin;
 }
 </style>

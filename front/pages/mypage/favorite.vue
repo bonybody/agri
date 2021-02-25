@@ -34,7 +34,7 @@
 import AppHeading from "~/components/atoms/headings/AppHeading";
 import AppTabButton from "~/components/atoms/buttons/AppTabButton";
 import FavoriteItemBoxes from "~/components/organisms/ItemBoxes/FavoriteItemBoxes";
-import FavoriteKoeBoxes from "~/components/organisms/koeBoxes/NewKoeBoxes";
+import FavoriteKoeBoxes from "~/components/organisms/koeBoxes/FavoriteKoeBoxes";
 
 export default {
   name: "favorite",

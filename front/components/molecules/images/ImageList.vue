@@ -23,10 +23,7 @@ export default {
       type: Array,
       default: () => {
         return [
-          null,
-          null,
-          null,
-          null
+          require('~/assets/images/test_images/item/1.jpg')
         ]
       }
     },
