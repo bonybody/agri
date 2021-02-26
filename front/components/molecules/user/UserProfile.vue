@@ -26,6 +26,11 @@
       </div>
     </div>
     <p class="user-profile__description">{{ userDescription }}</p>
+    <div class="sns-share">
+      <div class="sns-share__icon">
+        <app-twitter-share-button/>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -33,10 +38,11 @@
 import UserIcon from "~/components/icons/UserIcon";
 import AppUserFollowButton from "~/components/atoms/buttons/AppUserFollowButton";
 import AppLinkButton from "~/components/atoms/buttons/AppLinkButton";
+import AppTwitterShareButton from "~/components/atoms/buttons/AppTwitterShareButton";
 
 export default {
   name: "UserProfile",
-  components: {AppLinkButton, AppUserFollowButton, UserIcon},
+  components: {AppTwitterShareButton, AppLinkButton, AppUserFollowButton, UserIcon},
   props: {
     userImage: {
       type: String,
@@ -115,6 +121,14 @@ export default {
 
   &__description {
     white-space: pre-wrap;
+  }
+}
+.sns-share {
+  display: flex;
+  justify-content: flex-end;
+  &__icon {
+    width: 30px;
+    height: 30px;
   }
 }
 </style>

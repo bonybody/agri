@@ -20,7 +20,7 @@
 import KoeBox from "~/components/molecules/koe/KoeBox";
 
 export default {
-  name: "FavoriteKoeBoxes",
+  name: "ItemCatchKoeBoxes",
   components: {KoeBox},
   data() {
     return {

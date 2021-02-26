@@ -72,7 +72,7 @@ export default {
   data() {
     return {
       displayName: {
-        value: '',
+        value: 'テストユーザー',
         error: '',
         require: true
       },
@@ -82,12 +82,12 @@ export default {
         require: false
       },
       email: {
-        value: '',
+        value: 'test@test.com',
         error: '',
         require: true
       },
       password: {
-        value: '',
+        value: 'test',
         error: '',
         require: true
       },
@@ -95,10 +95,10 @@ export default {
         require: true,
         error: '',
         value: {
-          familyName: '',
-          familyNameRuby: '',
-          givenName: '',
-          givenNameRuby: '',
+          familyName: '山田',
+          familyNameRuby: 'ヤマダ',
+          givenName: '太郎',
+          givenNameRuby: 'タロウ',
         }
       },
       birthday: {

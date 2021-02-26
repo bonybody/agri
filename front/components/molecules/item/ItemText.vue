@@ -63,8 +63,18 @@
       <p class="delivery-deadline">ご購入から発送まで約{{ deliveryDeadline }}日程度</p>
     </div>
     <div class="line-wrap">
+      <div class="sns-share">
+        <div class="sns-share__icon">
+          <app-twitter-share-button
+              :url="getHostFrontEnv"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="line-wrap">
       <app-form-button v-if="Number(this.$myAuth.user.id) !== userId" @my-click="$emit('buy')">購入する</app-form-button>
-      <app-form-button v-if="Number(this.$myAuth.user.id) === userId" @my-click="$emit('edit')">内容を編集する</app-form-button>
+      <app-form-button v-if="Number(this.$myAuth.user.id) === userId" @my-click="$emit('edit')">内容を編集する
+      </app-form-button>
     </div>
   </div>
 </template>
@@ -75,26 +85,27 @@ import MapIcon from "~/components/icons/MapIcon";
 import UserIcon from "~/components/icons/UserIcon";
 import AppFormButton from "~/components/atoms/forms/button/AppFormButton";
 import AppInputText from "~/components/atoms/forms/input/AppInputText";
+import AppTwitterShareButton from "~/components/atoms/buttons/AppTwitterShareButton";
 
 export default {
   name: "ItemText",
-  components: {AppInputText, AppFormButton, UserIcon, MapIcon, AppItemFormatLabel},
+  components: {AppTwitterShareButton, AppInputText, AppFormButton, UserIcon, MapIcon, AppItemFormatLabel},
   props: {
     period: {
       type: Number,
-      default: 1
+      default: 3
     },
     remaining: {
       type: String,
-      default: '残1個'
+      default: '今週残り4個'
     },
     address: {
       type: String,
-      default: '愛知県豊橋市'
+      default: '愛知県碧南市'
     },
     itemName: {
       type: String,
-      default: '豊橋産の美味しいキャベツを1kgから！'
+      default: '【家庭用】フルーツにんじん10kg～'
     },
     itemId: {
       type: Number,
@@ -113,18 +124,17 @@ export default {
       type: Array,
       default: () => {
         return [
-          {id: 1, name: 'キャベツ'},
-          {id: 2, name: '冬キャベツ'}
+          {id: 1, name: 'にんじん'},
         ]
       }
     },
     quantity: {
       type: String,
-      default: '1kg'
+      default: '10kg'
     },
     price: {
       type: Number | String,
-      default: '1500'
+      default: '2160'
     },
     shippingFee: { // 送料
       type: Number,
@@ -174,6 +184,9 @@ export default {
         this.$emit('update:setCount', Number(value));
       }
     },
+    getHostFrontEnv() {
+      return process.env.HostFrontUrl
+    }
   }
 }
 </script>
@@ -283,6 +296,16 @@ export default {
     height: 1.1em;
     fill: $weak-font-color;
     vertical-align: bottom;
+  }
+}
+
+.sns-share {
+  display: flex;
+  justify-content: flex-end;
+
+  &__icon {
+    width: 30px;
+    height: 30px;
   }
 }
 </style>

@@ -1,6 +1,12 @@
 <template>
   <div class="follow">
-    <follow-user-boxes/>
+    <div class="follow__heading">
+      <app-heading>フォローユーザー</app-heading>
+    </div>
+
+    <div class="follow__user-boxes">
+      <follow-user-boxes/>
+    </div>
   </div>
 </template>
 
@@ -14,6 +20,10 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+.follow {
+  &__heading {
+    margin-bottom: $large-margin;
+  }
+}
 </style>
