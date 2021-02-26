@@ -34,22 +34,8 @@ class User(db.Model):
     def postRecord(self):
         db.session.add(self)
         db.session.commit()
-        return {
-            'id': self.id,
-            'display_name': self.display_name,
-            'image': self.image,
-            'name': self.name,
-            'name_ruby': self.name_ruby,
-            'birthday': self.birthday,
-            'payment': self.payment
-        }
-
+        return self
     @classmethod
     def getUserInfo(cls, user_id):
         record = cls.query.filter_by(id=user_id).first()
-        return {
-            'id': record.id,
-            'image': record.image,
-            'display_name': record.display_name
-        }
-
+        return record

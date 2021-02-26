@@ -5,7 +5,7 @@
 <script>
 export default {
   name: "search",
-  auth: "guest"
+  auth: false
 }
 </script>
 

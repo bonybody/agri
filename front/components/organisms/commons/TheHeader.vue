@@ -14,7 +14,7 @@
             <span v-text="notification"></span>
           </p>
         </nuxt-link>
-        <nuxt-link to="/setting/profile" class="logged-in__item">
+        <nuxt-link to="/mypage" class="logged-in__item">
           <p class="profile__img" :class="{'image': getUserImage, 'noImage': !getUserImage}">
             <img v-if="getUserImage" :src="getUserImage" alt="ユーザー画像">
             <no-user-image-icon v-if="!getUserImage" />
@@ -72,9 +72,9 @@ export default {
 <style scoped lang="scss">
 header {
   position: relative;
+  z-index: 1000;
   background-color: $main-background-color;
   box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.3);
-  margin-bottom: 30px;
 }
 
 .header__content {

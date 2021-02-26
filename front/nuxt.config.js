@@ -29,14 +29,16 @@ export default {
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
     '@assets/css/destyle.css',
-    '@assets/css/common.scss'
+    '@assets/css/common.scss',
+    'swiper/css/swiper.css'
   ],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
     '~/plugins/axios/axios.js',
     '~/plugins/axios/index.js',
-    '~/plugins/vue-line-clamp/index.js'
+    '~/plugins/vue-line-clamp/index.js',
+    '~/plugins/vue-awesome-swiper/index.js'
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -88,6 +90,9 @@ export default {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
+    vendor: [
+      'vue-awesome-swiper'
+    ]
   },
   watchers: {
     webpack: {

@@ -1,5 +1,5 @@
 <template>
-  <button class="favorite-detail-button" :class="{'favorite': state, 'no-favorite': !state}" @click="click()">
+  <button class="favorite-detail-button" :class="{'favorite': state, 'no-favorite': !state}" @click="$emit('myClick')">
     <heart-icon></heart-icon>
     <span v-if="!state" class="favorite-detail-button__text">お気に入り登録</span>
     <span v-else class="favorite-detail-button__text">お気に入り解除</span>
@@ -15,12 +15,7 @@ export default {
   props: {
     state: {
       type: Boolean,
-      default: false
-    }
-  },
-  methods: {
-    click() {
-      this.$emit('myClick')
+      default: true
     }
   },
 }
