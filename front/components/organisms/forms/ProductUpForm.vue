@@ -7,7 +7,7 @@
     <password-form v-model="password.value" :require="password.require" :error="password.error"/>
     <app-separation/>
 
-    <app-form-button @my-click="signUp()">次へ進むよ</app-form-button>
+    <app-form-button @my-click="signUp()">次へ進む</app-form-button>
   </div>
 </template>
 
