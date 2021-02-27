@@ -1,17 +1,17 @@
 <template>
   <div class="sign-up">
     <site-icon></site-icon>
-    <product-up-form></product-up-form>
+    <item-post-form></item-post-form>
   </div>
 </template>
 
 <script>
-import ProductUpForm from "~/components/organisms/forms/ProductUpForm";
+import ItemPostForm from "~/components/organisms/forms/ItemPostForm";
 import SiteIcon from "~/components/icons/SiteIcon";
 export default {
-  name: "signup",
-  components: {SiteIcon, ProductUpForm},
-  auth: "guest"
+  name: "postItem",
+  components: {SiteIcon, ItemPostForm},
+  auth: false
 }
 </script>
 

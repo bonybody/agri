@@ -1,13 +1,67 @@
 <template>
-  <div class="product-up-from">
-    <app-form-heading>商品出品</app-form-heading>
-    <product-photo-form v-model="displayName.value" :require="displayName.require" :error="displayName.error"/>
-    <product-name-form v-model="displayName.value" :require="displayName.require" :error="displayName.error"/>
-    <product-description-form v-model="displayName.value" :require="displayName.require" :error="displayName.error"/>
-    <password-form v-model="password.value" :require="password.require" :error="password.error"/>
+  <div class="product-up-form">
+    <div class="product-up-form__form">
+      <item-image-form
+          v-model="image.value"
+          :reuiqre="false"
+          :error="image.error"
+      />
+    </div>
+    <div class="product-up-form__form">
+      <product-name-form
+          v-model="itemName.value"
+          :require="itemName.require"
+          :error="itemName.error"
+      />
+    </div>
+    <div class="product-up-form__form">
+      <item-description-form
+          v-model="itemDescription.value"
+          :require="itemDescription.require"
+          :error="itemDescription.error"
+      />
+    </div>
+    <div class="product-up-form__form">
+      <item-period-form
+          v-model="period.value"
+          :toggle="period.value"
+          @clickCheckbox="clickCheckbox"
+          :require="period.require"
+          :error="period.error"
+      />
+    </div>
+    <div class="product-up-form__form">
+      <item-remaining-form
+          v-model="remaining.value.value"
+          :picked="remaining.value.picked"
+          :options="remaining.value.options"
+          @changeRadio="changeRadio($event)"
+          :require="remaining.require"
+          :error="remaining.error"
+      />
+    </div>
+    <div class="product-up-form__form">
+      <item-category-form
+          v-model="category.value"
+          :require="category.require"
+          :error="category.error"
+      />
+    </div>
+    <div class="product-up-form__form">
+      <delivery-fee-form
+          v-model="deliveryFee"
+          :require="deliveryFee.require"
+          :error="deliveryFee.error"
+      />
+    </div>
+    <div class="product-up-form__form">
+      <item-price-form
+          v-model="price.value"
+          :require="price.require"
+          :error="price.error"/>
+    </div>
     <app-separation/>
-
-    <app-form-button @my-click="signUp()">次へ進む</app-form-button>
+    <app-form-button @my-click="formButtonClick">次へ進む</app-form-button>
   </div>
 </template>
 
@@ -28,10 +82,27 @@ import DayForm from "~/components/molecules/forms/DayForm";
 import AppFormLabel from "~/components/atoms/forms/label/AppFormLabel";
 import AppRequireMark from "~/components/atoms/forms/marks/AppRequireMark";
 import AppErrorMessage from "~/components/atoms/forms/error/AppErrorMessage";
+import ProductDescriptionForm from "~/components/molecules/forms/ItemDescriptionForm";
+import ItemDescriptionForm from "~/components/molecules/forms/ItemDescriptionForm";
+import ItemPeriodForm from "~/components/molecules/forms/ItemPeriodForm";
+import ItemRemainingForm from "~/components/molecules/forms/ItemRemainingForm";
+import ItemCategoryForm from "~/components/molecules/forms/ItemCategoryForm";
+import DeliveryFeeForm from "~/components/molecules/forms/DeliveryFeeForm";
+import ItemPriceForm from "~/components/molecules/forms/ItemPriceForm";
+import ItemImageForm from "~/components/molecules/forms/ItemImageForm";
+import requireValidate from "~/functions/validate/requireValidate";
 
 export default {
   name: "ProductUpForm",
   components: {
+    ItemImageForm,
+    ItemPriceForm,
+    DeliveryFeeForm,
+    ItemCategoryForm,
+    ItemRemainingForm,
+    ItemPeriodForm,
+    ItemDescriptionForm,
+    ProductDescriptionForm,
     AppErrorMessage,
     AppRequireMark,
     AppFormLabel,
@@ -45,49 +116,82 @@ export default {
   },
   data() {
     return {
-      displayName: {
-        value: '',
-        error: '',
-        require: true
-      },
       image: {
         value: '',
         error: '',
         require: false
       },
-      email: {
+
+      itemName: {
         value: '',
         error: '',
         require: true
       },
-      password: {
+      itemDescription: {
         value: '',
         error: '',
-        require: true
+        require: false
       },
-      userName: {
+      period: {
+        require: true,
+        error: '',
+        value: 1
+      },
+      remaining: {
         require: true,
         error: '',
         value: {
-          familyName: '',
-          familyNameRuby: '',
-          givenName: '',
-          givenNameRuby: '',
+          value: 1,
+          picked: 'whole',
+          options: [
+            {value: 'whole', label: '全期間'},
+            {value: 'day', label: '一日'},
+            {value: 'week', label: '一週間'},
+            {value: 'month', label: '一ヶ月'}
+          ]
         }
       },
-      birthday: {
-        require: true,
+      category: {
         error: '',
-        value:
-            {
-              year: 1981,
-              month: 1,
-              day: 1
-            }
-      }
+        require: true,
+        value: ''
+      },
+      deliveryFee: {
+        error: '',
+        require: true,
+        value: ''
+      },
+      shipment: {
+        error: '',
+        require: true,
+        value: ''
+      },
+      price: {
+        value: 300,
+        require: true,
+        error: ''
+      },
     }
   },
   methods: {
+    changeRadio(radioValue) {
+      console.log(radioValue)
+      this.remaining.value.picked = radioValue
+    },
+    clickCheckbox(value) {
+      if (value !== 0) {
+        this.period.value = 0
+      } else {
+        this.period.value = 1
+      }
+    },
+    formButtonClick() {
+      let validateFlg;
+      validateFlg = requireValidate(this.$data);
+      if (!validateFlg) {
+        return
+      }
+    },
     signUp: function () {
       let errorFlg = false
       !this.requireValidate(this.displayName) ? errorFlg = true : '';
@@ -140,7 +244,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.product-up-from {
+.product-up-form {
   @include form-box-style();
 }
 
@@ -167,6 +271,5 @@ export default {
   &__form {
     @include left-right-alignment-mixin;
   }
-
 }
 </style>
