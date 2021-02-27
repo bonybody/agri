@@ -38,7 +38,7 @@ import ImagesSwiper from "~/components/molecules/images/ImagesSwiper";
 export default {
   name: "index",
   layout: 'home',
-  auth: "guest",
+  auth: false,
   components: {ImagesSwiper, NewKoeBoxes, NewItemBoxies, kuro334},
   data() {
     return {
