@@ -2,13 +2,13 @@ from datetime import datetime
 from api.database.database import db
 
 
-class Category(db.Model):
-    __tablename__ = 'category'
+class ItemImage(db.Model):
+    __tablename__ = 'item_image'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(255), nullable=False)
+    item_id = db.Column(db.Integer, db.ForeignKey('item.id', onupdate='CASCADE', ondelete='CASCADE'))
+    image_path = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now, onupdate=datetime.now)
-    product = db.relationship('Item', backref='category')
 
     def __init__(self, name=''):
         self.name = name
@@ -28,10 +28,10 @@ class Category(db.Model):
 
     @classmethod
     def addTestData(cls):
-        categories = []
+        models = []
         data_lists = ['grain', 'vegetable', 'fruit', 'other']
         for data in data_lists:
-            categories.append(cls(data))
+            models.append(cls(data))
 
-        db.session.add_all(categories)
+        db.session.add_all(models)
         db.session.commit()

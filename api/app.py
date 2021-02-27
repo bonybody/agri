@@ -32,8 +32,12 @@ register_controller_blueprint(app)
 
 init_db(app)
 
+from .models import Auth, User
+
+
 # アプリケーションの開始
 if __name__ == '__main__':
   host = os.environ['HOST']
   port = os.environ['PORT']
   app.run(host=host, port=port)
+
