@@ -2,7 +2,7 @@
   <label :for="name" class="input-image">
     <div class="input-image__label-icon">画像</div>
     <input class="input-image__input" type="file" :name="name" ref="preview" @change="uploadFile" hidden>
-    <img class="input-image__img" v-if="url" :src="url" alt="アップロード画像プレビュー">
+    <img class="input-image__img" v-if="previewUrl" :src="previewUrl" alt="アップロード画像プレビュー">
   </label>
 </template>
 
@@ -14,16 +14,24 @@ export default {
   mixins: [input],
   data() {
     return {
-      url: ''
+      previewUrl: ''
     }
   },
   props: {
-    name: ''
+    name: {
+      type: String,
+      require: true
+    },
+    value: {
+      type: String,
+      require: true
+    }
   },
   methods: {
     uploadFile() {
       const file = this.$refs.preview.files[0];
-      this.url = URL.createObjectURL(file)
+      this.previewUrl = URL.createObjectURL(file)
+      this.$emit('changeValue', file)
       this.$refs.preview.value = "";
     }
   }

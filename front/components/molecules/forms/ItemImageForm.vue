@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="item-image-form__input">
-      <app-input-image v-model="inputValue" />
+      <app-input-image @changeValue="change($event)" />
     </div>
     <div class="item-image-form__error">
       <app-error-message>{{ error }}</app-error-message>
@@ -27,7 +27,6 @@ import input from "~/mixins/input";
 export default {
   name: "ItemImageForm",
   components: {AppErrorMessage, AppInputImage, AppRequireMark, AppFormLabel},
-  mixins: [input],
   props: {
     require: {
       type: Boolean,
@@ -36,6 +35,12 @@ export default {
     error: {
       type: String,
       default: ''
+    }
+  },
+  methods: {
+    change(event) {
+      this.$emit('input', event)
+      console.log(event)
     }
   }
 }

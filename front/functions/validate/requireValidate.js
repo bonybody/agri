@@ -1,7 +1,6 @@
 export default function requireValidate(attrs) {
   let flg = true;
   Object.keys(attrs).forEach(function (key) {
-    console.log(attrs[key]);
     if (
       (attrs[key].value === '' ||
         attrs[key].value === null ||
@@ -9,7 +8,10 @@ export default function requireValidate(attrs) {
       attrs[key].require
     ) {
       attrs[key].error = 'この項目は入力必須です。'
+      console.log(attrs[key])
       flg = false
+    } else {
+      // attrs[key].error = ''
     }
   });
   return flg

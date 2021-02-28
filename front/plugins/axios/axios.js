@@ -18,6 +18,7 @@ export default ({$myAuth, $axios, env}) => {
     // }
   });
 
+
   // レスポンスが帰ってくると発火する
   $axios.onResponse(response => {
     return Promise.resolve(response);

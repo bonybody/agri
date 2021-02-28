@@ -36,6 +36,7 @@ class User(db.Model):
         db.session.add(self)
         db.session.commit()
         return self
+
     @classmethod
     def getUserInfo(cls, user_id):
         record = cls.query.filter_by(id=user_id).first()
