@@ -1,10 +1,12 @@
 from flask import Blueprint, request, jsonify
-from flask_jwt import JWT, jwt_required, current_identity
+from flask_jwt import JWT, jwt_required, current_identity, current_app
 import logging
 import json
-from api.models import User, Auth, Item, Category
+from api.models import User, Auth, Item, Category, ItemImage
 from api.app import app
 from api.database.database import db
+from api.plugin.aws_s3 import item_image_bucket
+import io
 
 bp = Blueprint('item', __name__, url_prefix='/item')
 
@@ -23,7 +25,7 @@ def post():
     userData = json.loads(jsonData)
     json_dict = json.loads(request.form['params'])
     app.logger.debug(json_dict)
-    app.logger.debug(request.form)
+    app.logger.debug(request.files)
     item = Item(
         name=json_dict['name'],
         description=json_dict['description'],
@@ -37,11 +39,21 @@ def post():
     )
 
     db.session.add(item)
-    db.session.flush()
     db.session.commit()
     db.session.refresh(item)
-    app.logger.debug(vars(item))
     post_record = item.__dict__
     post_record.pop('_sa_instance_state')
 
-    return jsonify(post_record)
+    try:
+        if 'image' in request.files.keys():
+            image = request.files['image']
+            response = item_image_bucket.put_object(
+                Body=io.BufferedReader(image).read(),
+                Key=f's3/item-images/' + str(image.filename)
+            )
+            item_image =  ItemImage(app.config['ITEM_IMAGE_BASE'] + response.key, post_record['id'])
+            item_image.postRecord()
+    except NameError:
+        pass
+
+    return jsonify({'state': True})

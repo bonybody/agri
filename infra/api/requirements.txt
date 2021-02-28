@@ -13,3 +13,5 @@ SQLAlchemy
 mysqlclient
 marshmallow
 marshmallow-sqlalchemy
+boto3
+awscli

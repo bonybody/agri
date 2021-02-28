@@ -3,6 +3,8 @@ from flask_jwt import JWT, jwt_required, current_identity
 import logging
 import json
 from api.models import User, Auth, Category, RemainingFormat
+from api.plugin.aws_s3 import getS3Buckets
+from api.app import app
 
 bp = Blueprint('test', __name__, url_prefix='/test')
 
@@ -36,4 +38,9 @@ def postCategory():
 @bp.route('/remaining_format', methods=['post'])
 def postRemainingFormat():
     RemainingFormat.addTestData()
+    return jsonify({'state': True})
+
+@bp.route('/s3', methods=['get'])
+def getS3Bucket():
+    getS3Buckets(app)
     return jsonify({'state': True})
