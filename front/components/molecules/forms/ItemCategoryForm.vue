@@ -31,7 +31,10 @@ export default {
   data() {
     return {
       categories: [
-        {id: 1, value: 'aaa', label: 'aaaa'}
+        {value: 1, label: '米・穀物'},
+        {value: 2, label: '野菜'},
+        {value: 3, label: '果物'},
+        {value: 4, label: 'その他'}
       ],
       require: {
         type: Boolean,

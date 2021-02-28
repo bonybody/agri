@@ -60,6 +60,12 @@
           :require="price.require"
           :error="price.error"/>
     </div>
+    <div class="product-up-form__form">
+      <item-shipment-form
+          v-model="shipment.value"
+          :require="shipment.require"
+          :error="shipment.error"/>
+    </div>
     <app-separation/>
     <app-form-button @my-click="formButtonClick">次へ進む</app-form-button>
   </div>
@@ -91,10 +97,14 @@ import DeliveryFeeForm from "~/components/molecules/forms/DeliveryFeeForm";
 import ItemPriceForm from "~/components/molecules/forms/ItemPriceForm";
 import ItemImageForm from "~/components/molecules/forms/ItemImageForm";
 import requireValidate from "~/functions/validate/requireValidate";
+import ItemShipmentForm from "~/components/molecules/forms/ItemShipmentForm";
+import ProductNameForm from "~/components/molecules/forms/ProductNameForm";
 
 export default {
   name: "ProductUpForm",
   components: {
+    ProductNameForm,
+    ItemShipmentForm,
     ItemImageForm,
     ItemPriceForm,
     DeliveryFeeForm,
@@ -142,12 +152,12 @@ export default {
         error: '',
         value: {
           value: 1,
-          picked: 'whole',
+          picked: '1',
           options: [
-            {value: 'whole', label: '全期間'},
-            {value: 'day', label: '一日'},
-            {value: 'week', label: '一週間'},
-            {value: 'month', label: '一ヶ月'}
+            {value: '1', label: '全期間'},
+            {value: '2', label: '一日'},
+            {value: '3', label: '一週間'},
+            {value: '4', label: '一ヶ月'}
           ]
         }
       },
@@ -164,7 +174,7 @@ export default {
       shipment: {
         error: '',
         require: true,
-        value: ''
+        value: 1
       },
       price: {
         value: 300,
@@ -191,53 +201,31 @@ export default {
       if (!validateFlg) {
         return
       }
+      this.post()
     },
-    signUp: function () {
-      let errorFlg = false
-      !this.requireValidate(this.displayName) ? errorFlg = true : '';
-      !this.requireValidate(this.email) ? errorFlg = true : '';
-      !this.requireValidate(this.password) ? errorFlg = true : '';
-      !this.requireValidate(this.userName) ? errorFlg = true : '';
-      !this.requireValidate(this.birthday) ? errorFlg = true : '';
-      if (errorFlg) {
-        return
-      }
+    post() {
       const params = {
-        display_name: this.displayName.value,
-        email: this.email.value,
-        image: this.image.value,
-        password: this.password.value,
-        name: this.userName.value.familyName + this.userName.value.givenName,
-        name_ruby: this.userName.value.familyNameRuby + this.userName.value.givenNameRuby,
-        birthday: this.birthday.value.year + '-' +
-            ('00' + this.birthday.value.month).slice(-2) + '-' +
-            ('00' + this.birthday.value.day).slice(-2)
+        name: this.itemName.value,
+        description: this.itemDescription.value,
+        period: this.period.value,
+        remaining_days: this.remaining.value.value,
+        remaining_format_id: this.remaining.value.picked,
+        category_id: this.category.value,
+        shipment: this.shipment.value,
+        price: this.price.value,
+        user_id: this.$myAuth.user().id
       }
-      this.$api['user'].signUp(params).then(() => {
-        console.log(this.email.value, this.password.value)
-        this.$myAuth.login(this.email.value, this.password.value)
+      const fileParam = this.image.value
+      const formData = new FormData()
+      let jsonDate = JSON.stringify(params)
+      formData.append('params', jsonDate)
+      formData.append('image', fileParam)
+      this.$api['item'].post(formData).then(({data}) => {
+        console.log(data)
       }).catch((e) => {
         console.log(e)
       });
 
-    },
-    requireValidate: function (form) {
-      if (form.require) {
-        if (typeof form.value === 'object') {
-          Object.keys(form.value).forEach(function (key) {
-            if (form.value[key] === '') {
-              form.error = '入力必須です。';
-              return false
-            }
-          }, form.value);
-        } else {
-          if (!form.value) {
-            form.error = "入力必須です。";
-            return false
-          }
-        }
-      }
-      return true;
     },
   }
 }

@@ -8,7 +8,7 @@ class Category(db.Model):
     name = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now, onupdate=datetime.now)
-    product = db.relationship('Item', backref='category')
+    item = db.relationship('Item', backref='category')
 
     def __init__(self, name=''):
         self.name = name
