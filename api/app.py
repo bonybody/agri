@@ -9,7 +9,6 @@ from flask import Flask
 from flask_cors import CORS
 from .plugin.auth import set_jwt
 
-
 # sys.stdout = codecs.getwriter('utf_8')(sys.stdout)
 
 # アプリケーションの初期化
@@ -18,6 +17,7 @@ app = Flask(__name__)
 # 設定ファイルの読み込み
 app.config.from_pyfile("config/base_config.py")
 app.config.from_object('api.config.database_config.DatabaseConfig')
+app.config.from_pyfile("config/aws_config.py")
 
 # CORSを適応
 CORS(app)
