@@ -1,5 +1,5 @@
 from datetime import datetime
-from api.database.database import db
+from api.database.database import db, ma
 
 
 class Category(db.Model):

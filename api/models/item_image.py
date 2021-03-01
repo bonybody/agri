@@ -1,6 +1,5 @@
 from datetime import datetime
-from api.database.database import db
-
+from api.database.database import db, ma
 
 class ItemImage(db.Model):
     __tablename__ = 'item_image'
@@ -25,3 +24,7 @@ class ItemImage(db.Model):
         record = cls.query.filter_by(id=image_id).first()
         return record
 
+class ItemImageSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = ItemImage
+        # load_instance = True

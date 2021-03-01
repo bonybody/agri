@@ -1,6 +1,5 @@
 from datetime import datetime
-from api.database.database import db
-
+from api.database.database import db, ma
 
 class RemainingFormat(db.Model):
     __tablename__ = 'remaining_format'

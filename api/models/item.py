@@ -1,5 +1,6 @@
 from datetime import datetime
-from api.database.database import db
+from api.database.database import db, ma
+from .item_image import ItemImageSchema
 
 
 class Item(db.Model):
@@ -19,9 +20,10 @@ class Item(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id', onupdate='CASCADE', ondelete='CASCADE'))
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now, onupdate=datetime.now)
-    item_image = db.relationship('ItemImage', backref='item')
+    images = db.relationship('ItemImage', backref='item', lazy="joined")
 
-    def __init__(self, name=None, description=None, period=None, remaining_days=None, remaining_format_id=None, category_id=None,
+    def __init__(self, name=None, description=None, period=None, remaining_days=None, remaining_format_id=None,
+                 category_id=None,
                  shipment=None, price=None, state=None, user_id=None):
         self.name = name
         self.description = description
@@ -42,3 +44,11 @@ class Item(db.Model):
     def getProductById(cls, item_id):
         record = cls.query.filter_by(id=item_id).first()
         return record
+
+
+class ItemSchema(ma.SQLAlchemyAutoSchema):
+    images = ma.Nested(ItemImageSchema, many=True)
+
+    class Meta:
+        model = Item
+        # load_instance = True

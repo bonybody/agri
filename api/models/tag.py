@@ -1,7 +1,8 @@
 from datetime import datetime
 from api.database.database import db
+from api.app import ma
 
-class User(db.Model):
+class Tag(db.Model):
     __tablename__ = 't_tag'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     code = db.Column(db.String(255))
@@ -20,3 +21,6 @@ class User(db.Model):
             'display_name': record.display_name
         }
 
+class tagSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = Tag

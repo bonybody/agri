@@ -1,6 +1,5 @@
 from datetime import datetime
-from api.database.database import db
-
+from api.database.database import db, ma
 
 class User(db.Model):
     __tablename__ = 'user'
@@ -16,7 +15,7 @@ class User(db.Model):
     auth = db.relationship('Auth', backref='user')
     item = db.relationship('Item', backref='user')
 
-    def __init__(self, display_name, image='', name='', name_ruby='', birthday='', payment=''):
+    def __init__(self, display_name='', image='', name='', name_ruby='', birthday='', payment=''):
         self.display_name = display_name
         self.image = image
         self.name = name
@@ -24,7 +23,7 @@ class User(db.Model):
         self.birthday = birthday
         self.payment = payment
 
-    def setAttr(self, display_name, image='', name='', name_ruby='', birthday='', payment=''):
+    def setAttr(self, display_name='', image='', name='', name_ruby='', birthday='', payment=''):
         self.display_name = display_name
         self.image = image
         self.name = name
@@ -37,7 +36,17 @@ class User(db.Model):
         db.session.commit()
         return self
 
+    def getUserInfo(self, user_id):
+        record = db.session.query(self).filter_by(id=user_id).first()
+        return record
+
+
+
     @classmethod
     def getUserInfo(cls, user_id):
-        record = cls.query.filter_by(id=user_id).first()
+        record = db.session.query(cls).filter_by(id=user_id).first()
         return record
+
+class UserSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = User
