@@ -8,8 +8,12 @@
         <app-require-mark v-show="!require"/>
       </div>
     </div>
-    <div class="item-image-form__input">
-      <app-input-image @changeValue="change($event)" />
+    <div class="item-image-form__input-box">
+      <template v-for="(image, index) in images">
+        <div class="item-image-form__input" :key="index">
+          <app-input-image @changeValue="change($event, index)"/>
+        </div>
+      </template>
     </div>
     <div class="item-image-form__error">
       <app-error-message>{{ error }}</app-error-message>
@@ -37,10 +41,21 @@ export default {
       default: ''
     }
   },
+  data() {
+    return {
+      images: [
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    }
+  },
   methods: {
-    change(event) {
-      this.$emit('input', event)
-      console.log(event)
+    change(event, index) {
+      this.images[index] = event
+      this.$emit('input', this.images)
     }
   }
 }
@@ -53,10 +68,19 @@ export default {
   &__heading {
     @include left-right-alignment-mixin;
   }
-  &__input {
-    width: 100px;
-    height: 50px;
 
+  &__input-box {
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    padding: 0;
+  }
+
+  &__input {
+    width: 200px;
+    height: 200px;
+    margin-right: $medium-parts-margin;
+    display: inline-block;
   }
 }
 </style>

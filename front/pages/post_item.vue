@@ -11,7 +11,6 @@ import SiteIcon from "~/components/icons/SiteIcon";
 export default {
   name: "postItem",
   components: {SiteIcon, ItemPostForm},
-  auth: false
 }
 </script>
 

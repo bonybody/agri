@@ -27,7 +27,7 @@
         </div>
         <div class="line-wrap">
           <p class="item-box__price">&yen;{{ price }}~</p>
-          <p class="item-box__format">{{ remaining }}</p>
+          <p class="item-box__format">{{ getRemaining }}</p>
         </div>
         <div class="tags">
           <p class="tag"></p>
@@ -71,8 +71,12 @@ export default {
       default: true
     },
     remaining: {
+      type: Number,
+      default: 4
+    },
+    remaining_format: {
       type: String,
-      default: '今週残り1つ'
+      require: true
     },
     image: {
       type: String,
@@ -113,15 +117,31 @@ export default {
     },
     getItemDetailLink() {
       return {
-        path: '/item', query: {
-          itemId: this.itemId
-        }
+        path: '/item/' + this.itemId
       }
     },
     getUserProfileLink() {
       return {
         path: '/user/' + this.userId
       }
+    },
+    getRemaining() {
+      let remaining_text = ''
+      switch (this.remaining_format){
+        case 'whole':
+          remaining_text = '全期間残り：' + this.remaining + '個'
+          break
+        case 'day':
+          remaining_text = '本日残り：' + this.remaining + '個'
+          break
+        case 'week':
+          remaining_text = '今週残り：' + this.remaining + '個'
+          break
+        case 'month':
+          remaining_text = '今月残り：' + this.remaining + '個'
+          break
+      }
+      return remaining_text
     }
   }
 }
@@ -234,6 +254,7 @@ export default {
   }
 
   &__format {
+    font-size: 0.8em;
     font-weight: bold;
     padding: 3px 10px;
     border-radius: 1000px;

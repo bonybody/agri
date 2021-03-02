@@ -1,6 +1,10 @@
 <template>
   <div class="sign-up-form">
     <app-form-heading>新規登録</app-form-heading>
+    <div class="image">
+      <user-image-form v-model="image.value"/>
+    </div>
+
     <display-name-form v-model="displayName.value" :require="displayName.require" :error="displayName.error"/>
     <email-form v-model="email.value" :require="email.require" :error="email.error"/>
     <password-form v-model="password.value" :require="password.require" :error="password.error"/>
@@ -54,10 +58,15 @@ import DayForm from "~/components/molecules/forms/DayForm";
 import AppFormLabel from "~/components/atoms/forms/label/AppFormLabel";
 import AppRequireMark from "~/components/atoms/forms/marks/AppRequireMark";
 import AppErrorMessage from "~/components/atoms/forms/error/AppErrorMessage";
+import UserProfile from "~/components/molecules/user/UserProfile";
+import requireValidate from "~/functions/validate/requireValidate";
+import UserImageForm from "~/components/molecules/forms/UserImageForm";
 
 export default {
   name: "SignUpForm",
   components: {
+    UserImageForm,
+    UserProfile,
     AppErrorMessage,
     AppRequireMark,
     AppFormLabel,
@@ -77,7 +86,7 @@ export default {
         require: true
       },
       image: {
-        value: '',
+        value: null,
         error: '',
         require: false
       },
@@ -115,15 +124,11 @@ export default {
   },
   methods: {
     signUp: function () {
-      let errorFlg = false
-      !this.requireValidate(this.displayName) ? errorFlg = true : '';
-      !this.requireValidate(this.email) ? errorFlg = true : '';
-      !this.requireValidate(this.password) ? errorFlg = true : '';
-      !this.requireValidate(this.userName) ? errorFlg = true : '';
-      !this.requireValidate(this.birthday) ? errorFlg = true : '';
-      if (errorFlg) {
+      let varidateFlg = requireValidate(this.$data)
+      if (!varidateFlg) {
         return
       }
+      const formData = new FormData()
       const params = {
         display_name: this.displayName.value,
         email: this.email.value,
@@ -135,31 +140,17 @@ export default {
             ('00' + this.birthday.value.month).slice(-2) + '-' +
             ('00' + this.birthday.value.day).slice(-2)
       }
-      this.$api['user'].signUp(params).then(() => {
-        console.log(this.email.value, this.password.value)
-        this.$myAuth.login(this.email.value, this.password.value)
+      let jsonDate = JSON.stringify(params)
+      formData.append('params', jsonDate)
+      if (this.image.value) {
+        formData.append('image', this.image.value)
+      }
+      this.$api['user'].signUp(formData).then(() => {
+        this.$router.push({path: '/login'})
       }).catch((e) => {
         console.log(e)
       });
 
-    },
-    requireValidate: function (form) {
-      if (form.require) {
-        if (typeof form.value === 'object') {
-          Object.keys(form.value).forEach(function (key) {
-            if (form.value[key] === '') {
-              form.error = '入力必須です。';
-              return false
-            }
-          }, form.value);
-        } else {
-          if (!form.value) {
-            form.error = "入力必須です。";
-            return false
-          }
-        }
-      }
-      return true;
     },
   }
 }

@@ -34,3 +34,7 @@ class RemainingFormat(db.Model):
 
         db.session.add_all(models)
         db.session.commit()
+
+# class RemainingFormatSchema(ma.SQLAlchemyAutoSchema):
+#     class Meta:
+#         model = RemainingFormat

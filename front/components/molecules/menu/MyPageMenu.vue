@@ -57,7 +57,7 @@ export default {
           id: 3,
           name: '販売',
           links: [
-            {id: 1, text: '商品を出品する', link: {path: '/mypage'}},
+            {id: 1, text: '商品を出品する', link: {path: '/post_item'}},
             {id: 2, text: '売上管理', link: {path: '/user/' + this.$myAuth.user().id}},
             {id: 3, text: '出品商品', link: {path: '/favorite'}},
             {id: 4, text: '出品商品 - 取引中', link: {path: '/notice'}},

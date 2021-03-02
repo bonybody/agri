@@ -24,7 +24,7 @@ class ItemImage(db.Model):
         record = cls.query.filter_by(id=image_id).first()
         return record
 
-class ItemImageSchema(ma.SQLAlchemyAutoSchema):
-    class Meta:
-        model = ItemImage
-        # load_instance = True
+# class ItemImageSchema(ma.SQLAlchemyAutoSchema):
+#     class Meta:
+#         model = ItemImage
+#         # load_instance = True

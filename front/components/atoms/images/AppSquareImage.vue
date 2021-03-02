@@ -1,6 +1,6 @@
 <template>
   <div class="square-image">
-    <img v-if="src !==null" class="square-image__image" :src="src" :alt="alt">
+    <img v-if="src" class="square-image__image" :src="src" :alt="alt">
     <div v-else class="square-image__no-image"></div>
   </div>
 </template>
