@@ -4,6 +4,7 @@
     <product-photo-form v-model="displayName.value" :require="displayName.require" :error="displayName.error"/>
     <product-name-form v-model="displayName.value" :require="displayName.require" :error="displayName.error"/>
     <product-description-form v-model="displayName.value" :require="displayName.require" :error="displayName.error"/>
+    <product-description-form v-model="displayName.value" :require="displayName.require" :error="displayName.error"/>
     <password-form v-model="password.value" :require="password.require" :error="password.error"/>
     <app-separation/>
 
