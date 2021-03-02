@@ -1,7 +1,7 @@
 <template>
   <div class="item">
     <div class="item__detail">
-      <item-detail></item-detail>
+      <item-detail :item="item"></item-detail>
     </div>
     <div class="item__catch-koe">
       <div class="koe">
@@ -22,9 +22,21 @@ import ItemCatchKoeBoxes from "~/components/organisms/koeBoxes/ItemCatchKoeBoxes
 import AppHeading from "~/components/atoms/headings/AppHeading";
 
 export default {
-  name: "item",
   components: {AppHeading, ItemCatchKoeBoxes, ItemDetail},
-  auth: false
+  auth: false,
+  async asyncData({params, $api}) {
+    let item = {}
+    const res = await $api['item'].getById(params.id).then(
+        ({data}) => {
+          console.log(data)
+          item = data.entries
+        }
+    )
+    return {item: item}
+  },
+  mounted() {
+    console.log(this.item)
+  }
 }
 </script>
 

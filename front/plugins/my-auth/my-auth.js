@@ -31,6 +31,7 @@ class MyAuth {
   }
 
   user() {
+    console.log(this.auth.user)
     return this.auth.user
   }
 

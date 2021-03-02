@@ -1,12 +1,13 @@
 <template>
   <div class="image-list">
-    <template v-for="image in getImages">
-      <p v-if="image.id === images.length"
+    <div v-if="images.length === 0" class="image-list__no-image">画像なし</div>
+    <template v-for="(image,index) in images">
+      <p v-if="index === 0"
          class="image-list__image-wrap image-list__image-wrap--first">
-        <app-square-image :src="image.image" :alt="meaning + image.id"/>
+        <app-square-image :src="image.url" :alt="meaning + image.id"/>
       </p>
-      <p v-if="image.id !== images.length" class="image-list__image-wrap">
-        <app-square-image :src="image.image" :alt="meaning + image.id"/>
+      <p v-if="index !== 0" class="image-list__image-wrap">
+        <app-square-image :src="image.url" :alt="meaning + image.id"/>
       </p>
     </template>
   </div>
@@ -32,16 +33,6 @@ export default {
       default: null
     },
   },
-  computed: {
-    getImages() {
-      const resultImages = []
-      this.images.forEach((value, index) => {
-        resultImages.push({image: value, id: index + this.images.length})
-      });
-      return resultImages;
-    }
-
-  },
 }
 </script>
 
@@ -51,6 +42,16 @@ export default {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+
+  &__no-image {
+    width: 400px;
+    height: 400px;
+    margin-bottom: 20px;
+    background-color: $weak-font-color;
+    text-align: center;
+    line-height: 400px;
+    font-size: large;
+  }
 
   &__image-wrap {
     width: 80px;

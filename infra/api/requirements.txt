@@ -15,3 +15,6 @@ marshmallow
 marshmallow-sqlalchemy
 boto3
 awscli
+marshmallow
+flask_marshmallow
+marshmallow-sqlalchemy

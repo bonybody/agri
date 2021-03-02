@@ -12,6 +12,7 @@ import SiteIcon from "~/components/icons/SiteIcon";
 export default {
   name: "login",
   components: {SiteIcon, LoginForm},
+  auth: 'guest',
   data() {
     return {
       password: 'user1',
