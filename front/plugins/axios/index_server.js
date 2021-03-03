@@ -1,5 +1,5 @@
 import User from "~/plugins/axios/modules/user";
-import { axios } from "~/plugins/axios/axios.js";
+import { axios } from "~/plugins/axios/axios_server.js";
 import Item from "~/plugins/axios/modules/item";
 import ItemTransaction from "~/plugins/axios/modules/item_transaction";
 import api from "~/plugins/axios/modules";

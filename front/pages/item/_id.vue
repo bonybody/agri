@@ -34,9 +34,6 @@ export default {
     )
     return {item: item}
   },
-  mounted() {
-    console.log(this.item)
-  }
 }
 </script>
 

@@ -1,11 +1,12 @@
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
   env: {
-    apiUrl: process.env.API_URL,
+    apiUrlClient: process.env.API_URL_CLIENT,
+    apiUrlServer: process.env.API_URL_SERVER,
     HostFrontUrl: process.env.HOST_FRONT_URL
   },
 
-  ssr: false,
+  ssr: true,
   head: {
     title: 'agri',
     meta: [
@@ -36,10 +37,30 @@ export default {
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
-    '~/plugins/axios/axios.js',
-    '~/plugins/axios/index.js',
-    '~/plugins/vue-line-clamp/index.js',
-    '~/plugins/vue-awesome-swiper/index.js',
+    {
+      src: '~/plugins/axios/axios.js',
+      mode: "client"
+    },
+    {
+      src: '~/plugins/axios/axios_server.js',
+      mode: "server"
+    },
+    {
+      src: '~/plugins/axios/index.js',
+      mode: "client"
+    },
+    {
+      src: '~/plugins/axios/index_server.js',
+      mode: "server"
+    },
+    {
+      src: '~/plugins/vue-line-clamp/index.js',
+      mode: 'client'
+    },
+    {
+      src: '~/plugins/vue-awesome-swiper/index.js',
+      mode: 'client'
+    },
     {
       src: '~/plugins/vue-social-share/index.js',
       mode: 'client'
