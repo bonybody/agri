@@ -24,6 +24,7 @@ class Item(db.Model):
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now, onupdate=datetime.now)
     images = db.relationship('ItemImage', backref='item', lazy="joined")
     item_transactions = db.relationship('ItemTransaction', backref='item')
+    # koes = db.relationship('Koe', backref='item')
 
     def __init__(self, name=None, description=None, period=None, remaining_days=None, remaining_format_id=None,
                  category_id=None,

@@ -33,8 +33,8 @@ class ItemTransaction(db.Model):
         db.session.refresh(self)
 
     @classmethod
-    def getRecordsById(cls, id):
-        record = cls.query.filter_by(id=id).first()
+    def getRecordById(cls, transaction_id):
+        record = cls.query.filter_by(id=transaction_id).first()
         return record
 
     @classmethod

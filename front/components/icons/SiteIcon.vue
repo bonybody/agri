@@ -1,5 +1,7 @@
 <template>
-  <div class="site-icon">アイコン</div>
+  <div class="site-icon">
+    <img src="~/assets/images/icon/site_logo.svg" alt="サイトロゴ">
+  </div>
 </template>
 
 <script>
@@ -10,11 +12,13 @@ name: "SiteIcon"
 
 <style scoped lang="scss">
 .site-icon {
-  width: 100px;
-  height: 100px;
-  background-color: $main-background-color;
-  @include border-radius-box();
+  width: 100%;
+  height: 100%;
   @include center-flex();
   text-align: center;
+  img {
+    width: 100%;
+    height: 100%;
+  }
 }
 </style>

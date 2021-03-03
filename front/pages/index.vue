@@ -39,7 +39,7 @@ export default {
   name: "index",
   layout: 'home',
   auth: false,
-  components: {ImagesSwiper, NewKoeBoxes, NewItemBoxies, kuro334},
+  components: {ImagesSwiper, NewKoeBoxes, NewItemBoxies},
   data() {
     return {
       categories: [

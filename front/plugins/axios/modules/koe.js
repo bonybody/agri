@@ -1,7 +1,7 @@
-export default class ItemTransaction {
+export default class Koe {
   constructor(axios) {
     this.api = axios;
-    this.prefix = '/item-transaction/';
+    this.prefix = '/koe/';
     console.log(this.api);
   }
 
@@ -11,6 +11,10 @@ export default class ItemTransaction {
         id: id
       }
     })
+    return res
+  }
+  async getByNew() {
+    const res = await this.api.get(this.prefix + 'new')
     return res
   }
 
@@ -35,11 +39,30 @@ export default class ItemTransaction {
     return res
   }
 
-  async getByBuyerId(buyer_id) {
-    console.log(buyer_id);
-    const res = await this.api.get(this.prefix + 'buyer', {
+  async getByPostUser(user_id) {
+    const res = await this.api.get(this.prefix + 'post-user', {
       params: {
-        id: buyer_id
+        id: user_id
+      }
+    });
+    console.log(res);
+    return res
+  }
+
+  async getByCatchUser(user_id) {
+    const res = await this.api.get(this.prefix + 'catch-user', {
+      params: {
+        id: user_id
+      }
+    });
+    console.log(res);
+    return res
+  }
+
+  async getByItem(item_id) {
+    const res = await this.api.get(this.prefix + 'item', {
+      params: {
+        id: item_id
       }
     });
     console.log(res);

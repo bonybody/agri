@@ -93,7 +93,7 @@ export default {
   },
   methods: {
     itemLink: function () {
-      this.$router.push({name: 'item', query: {itemId: this.itemId}})
+      this.$router.push({path: '/item/' + this.itemId})
     }
   }
 }

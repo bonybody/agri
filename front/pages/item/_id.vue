@@ -9,7 +9,7 @@
           <app-heading>この商品に届いたコエ</app-heading>
         </div>
         <div class="koe-lists">
-          <item-catch-koe-boxes/>
+          <item-catch-koe-boxes :item-id="item.id"/>
         </div>
       </div>
     </div>

@@ -67,8 +67,8 @@ export default {
           id: 4,
           name: 'コエ',
           links: [
-            {id: 1, text: '投稿したコエ', link: {path: '/mypage'}},
-            {id: 2, text: '届いたコエ', link: {path: '/user/' + this.$myAuth.user().id}},
+            {id: 1, text: '投稿したコエ', link: {path: '/mypage/post_koe'}},
+            {id: 2, text: '届いたコエ', link: {path: '/mypage/catch_koe'}},
           ]
         },
         {

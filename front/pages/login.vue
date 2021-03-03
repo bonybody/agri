@@ -1,6 +1,8 @@
 <template>
   <div class="login">
-    <site-icon/>
+    <div class="site-icon">
+      <site-icon/>
+    </div>
     <login-form></login-form>
   </div>
 </template>
@@ -39,5 +41,10 @@ export default {
 
 .login > div {
   margin: 30px 0;
+}
+
+.site-icon {
+  width: 100px;
+  height: 100px;
 }
 </style>

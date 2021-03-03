@@ -1,6 +1,4 @@
 export default function ({$auth, redirect}, inject) {
-  console.log($auth.loggedIn)
-  console.log($auth.$storage.getCookies())
   const myAuth = new MyAuth($auth, redirect)
   inject('myAuth', myAuth)
 }
@@ -19,10 +17,6 @@ class MyAuth {
       }
     })
       .then((response) => {
-          console.log("成功");
-          console.log(response);
-          console.log(this.auth.loggedIn);
-          console.log(this.auth.user);
           return response
         },
         (error) => {
@@ -31,7 +25,6 @@ class MyAuth {
   }
 
   user() {
-    console.log(this.auth.user)
     return this.auth.user
   }
 

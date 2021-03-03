@@ -11,6 +11,15 @@ import io
 bp = Blueprint('item-transaction', __name__, url_prefix='/item-transaction')
 
 
+@bp.route('/', methods=['get'])
+def getById():
+    transaction_id = request.args.get('id')
+    record = ItemTransaction.getRecordById(transaction_id)
+    current_app.logger.debug(record)
+    item_transaction_schema = ItemTransactionSchema()
+    return jsonify({'state': True, 'entries': item_transaction_schema.dump(record)})
+
+
 @bp.route('/buyer', methods=['get'])
 def getByBuyerId():
     seller_id = request.args.get('id')
@@ -19,19 +28,23 @@ def getByBuyerId():
     item_transaction_schema = ItemTransactionSchema(many=True)
     return jsonify({'state': True, 'entries': item_transaction_schema.dump(records)})
 
-# @bp.route('/', methods=['post'])
-# def postTransaction():
-#     items = ItemTransaction()
-#     # current_app.logger.debug(item)
-#     current_app.logger.debug(items)
-#     return jsonify({'state': True})
-#
+@bp.route('/receive', methods=['patch'])
+def patchStateReceive():
+    transaction_id = request.json['id']
+    record = ItemTransaction.getRecordById(transaction_id)
+    record.state = 2
+    db.session.commit()
+    return jsonify({'state': True})
 
-@bp.route('/seller', methods=['get'])
-def getBySellerId():
-    records = ItemTransaction.getRecordsBySellerId(request.json['seller_id'])
-    item_transaction_schema = ItemTransactionSchema(many=True)
-    return jsonify({'state': True, 'entries': item_transaction_schema.dump(records)})
+
+@bp.route('/shipment', methods=['patch'])
+def patchStateShipment():
+    transaction_id = request.json['id']
+    record = ItemTransaction.getRecordById(transaction_id)
+    record.state = 1
+    db.session.commit()
+    return jsonify({'state': True})
+
 
 # @bp.route('/', methods=['post'])
 # def postTransaction():
@@ -48,10 +61,9 @@ def postTransaction():
     seller_id = request.json['seller_id']
     buyer_id = request.json['buyer_id']
     set_count = request.json['set_count']
-    transaction = ItemTransaction(item_id=item_id, seller_id=seller_id,buyer_id=buyer_id, set_count=set_count)
+    transaction = ItemTransaction(item_id=item_id, seller_id=seller_id, buyer_id=buyer_id, set_count=set_count)
     transaction.postRecord()
     # app.logger.debug(json_dict)
     # app.logger.debug(request.files)
-
 
     return jsonify({'state': True})
