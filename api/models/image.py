@@ -1,5 +1,6 @@
 from datetime import datetime
 from api.database.database import db
+# from api.app import ma
 
 class User(db.Model):
     __tablename__ = 't_productgazou'

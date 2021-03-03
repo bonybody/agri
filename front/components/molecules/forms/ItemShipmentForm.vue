@@ -10,6 +10,8 @@
     </div>
     <div class="form-parts__input">
       <app-input-text
+          :type="'number'"
+
           :name="'shipment'"
           :placeholder="'例：3'"
           v-model="inputValue"
@@ -45,6 +47,11 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+.form-parts {
+  @include form-section-mixin;
+  &__heading {
+    @include left-right-alignment-mixin;
+  }
+}
 </style>

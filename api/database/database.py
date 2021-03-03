@@ -1,8 +1,13 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-db = SQLAlchemy()
+from flask import  current_app
+from flask_marshmallow import Marshmallow
 
-def init_db(app):
-    db.init_app(app)
-    Migrate(app, db)
+db = SQLAlchemy()
+ma = Marshmallow(current_app)
+
+
+def init_db():
+    db.init_app(current_app)
+    Migrate(current_app, db)
 

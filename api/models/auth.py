@@ -1,5 +1,6 @@
 from datetime import datetime
-from api.database.database import db
+from api.database.database import db, ma
+
 import hashlib
 
 

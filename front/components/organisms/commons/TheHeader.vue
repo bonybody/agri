@@ -17,7 +17,7 @@
         <nuxt-link to="/mypage" class="logged-in__item">
           <p class="profile__img" :class="{'image': getUserImage, 'noImage': !getUserImage}">
             <img v-if="getUserImage" :src="getUserImage" alt="ユーザー画像">
-            <no-user-image-icon v-if="!getUserImage" />
+            <no-user-image-icon v-if="!getUserImage"/>
           </p>
         </nuxt-link>
         <app-button-header type="button" @myClick="logout()">ログアウト</app-button-header>
@@ -57,8 +57,8 @@ export default {
       return this.$myAuth.loggedIn()
     },
     getUserImage() {
-      console.log(this.$myAuth.user.image)
-      return this.$myAuth.user.image
+      console.log(this.$myAuth.user())
+      return this.$myAuth.user().image
     },
   },
   methods: {
@@ -108,12 +108,20 @@ h1 {
 }
 
 .profile__img {
-  height: 30px;
-  width: 30px;
+  height: 35px;
+  width: 35px;
   border-radius: 100%;
   background-color: $shadow-color;
   @include center-flex;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 100%;
+  }
 }
+
 .profile__img svg {
   fill: $main-background-color;
 }

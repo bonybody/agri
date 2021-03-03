@@ -2,9 +2,10 @@
   <div class="product-up-form">
     <div class="product-up-form__form">
       <item-image-form
-          v-model="image.value"
-          :reuiqre="false"
-          :error="image.error"
+          v-model="images.value"
+          :reuiqre="images.require"
+          :error="images.error"
+
       />
     </div>
     <div class="product-up-form__form">
@@ -55,10 +56,25 @@
       />
     </div>
     <div class="product-up-form__form">
+      <item-volume-form
+          v-model="volume.value"
+          :require="volume.require"
+          :error="volume.error"
+      />
+    </div>
+    <div class="product-up-form__form">
+
       <item-price-form
           v-model="price.value"
           :require="price.require"
           :error="price.error"/>
+    </div>
+    <div class="product-up-form__form">
+      <area-form
+          v-model="area.value"
+          :require="area.require"
+          :error="area.error"
+      />
     </div>
     <div class="product-up-form__form">
       <item-shipment-form
@@ -73,22 +89,8 @@
 
 <script>
 import AppFormHeading from "~/components/atoms/headings/AppFormHeading";
-import EmailForm from "~/components/molecules/forms/EmailForm";
-import PasswordForm from "~/components/molecules/forms/PasswordForm";
 import AppFormButton from "~/components/atoms/forms/button/AppFormButton";
 import AppSeparation from "~/components/atoms/separations/AppSeparation";
-import ProductPhotoForm from "~/components/molecules/forms/ProductPhotoForm";
-import FamilyNameForm from "~/components/molecules/forms/FamilyNameForm";
-import FamilyNameRubyForm from "~/components/molecules/forms/FamilyNameRubyForm";
-import GivenNameForm from "~/components/molecules/forms/GivenNameForm";
-import GivenNameRubyForm from "~/components/molecules/forms/GivenNameRubyForm";
-import YearForm from "~/components/molecules/forms/YearForm";
-import MonthForm from "~/components/molecules/forms/MonthForm";
-import DayForm from "~/components/molecules/forms/DayForm";
-import AppFormLabel from "~/components/atoms/forms/label/AppFormLabel";
-import AppRequireMark from "~/components/atoms/forms/marks/AppRequireMark";
-import AppErrorMessage from "~/components/atoms/forms/error/AppErrorMessage";
-import ProductDescriptionForm from "~/components/molecules/forms/ItemDescriptionForm";
 import ItemDescriptionForm from "~/components/molecules/forms/ItemDescriptionForm";
 import ItemPeriodForm from "~/components/molecules/forms/ItemPeriodForm";
 import ItemRemainingForm from "~/components/molecules/forms/ItemRemainingForm";
@@ -99,10 +101,16 @@ import ItemImageForm from "~/components/molecules/forms/ItemImageForm";
 import requireValidate from "~/functions/validate/requireValidate";
 import ItemShipmentForm from "~/components/molecules/forms/ItemShipmentForm";
 import ProductNameForm from "~/components/molecules/forms/ProductNameForm";
+import AreaForm from "~/components/molecules/forms/AreaForm";
+import ItemVolumeForm from "~/components/molecules/forms/ItemVolumeForm";
+
 
 export default {
   name: "ProductUpForm",
   components: {
+    ItemVolumeForm,
+    AreaForm,
+
     ProductNameForm,
     ItemShipmentForm,
     ItemImageForm,
@@ -112,22 +120,13 @@ export default {
     ItemRemainingForm,
     ItemPeriodForm,
     ItemDescriptionForm,
-    ProductDescriptionForm,
-    AppErrorMessage,
-    AppRequireMark,
-    AppFormLabel,
-    DayForm,
-    MonthForm,
-    YearForm,
-    GivenNameRubyForm,
-    GivenNameForm,
-    FamilyNameRubyForm,
-    FamilyNameForm, AppSeparation, AppFormButton, PasswordForm, EmailForm, ProductPhotoForm, AppFormHeading
+    AppSeparation, AppFormButton, AppFormHeading
   },
   data() {
     return {
-      image: {
-        value: '',
+      images: {
+        value: null,
+
         error: '',
         require: false
       },
@@ -176,11 +175,23 @@ export default {
         require: true,
         value: 1
       },
+      volume: {
+        value: '',
+        require: true,
+        error: ''
+      },
+
       price: {
         value: 300,
         require: true,
         error: ''
       },
+      area: {
+        value: '愛知県名古屋市',
+        require: true,
+        error: ''
+      }
+
     }
   },
   methods: {
@@ -196,6 +207,8 @@ export default {
       }
     },
     formButtonClick() {
+      console.log(this.images)
+
       let validateFlg;
       validateFlg = requireValidate(this.$data);
       if (!validateFlg) {
@@ -212,14 +225,20 @@ export default {
         remaining_format_id: this.remaining.value.picked,
         category_id: this.category.value,
         shipment: this.shipment.value,
+        volume: this.volume.value,
         price: this.price.value,
-        user_id: this.$myAuth.user().id
+        user_id: this.$myAuth.user().id,
+        area: this.area.value
       }
-      const fileParam = this.image.value
       const formData = new FormData()
       let jsonDate = JSON.stringify(params)
       formData.append('params', jsonDate)
-      formData.append('image', fileParam)
+      if (this.images.value) {
+        this.images.value.forEach(async function (image, index) {
+          await formData.append('image' + index, image)
+        })
+      }
+
       this.$api['item'].post(formData).then(({data}) => {
         console.log(data)
       }).catch((e) => {

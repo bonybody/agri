@@ -1,5 +1,5 @@
 from datetime import datetime
-from api.database.database import db
+from api.database.database import db, ma
 
 
 class Category(db.Model):
@@ -8,7 +8,7 @@ class Category(db.Model):
     name = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now, onupdate=datetime.now)
-    item = db.relationship('Item', backref='category')
+    items = db.relationship('Item', backref='category')
 
     def __init__(self, name=''):
         self.name = name
@@ -35,3 +35,7 @@ class Category(db.Model):
 
         db.session.add_all(categories)
         db.session.commit()
+
+# class CategorySchema(ma.SQLAlchemyAutoSchema):
+#     class Meta:
+#         model = Category

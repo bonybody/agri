@@ -1,8 +1,8 @@
 from datetime import datetime
 from flask_jwt import JWT, jwt_required, current_identity
 from werkzeug.security import safe_str_cmp
-from api.models import Auth, User
 import hashlib
+from api.models import Auth, User
 
 
 def set_jwt(app):
@@ -14,7 +14,7 @@ def set_jwt(app):
     def identity(payload):
         user_id = payload['identity']
         user = User.getUserInfo(user_id=user_id)
-        return user.__dict__
+        return user
 
     jwt = JWT(app, authenticate, identity)
 

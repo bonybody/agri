@@ -5,6 +5,20 @@ export default class Item {
     console.log(this.api);
   }
 
+  async getById(id) {
+    const res = await this.api.get(this.prefix, {
+      params: {
+        id: id
+      }
+    })
+    return res
+  }
+  async getNewItems() {
+    const res = await this.api.get(this.prefix + 'new')
+    return res
+  }
+
+
   async post(params) {
     this.api.setHeader('Content-Type', 'multipart/form-data')
     this.api.setHeader('Accept', 'application/json')

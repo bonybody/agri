@@ -41,7 +41,7 @@
     <div class="line-wrap">
       <p class="line-wrap__heading">1セットあたり</p>
       <div class="value">
-        <p class="value__quantity">内容量：{{ quantity }}</p>
+        <p class="value__quantity">内容量：{{ volume }}</p>
         <p class="value__price">&yen;{{ String(price) }}円 + 送料（{{ shippingFee > 0 ? shippingFee : '無料' }}）</p>
       </div>
       <div class="cart">
@@ -60,7 +60,7 @@
       <p class="description">{{ description }}</p>
     </div>
     <div class="line-wrap">
-      <p class="delivery-deadline">ご購入から発送まで約{{ deliveryDeadline }}日程度</p>
+      <p class="delivery-deadline">ご購入から発送まで約{{ shipment }}日程度</p>
     </div>
     <div class="line-wrap">
       <div class="sns-share">
@@ -95,9 +95,13 @@ export default {
       type: Number,
       default: 3
     },
-    remaining: {
-      type: String,
+    remaining_days: {
+      type: Number,
       default: '今週残り4個'
+    },
+    remaining_format: {
+      type: String,
+      default: '週'
     },
     address: {
       type: String,
@@ -113,12 +117,7 @@ export default {
     },
     category: {
       type: Object,
-      default: () => {
-        return {
-          name: '野菜',
-          id: 1
-        }
-      }
+      require: true
     },
     tags: {
       type: Array,
@@ -128,7 +127,7 @@ export default {
         ]
       }
     },
-    quantity: {
+    volume: {
       type: String,
       default: '10kg'
     },
@@ -138,7 +137,7 @@ export default {
     },
     shippingFee: { // 送料
       type: Number,
-      default: 0
+      default: 200
     },
     setCount: {
       type: Number | String,
@@ -160,7 +159,7 @@ export default {
       type: String,
       default: ''
     },
-    deliveryDeadline: {
+    shipment: {
       type: Number,
       default: 2
     }
@@ -173,7 +172,19 @@ export default {
       } else {
         result.period = '残り' + this.period + '日';
       }
-      result.remaining = this.remaining;
+      switch (this.remaining_format) {
+        case 'whole':
+          result.remaining = '全期間残り：' + this.remaining_days
+          break
+        case 'day':
+          result.remaining = '本日残り：' + this.remaining_days
+          break
+        case 'week':
+          result.remaining = '今週残り：' + this.remaining_days
+          break
+        case 'month':
+          result.remaining = '今月残り：' + this.remaining_days
+      }
       return result.period + '：' + result.remaining
     },
     inputSetCount: {
