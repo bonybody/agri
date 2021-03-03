@@ -14,6 +14,7 @@ class User(db.Model):
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now, onupdate=datetime.now)
     auth = db.relationship('Auth', backref='user')
     items = db.relationship('Item', backref='user')
+    koes = db.relationship('Koe', backref='user')
 
 
     def __init__(self, display_name='', image='', name='', name_ruby='', birthday='', payment=''):

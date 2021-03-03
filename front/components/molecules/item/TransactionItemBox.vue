@@ -9,23 +9,26 @@
           <map-icon/>
           {{ area }}
         </p>
-        <p class="detail__state">{{ state }}</p>
+        <p class="detail__state">{{ getStateText }}</p>
       </div>
       <p class="detail__name">{{ name }}</p>
       <div class="detail__buy-content">
-        <span class="detail__price">{{ price }}</span>
+        <span class="detail__price">{{ price * set_count }}</span>
         <span class="detail__volume">{{ volume }} × {{ set_count }}</span>
       </div>
     </div>
     <div class="buy-item-box__buttons buttons">
-<!--      <div class="buttons__button">-->
-<!--        <app-link-button>aaa</app-link-button>-->
-<!--      </div>-->
+      <!--      <div class="buttons__button">-->
+      <!--        <app-link-button>aaa</app-link-button>-->
+      <!--      </div>-->
       <div class="buttons__button">
         <app-link-button :link="{ path: '/item/' + itemId }">商品画面へ</app-link-button>
       </div>
       <div class="buttons__button">
         <app-link-button :link="{ path: '/transaction/' + id }">取引画面へ</app-link-button>
+      </div>
+      <div class="buttons__button">
+        <app-link-button :link="{ path: '/post_koe/' + id }">コエを投稿する</app-link-button>
       </div>
     </div>
   </div>
@@ -77,6 +80,18 @@ export default {
       type: Number,
       default: 300
     }
+  },
+  computed: {
+    getStateText() {
+      switch (this.state) {
+        case 0:
+          return '発送確認待ち'
+        case 1:
+          return '受け取り確認待ち'
+        case 2:
+          return '取引完了'
+      }
+    }
   }
 }
 </script>
@@ -106,7 +121,8 @@ export default {
     flex-grow: 10;
   }
 
-  &__buttons {}
+  &__buttons {
+  }
 }
 
 .detail {
@@ -116,6 +132,10 @@ export default {
     display: flex;
     justify-content: space-between;
     margin-bottom: $min-parts-margin;
+  }
+
+  &__state {
+    color: $accent-color;
   }
 
   &__name {
@@ -129,13 +149,16 @@ export default {
     //display: flex;
     //justify-content: left;
   }
+
   &__price {
     font-size: 1.5em;
     font-weight: bold;
   }
+
   &__volume {
     //vertical-align: bottom;
   }
+
   &__area {
     color: $weak-font-color;
 
@@ -151,11 +174,11 @@ export default {
 .buttons {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
 
   &__button {
     width: 100px;
-    height: 30px;
+    height: 22px;
     font-size: 0.8em;
   }
 }

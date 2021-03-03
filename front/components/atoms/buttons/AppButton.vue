@@ -1,7 +1,9 @@
 <template>
   <button
       class="link-button"
+      :class="{ 'none': none }"
       @click="$emit('myClick')"
+      :disabled="none"
   >
     <slot></slot>
   </button>
@@ -10,6 +12,12 @@
 <script>
 export default {
   name: "AppButton",
+  props: {
+    none: {
+      type: Boolean,
+      default: false
+    }
+  }
 }
 </script>
 
@@ -28,4 +36,9 @@ export default {
   border-radius: 1000px;
 }
 
+.none {
+  background-color: $weak-font-color;
+  color: $primary-on-font-color;
+  border-color: $weak-font-color;
+}
 </style>

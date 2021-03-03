@@ -2,7 +2,12 @@
   <header>
     <div class="header__bar"></div>
     <div class="header__content">
-      <nuxt-link :to="links.home"><h1>アグリー</h1></nuxt-link>
+      <nuxt-link :to="links.home">
+        <h1 class="header__title title">
+          <span class="title__icon"><site-icon/></span>
+          <span class="title__text">アグリー</span>
+        </h1>
+      </nuxt-link>
       <search-bar></search-bar>
 
       <div v-if="getLoggedIn" class="logged-in">
@@ -37,10 +42,11 @@ import AppButtonHeader from "~/components/atoms/buttons/AppButtonHeader";
 import SearchBar from "~/components/molecules/searchBar";
 import NotificationIcon from "~/components/icons/NotificationIcon";
 import NoUserImageIcon from "~/components/icons/NoUserImageIcon";
+import SiteIcon from "~/components/icons/SiteIcon";
 
 export default {
   name: "TheHeader",
-  components: {NoUserImageIcon, NotificationIcon, SearchBar, AppButtonHeader},
+  components: {SiteIcon, NoUserImageIcon, NotificationIcon, SearchBar, AppButtonHeader},
   data() {
     return {
       links: {
@@ -90,6 +96,15 @@ h1 {
   font-weight: bold;
   font-size: 30px;
   margin: 0 20px;
+}
+
+.title {
+  &__icon {
+    display: inline-block;
+    height: 1.2em;
+    width: 1.2em;
+    vertical-align: bottom;
+  }
 }
 
 .header__bar {

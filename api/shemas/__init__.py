@@ -4,6 +4,7 @@ from .item_image_shema import ItemImageSchema
 from .user_shema import UserSchema
 from .item_transaction_shema import ItemTransactionSchema
 from .remaining_format_shema import RemainingFormatSchema
+from .koe_shema import KoeSchema
 
 __all__ = [
     ItemSchema,
@@ -12,4 +13,5 @@ __all__ = [
     ItemImageSchema,
     CategorySchema,
     ItemTransactionSchema,
+    KoeSchema
 ]

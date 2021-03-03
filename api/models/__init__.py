@@ -6,6 +6,7 @@ from .user import User
 from .item_transaction import ItemTransaction
 from .address import Address
 from .remaining_format import RemainingFormat
+from .koe import Koe
 
 __all__ = [
     Item,
@@ -16,4 +17,5 @@ __all__ = [
     ItemImage,
     Category,
     ItemTransaction,
+    Koe
 ]
