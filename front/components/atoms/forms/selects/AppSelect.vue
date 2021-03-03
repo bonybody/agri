@@ -1,5 +1,8 @@
 <template>
   <select class="app-select" v-model="inputValue" :name="name">
+    <template v-for="(option, index) in options">
+      <option :value="option.value">{{ option.label }}</option>
+    </template>
     <slot></slot>
   </select>
 </template>
@@ -14,6 +17,10 @@ export default {
     name: {
       type: String,
       default: 'select'
+    },
+    options: {
+      type: Array,
+      require: false
     }
   }
 }
@@ -22,6 +29,7 @@ export default {
 <style scoped lang="scss">
 .app-select {
   display: block;
+  width: 100%;
   height: 30px;
   padding: 0 8px;
   text-align: left;

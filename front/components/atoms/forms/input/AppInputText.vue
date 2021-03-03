@@ -5,6 +5,7 @@
       :name="name"
       v-model="inputValue"
       :placeholder="placeholder"
+      :disabled="disabled"
   >
 </template>
 
@@ -27,6 +28,10 @@ export default {
     type: {
       type: String,
       default: 'text'
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {

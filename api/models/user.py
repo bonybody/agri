@@ -14,6 +14,7 @@ class User(db.Model):
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now, onupdate=datetime.now)
     auth = db.relationship('Auth', backref='user')
+    item = db.relationship('Item', backref='user')
 
     def __init__(self, display_name, image='', name='', name_ruby='', birthday='', payment=''):
         self.display_name = display_name
@@ -35,6 +36,7 @@ class User(db.Model):
         db.session.add(self)
         db.session.commit()
         return self
+
     @classmethod
     def getUserInfo(cls, user_id):
         record = cls.query.filter_by(id=user_id).first()

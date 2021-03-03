@@ -41,6 +41,7 @@ services:
       - "8002:80"
     volumes:
       - "./api:/api"
+      - "./infra/.aws:/root/.aws"
     environment: # コンテナ内に渡される環境変数
       - http_proxy
       - https_proxy

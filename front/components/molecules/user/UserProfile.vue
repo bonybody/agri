@@ -63,7 +63,7 @@ export default {
     userDescription: {
       type: String,
       default:
-          'これはテストこれはテストこれはテストこれはテストa\nこれはテストこれはテストこれはテストこれはテスト'
+          'テストユーザーです。'
     }
   },
   methods: {

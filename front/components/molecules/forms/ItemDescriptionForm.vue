@@ -4,12 +4,13 @@
       <app-form-label :name="'display_name'">商品説明</app-form-label>
       <app-require-mark v-show="require"/>
     </div>
-    <app-input-text
-        :type="'text'"
-        :placeholder="'商品の説明（１,０００字以内）'"
-        :name="'display_name'"
-        v-model="inputValue"
-    />
+    <div class="user-name-form__input">
+      <app-text-area
+          v-model="inputValue"
+          :placeholder="'商品の説明'"
+          :name="'item_description'"
+      />
+    </div>
     <app-error-message>{{ error }}</app-error-message>
   </div>
 </template>
@@ -20,10 +21,11 @@ import AppFormLabel from "~/components/atoms/forms/label/AppFormLabel";
 import input from "~/mixins/input";
 import AppRequireMark from "~/components/atoms/forms/marks/AppRequireMark";
 import AppErrorMessage from "~/components/atoms/forms/error/AppErrorMessage";
+import AppTextArea from "~/components/atoms/forms/textarea/AppTextArea";
 
 export default {
-  name: "ProductDescriptionForm",
-  components: {AppErrorMessage, AppRequireMark, AppFormLabel, AppInputText},
+  name: "ItemDescriptionForm",
+  components: {AppTextArea, AppErrorMessage, AppRequireMark, AppFormLabel, AppInputText},
   mixins: [input],
   props: {
     require: {
@@ -44,6 +46,11 @@ export default {
 
   &__label {
     @include left-right-alignment-mixin;
+  }
+
+  &__input {
+    width: 100%;
+    height: 50px;
   }
 }
 </style>

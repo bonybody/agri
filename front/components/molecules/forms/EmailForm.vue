@@ -1,7 +1,7 @@
 <template>
   <div class="email-form">
     <div class="email-form__label">
-    <app-form-label :name="'email'">メールアドレス</app-form-label>
+      <app-form-label :name="'email'">メールアドレス</app-form-label>
       <app-require-mark v-show="require"/>
     </div>
     <app-input-text
@@ -41,6 +41,7 @@ export default {
 <style scoped lang="scss">
 .email-form {
   @include form-section-mixin;
+
   &__label {
     @include left-right-alignment-mixin;
   }
