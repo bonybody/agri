@@ -14,6 +14,7 @@
           <app-input-image @changeValue="change($event, index)"/>
         </div>
       </template>
+
     </div>
     <div class="item-image-form__error">
       <app-error-message>{{ error }}</app-error-message>
@@ -68,7 +69,6 @@ export default {
   &__heading {
     @include left-right-alignment-mixin;
   }
-
   &__input-box {
     overflow-x: auto;
     white-space: nowrap;

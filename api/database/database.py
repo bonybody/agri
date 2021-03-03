@@ -11,4 +11,3 @@ def init_db():
     db.init_app(current_app)
     Migrate(current_app, db)
 
-

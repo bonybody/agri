@@ -35,6 +35,9 @@ with app.app_context():
     register_controller_blueprint(app)
     # JWT認証を追加
 
+from .models import Auth, User
+
+
 # アプリケーションの開始
 if __name__ == '__main__':
     host = os.environ['HOST']
