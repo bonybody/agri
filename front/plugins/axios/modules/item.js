@@ -18,6 +18,7 @@ export default class Item {
     return res
   }
 
+
   async post(params) {
     this.api.setHeader('Content-Type', 'multipart/form-data')
     this.api.setHeader('Accept', 'application/json')

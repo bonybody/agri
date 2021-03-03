@@ -11,6 +11,7 @@
     <div class="form-parts__input">
       <app-input-text
           :type="'number'"
+
           :name="'shipment'"
           :placeholder="'例：3'"
           v-model="inputValue"

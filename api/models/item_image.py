@@ -1,6 +1,7 @@
 from datetime import datetime
 from api.database.database import db, ma
 
+
 class ItemImage(db.Model):
     __tablename__ = 'item_image'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)

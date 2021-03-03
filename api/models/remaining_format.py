@@ -1,6 +1,7 @@
 from datetime import datetime
 from api.database.database import db, ma
 
+
 class RemainingFormat(db.Model):
     __tablename__ = 'remaining_format'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -34,7 +35,7 @@ class RemainingFormat(db.Model):
 
         db.session.add_all(models)
         db.session.commit()
-
 # class RemainingFormatSchema(ma.SQLAlchemyAutoSchema):
 #     class Meta:
 #         model = RemainingFormat
+

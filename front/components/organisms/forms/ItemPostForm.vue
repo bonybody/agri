@@ -5,6 +5,7 @@
           v-model="images.value"
           :reuiqre="images.require"
           :error="images.error"
+
       />
     </div>
     <div class="product-up-form__form">
@@ -62,6 +63,7 @@
       />
     </div>
     <div class="product-up-form__form">
+
       <item-price-form
           v-model="price.value"
           :require="price.require"
@@ -102,11 +104,13 @@ import ProductNameForm from "~/components/molecules/forms/ProductNameForm";
 import AreaForm from "~/components/molecules/forms/AreaForm";
 import ItemVolumeForm from "~/components/molecules/forms/ItemVolumeForm";
 
+
 export default {
   name: "ProductUpForm",
   components: {
     ItemVolumeForm,
     AreaForm,
+
     ProductNameForm,
     ItemShipmentForm,
     ItemImageForm,
@@ -122,6 +126,7 @@ export default {
     return {
       images: {
         value: null,
+
         error: '',
         require: false
       },
@@ -175,6 +180,7 @@ export default {
         require: true,
         error: ''
       },
+
       price: {
         value: 300,
         require: true,
@@ -185,6 +191,7 @@ export default {
         require: true,
         error: ''
       }
+
     }
   },
   methods: {
@@ -201,6 +208,7 @@ export default {
     },
     formButtonClick() {
       console.log(this.images)
+
       let validateFlg;
       validateFlg = requireValidate(this.$data);
       if (!validateFlg) {
@@ -230,6 +238,7 @@ export default {
           await formData.append('image' + index, image)
         })
       }
+
       this.$api['item'].post(formData).then(({data}) => {
         console.log(data)
       }).catch((e) => {
