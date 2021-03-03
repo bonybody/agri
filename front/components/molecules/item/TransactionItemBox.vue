@@ -62,7 +62,7 @@ export default {
       default: '愛知県名古屋市'
     },
     state: {
-      type: String,
+      type: Number,
       default: '受け取り確認をして下さい'
     },
     volume: {

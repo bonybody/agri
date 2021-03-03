@@ -1,9 +1,10 @@
 export let axios;
 
-export default ({$myAuth, $axios}) => {
+export default ({$myAuth, $axios, env}) => {
 
-  $axios.defaults.baseURL = process.env.apiUrlClient;
   // リクエスト作成時にフックされる
+  $axios.defaults.baseURL = env.apiUrlServer;
+
   $axios.onRequest(config => {
     // if ($myAuth.loggedIn()) {
     //   console.log('ログイン中のレクエストを作成しています...');
