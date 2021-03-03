@@ -3,7 +3,6 @@ from flask_jwt import JWT, jwt_required, current_identity, current_app
 import logging
 import json
 from api.models import User, Auth, Item, Category, ItemImage
-=======
 from api.shemas import ItemSchema
 from api.database.database import db
 from api.plugin.aws_s3 import item_image_bucket
