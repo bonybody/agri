@@ -29,7 +29,8 @@ export default {
       type: Array,
       require: true
     }
-  }
+  },
+
 }
 </script>
 

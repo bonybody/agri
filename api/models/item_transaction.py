@@ -49,7 +49,7 @@ class ItemTransaction(db.Model):
 
     @classmethod
     def getRecordsByBuyerId(cls, buyer_id):
-        records = cls.query.filter_by(seller_id=buyer_id).all()
+        records = cls.query.filter_by(buyer_id=buyer_id).all()
         return records
 
 

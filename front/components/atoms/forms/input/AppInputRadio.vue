@@ -19,7 +19,7 @@ export default {
   name: "AppInputRadio",
   props: {
     value: {
-      type: String,
+      type: Number | String,
       require: true
     },
     options: {
