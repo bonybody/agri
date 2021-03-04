@@ -230,6 +230,7 @@ export default {
         user_id: this.$myAuth.user().id,
         area: this.area.value
       }
+      console.log(params)
       const formData = new FormData()
       let jsonDate = JSON.stringify(params)
       formData.append('params', jsonDate)
