@@ -49,8 +49,8 @@ export default {
       default: 1
     },
     picked: {
-      type: String,
-      default: ''
+      type: Number,
+      default: 1
     },
     options: {
       type: Array,
