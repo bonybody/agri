@@ -34,6 +34,19 @@ export default {
     )
     return {item: item}
   },
+  head () {
+    return {
+      title: this.item.name + "| agri",
+      meta: [
+        { hid: 'description', name: 'description', content: this.item.description },
+        { hid: 'og:type', property: 'og:type', content: 'article' },
+        { hid: 'og:title', property: 'og:title', content: this.item.name + '| agri' },
+        { hid: 'og:description', property: 'og:description', content: this.item.description },
+        { hid: 'og:url', property: 'og:url', content: process.env.HostFrontUrl + this.$router.history.base + this.$route.path },
+        { hid: 'og:image', property: 'og:image', content: this.item.images[0].url },
+      ],
+    }
+  }
 }
 </script>
 

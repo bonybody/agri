@@ -27,6 +27,7 @@ services:
       - TZ
       - API_URL_CLIENT
       - API_URL_SERVER
+      - HOST_FRONT_URL
     command: >
       bash -c "npm run dev"
 

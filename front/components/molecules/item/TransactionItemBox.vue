@@ -28,7 +28,7 @@
         <app-link-button :link="{ path: '/transaction/' + id }">取引画面へ</app-link-button>
       </div>
       <div class="buttons__button">
-        <app-link-button :link="{ path: '/post_koe/' + id }">コエを投稿する</app-link-button>
+        <app-link-button :link="{ path: '/post_koe/' + itemId }">コエを投稿する</app-link-button>
       </div>
     </div>
   </div>

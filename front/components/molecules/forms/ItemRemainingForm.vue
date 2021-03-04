@@ -17,7 +17,6 @@
         <app-input-radio
             :name="'remainingFormat'"
             v-model="radio"
-            :value="radio"
             :options="options"
         />
       </div>
@@ -45,7 +44,7 @@ export default {
   },
   props: {
     value: {
-      type: Number,
+      type: Number | String,
       default: 1
     },
     picked: {
