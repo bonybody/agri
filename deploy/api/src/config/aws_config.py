@@ -1,0 +1,1 @@
+ITEM_IMAGE_BASE = 'https://agri-item-images.s3-ap-northeast-1.amazonaws.com/'

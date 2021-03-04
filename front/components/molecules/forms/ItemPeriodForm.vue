@@ -1,7 +1,7 @@
 <template>
   <div class="item-period-form">
     <div class="item-period-form__label">
-      <app-form-label :name="'period'">販売期間</app-form-label>
+      <app-form-label :name="'period'">販売期間（日単位）</app-form-label>
       <app-require-mark v-show="require"/>
     </div>
     <div class="item-period-form__input-number">
