@@ -2,7 +2,7 @@ FROM python:3.7
 
 ADD entrypoint.sh /entrypoint.sh
 ADD requirements.txt /requirements.txt
-ADD .aws /.aws
+ADD .aws /root/.aws
 ADD src /api
 RUN apt-get update
 RUN apt-get -y install ansible
