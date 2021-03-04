@@ -2,7 +2,7 @@
   <div class="form-parts">
     <div class="form-parts__heading">
       <div class="form-parts__label">
-        <app-form-label :name="'area'">おおよそ発送まで（日単位）</app-form-label>
+        <app-form-label :name="'area'">生産地</app-form-label>
       </div>
       <div class="form-parts__require">
         <app-require-mark v-show="require"/>

@@ -38,6 +38,7 @@ services:
         - http_proxy
         - https_proxy
         - ftp_proxy
+    image: 794493619504.dkr.ecr.ap-northeast-1.amazonaws.com/agri:latest
     ports:
       - "8002:80"
     volumes:
