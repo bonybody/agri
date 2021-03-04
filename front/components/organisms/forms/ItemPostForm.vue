@@ -152,7 +152,7 @@ export default {
         error: '',
         value: {
           value: 1,
-          picked: '1',
+          picked: 1,
           options: [
             {value: 1, label: '全期間'},
             {value: 2, label: '一日'},
