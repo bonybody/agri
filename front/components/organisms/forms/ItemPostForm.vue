@@ -203,7 +203,7 @@ export default {
     changeRemainingDays(value) {
       console.log(value)
       this.remaining.value.value = value
-    }
+    },
     clickCheckbox(value) {
       if (value !== 0) {
         this.period.value = 0
