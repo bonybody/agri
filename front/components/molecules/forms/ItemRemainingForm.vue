@@ -9,8 +9,7 @@
           :type="'number'"
           :name="'remaining'"
           :placeholder="'1'"
-          :value="value"
-          @input="$emit('input')"
+          v-model="days"
       />
     </div>
     <div class="item-remaining-form__check">
@@ -65,6 +64,14 @@ export default {
       },
       set(value){
         this.$emit('changeRadio', value)
+      }
+    },
+    days: {
+      get() {
+        return this.value
+      },
+      set(value) {
+        this.$emit('changeValue', value)
       }
     }
   }

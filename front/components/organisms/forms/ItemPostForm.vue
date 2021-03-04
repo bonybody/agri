@@ -37,6 +37,8 @@
           :picked="remaining.value.picked"
           :options="remaining.value.options"
           @changeRadio="changeRadio($event)"
+          @changeValue="changeRemainingDays($event)"
+          :value="remaining.value.value"
           :require="remaining.require"
           :error="remaining.error"
       />
@@ -199,6 +201,10 @@ export default {
       console.log(radioValue)
       this.remaining.value.picked = radioValue
     },
+    changeRemainingDays(value) {
+      console.log(value)
+      this.remaining.value.value = value
+    }
     clickCheckbox(value) {
       if (value !== 0) {
         this.period.value = 0
