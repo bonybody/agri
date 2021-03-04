@@ -33,7 +33,6 @@
     </div>
     <div class="product-up-form__form">
       <item-remaining-form
-          v-model="remaining.value.value"
           :picked="remaining.value.picked"
           :options="remaining.value.options"
           @changeRadio="changeRadio($event)"
