@@ -1,6 +1,7 @@
 <template>
   <div class="image-list">
-    <div v-if="images.length === 0" class="image-list__no-image">画像なし</div>
+    <div v-if="!images.length" class="image-list__no-image">画像なし</div>
+    <div v-if="images.length">
     <template v-for="(image,index) in images">
       <p v-if="index === 0"
          class="image-list__image-wrap image-list__image-wrap--first">
@@ -10,6 +11,7 @@
         <app-square-image :src="image.url" :alt="meaning + image.id"/>
       </p>
     </template>
+    </div>
   </div>
 </template>
 
@@ -22,11 +24,7 @@ export default {
   props: {
     images: {
       type: Array,
-      default: () => {
-        return [
-          require('~/assets/images/test_images/item/1.jpg')
-        ]
-      }
+      require: true
     },
     meaning: {
       type: String,

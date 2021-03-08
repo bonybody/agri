@@ -15,7 +15,7 @@
             :name="transaction.item.name"
             :price="transaction.item.price * transaction.set_count"
             :volume="transaction.item.volume + '×' + transaction.set_count"
-            :image="transaction.item.images[0].url"
+            :image="transaction.item.images.length ? transaction.item.images[0].url : ''"
             :buyer_id="transaction.buyer.id"
             :seller_id="transaction.seller.id"
         />
