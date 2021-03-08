@@ -25,17 +25,6 @@
             }}
           </nuxt-link>
         </div>
-        <div class=" tags
-          ">
-          タグ：
-          <template v-for="tag in tags">
-            <nuxt-link class="tags__link" :to="{
-              path: '/search',
-              query: {tag: tag.id}
-              }">{{ tag.name }}
-            </nuxt-link>
-          </template>
-        </div>
       </div>
     </div>
     <div class="line-wrap">
@@ -72,7 +61,8 @@
       <div class="sns-share">
         <div class="sns-share__icon">
           <app-twitter-share-button
-              :url="getHostFrontEnv"
+              :url="getHostThisUrl"
+              :title="itemName"
           />
         </div>
       </div>
@@ -212,8 +202,8 @@ export default {
         this.$emit('update:setCount', Number(value));
       }
     },
-    getHostFrontEnv() {
-      return process.env.HostFrontUrl
+    getHostThisUrl() {
+      return process.env.HostFrontUrl + this.$router.history.base + this.$route.path
     },
     getCurrentUser() {
       if (this.$myAuth.loggedIn()) {

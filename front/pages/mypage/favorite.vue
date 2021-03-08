@@ -3,28 +3,9 @@
     <div class="favorite__heading">
       <app-heading>お気に入り</app-heading>
     </div>
-    <div class="favorite__tabs">
-      <div class="favorite__tab favorite__tab--item">
-        <app-tab-button
-            @myClick="tabChange"
-            :state="tabs.item.state"
-        >商品
-        </app-tab-button>
-      </div>
-      <div class="favorite__tab favorite__tab--koe">
-        <app-tab-button
-            @myClick="tabChange"
-            :state="tabs.koe.state"
-        >コエ
-        </app-tab-button>
-      </div>
-    </div>
     <div class="favorite__content">
       <div v-if="tabs.item.state" class="favorite__items">
         <favorite-item-boxes/>
-      </div>
-      <div v-if="tabs.koe.state" class="favorite__koe-list">
-        <favorite-koe-boxes/>
       </div>
     </div>
   </div>

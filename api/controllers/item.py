@@ -112,6 +112,7 @@ def post():
     db.session.add(item)
     db.session.commit()
     db.session.refresh(item)
+    item_schema = ItemSchema()
     # post_record = item.__dict__
     # post_record.pop('_sa_instance_state')
 
@@ -126,4 +127,4 @@ def post():
         item_image = ItemImage(current_app.config['ITEM_IMAGE_BASE'] + response.key, item.id)
         item_image.postRecord()
 
-    return jsonify({'state': True})
+    return jsonify({'state': True, 'entries': {'item': item_schema.dump(item)}})

@@ -41,7 +41,6 @@ export default {
             {id: 1, text: 'マイページ', link: {path: '/mypage'}},
             {id: 2, text: 'プロフィール', link: {path: '/user/' + this.$myAuth.user().id}},
             {id: 3, text: 'お気に入り', link: {path: '/mypage/favorite'}},
-            {id: 4, text: 'お知らせ', link: {path: '/mypage/notice'}},
             {id: 5, text: 'フォローユーザー', link: {path: '/mypage/follow'}},
           ]
         },
@@ -50,7 +49,6 @@ export default {
           name: '購入',
           links: [
             {id: 1, text: '購入履歴', link: {path: '/mypage/buy_history'}},
-            {id: 2, text: '購入履歴 - 取引中', link: {path: '/mypage/buy_history', query: {now: true}}},
           ]
         },
         {
@@ -71,14 +69,14 @@ export default {
             {id: 2, text: '届いたコエ', link: {path: '/mypage/catch_koe'}},
           ]
         },
-        {
-          id: 5,
-          name: '設定',
-          links: [
-            {id: 1, text: 'お支払い設定', link: {path: '/mypage'}},
-            {id: 2, text: 'お届け先住所', link: {path: '/user/' + this.$myAuth.user().id}},
-          ]
-        }
+        // {
+        //   id: 5,
+        //   name: '設定',
+        //   links: [
+        //     {id: 1, text: 'お支払い設定', link: {path: '/mypage'}},
+        //     {id: 2, text: 'お届け先住所', link: {path: '/user/' + this.$myAuth.user().id}},
+        //   ]
+        // }
       ]
     }
   }

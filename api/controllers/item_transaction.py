@@ -44,7 +44,7 @@ def getSalesDetailBySellerId():
     record = ItemTransaction.getSalesDetailBySellerId(seller_id=seller_id, item_model=Item)
     current_app.logger.debug(record)
     item_transaction_schema = ItemTransactionSchema()
-    return jsonify({'state': True, 'entries': int(record[0])})
+    return jsonify({'state': True, 'entries': 0 if record is None else int(record[0])})
 
 @item_transaction_bp.route('/seller/sold', methods=['get'])
 def getBySellerIdStateSold():

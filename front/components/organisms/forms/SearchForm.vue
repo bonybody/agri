@@ -24,6 +24,17 @@ import AppTabButton from "@/components/atoms/buttons/AppTabButton";
 export default {
   name: "SearchForm",
   components: {AppTabButton, OrderByForm, ItemCategoryForm, SearchBar},
+  created() {
+    if (this.$route.query.text) {
+      this.text.value = this.$route.query.text
+    }
+    if (this.$route.query.category) {
+      this.category.value = this.$route.query.category
+    }
+    if (this.$route.query.orderBy) {
+      this.orderBy.value = this.$route.query.orderBy
+    }
+  },
   data() {
     return {
       text: {

@@ -3,7 +3,7 @@
     <div class="koe-post__item">
       <item-box
           :item-id="record.item.id"
-          :image="record.item.images[0].url"
+          :image="record.item.images.length ? record.item.images[0].url: ''"
           :name="record.item.name"
           :address="record.item.area"
           :price="record.item.price"

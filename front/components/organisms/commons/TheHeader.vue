@@ -8,22 +8,16 @@
           <span class="title__text">アグリー</span>
         </h1>
       </nuxt-link>
-      <search-bar @click="search()" v-model="text"></search-bar>
+      <div class="header__search-bar">
+        <search-bar @click="search()" v-model="text"></search-bar>
+      </div>
 
       <div v-if="getLoggedIn" class="logged-in">
-        <nuxt-link to="/notifications" class="notifications logged-in__item">
-          <p class="notifications__img">
-            <notification-icon></notification-icon>
-          </p>
-          <p class="notifications__number">
-            <span v-text="notification"></span>
-          </p>
-        </nuxt-link>
         <nuxt-link to="/mypage" class="logged-in__item">
-          <p class="profile__img" :class="{'image': getUserImage, 'noImage': !getUserImage}">
+          <div class="profile__img" :class="{'image': getUserImage, 'noImage': !getUserImage}">
             <img v-if="getUserImage" :src="getUserImage" alt="ユーザー画像">
             <no-user-image-icon v-if="!getUserImage"/>
-          </p>
+          </div>
         </nuxt-link>
         <app-button-header type="button" @myClick="logout()">ログアウト</app-button-header>
       </div>
@@ -73,7 +67,9 @@ export default {
       await this.$myAuth.logout()
     },
     search() {
-      this.$router.push('/search')
+      this.$router.push({path: '/search', query: {
+        text: this.text
+        }})
     }
   }
 }
@@ -86,7 +82,9 @@ header {
   background-color: $main-background-color;
   box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.3);
 }
-
+.header__search-bar {
+  width: 500px;
+}
 .header__content {
   max-width: 1024px;
   height: 45px;

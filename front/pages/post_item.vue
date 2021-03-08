@@ -1,7 +1,7 @@
 <template>
   <div class="sign-up">
-    <div class="site-icon">
-      <site-icon></site-icon>
+    <div class="sign-up__heading">
+      <app-heading>商品出品</app-heading>
     </div>
     <item-post-form></item-post-form>
   </div>
@@ -10,26 +10,23 @@
 <script>
 import ItemPostForm from "~/components/organisms/forms/ItemPostForm";
 import SiteIcon from "~/components/icons/SiteIcon";
+import AppHeading from "@/components/atoms/headings/AppHeading";
 
 export default {
   name: "postItem",
-  components: {SiteIcon, ItemPostForm},
+  components: {AppHeading, SiteIcon, ItemPostForm},
+  layout: 'mypage'
 }
 </script>
 
 <style scoped lang="scss">
 .sign-up {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
+  max-width: 350px;
+  margin: 0 auto;
+  &__heading {
+    margin-bottom: $large-margin;
+    text-align: left;
+  }
 }
 
-.sign-up > div {
-  margin: 30px 0;
-}
-.site-icon {
-  width: 100px;
-  height: 100px;
-}
 </style>

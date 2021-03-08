@@ -40,7 +40,7 @@ export default {
 <style scoped lang="scss">
 
 .searchBar {
-  max-width: 400px;
+  width: 100%;
   background-color: $main-background-color;
   letter-spacing: -.4em;
 }

@@ -32,7 +32,6 @@ def postTest():
 
     Category.addTestData()
     RemainingFormat.addTestData()
-    getS3Buckets(current_app)
     return jsonify({'state': True})
 
 

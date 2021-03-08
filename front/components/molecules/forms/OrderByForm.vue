@@ -31,9 +31,9 @@ export default {
   data() {
     return {
       selects: [
-        {value: 1, label: '新着順'},
-        {value: 2, label: '価格が高い順'},
-        {value: 3, label: '価格が安い順'}
+        {value: 1, label: '新着順'}
+        // {value: 2, label: '価格が高い順'},
+        // {value: 3, label: '価格が安い順'}
       ],
     }
   },
