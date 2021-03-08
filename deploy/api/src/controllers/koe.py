@@ -2,16 +2,19 @@ from flask import Blueprint, request, jsonify
 from flask_jwt import JWT, jwt_required, current_identity, current_app
 import logging
 import json
-from api.models import Koe
-from api.schemas import ItemSchema,KoeSchema
-from api.database.database import db
-from api.plugin.aws_s3 import item_image_bucket
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from models import Koe
+from schemas import ItemSchema,KoeSchema
+from database.database import db
+from plugin.aws_s3 import item_image_bucket
 import io
 
-bp = Blueprint('koe', __name__, url_prefix='/koe')
+koe_bp = Blueprint('koe', __name__, url_prefix='/koe')
 
 
-@bp.route('/', methods=['get'])
+@koe_bp.route('/', methods=['get'])
 def get():
     koe_id = request.args.get('id')
     koe = Koe.getRecordById(koe_id)
@@ -20,7 +23,7 @@ def get():
     current_app.logger.debug(koe)
     return jsonify({'state': True, 'entries': koe_schema.dump(koe)})
 
-@bp.route('/', methods=['post'])
+@koe_bp.route('/', methods=['post'])
 def postKoe():
     item_id = request.json['item_id']
     user_id = request.json['user_id']
@@ -31,14 +34,14 @@ def postKoe():
     return jsonify({'state': True})
 
 
-@bp.route('/new', methods=['get'])
+@koe_bp.route('/new', methods=['get'])
 def getNew():
     koes = Koe.getRecordsByNew()
     koe_schema = KoeSchema(many=True)
     # current_app.logger.debug(item)
     return jsonify({'state': True, 'entries': koe_schema.dump(koes)})
 
-@bp.route('/post-user', methods=['get'])
+@koe_bp.route('/post-user', methods=['get'])
 def getByPostUser():
     user_id = request.args.get('id')
     koes = Koe.getRecordsByPostUser(user_id)
@@ -46,7 +49,7 @@ def getByPostUser():
     # current_app.logger.debug(item)
     return jsonify({'state': True, 'entries': koe_schema.dump(koes)})
 
-@bp.route('/catch-user', methods=['get'])
+@koe_bp.route('/catch-user', methods=['get'])
 def getByCatchUser():
     user_id = request.args.get('id')
     koes = Koe.getRecordsByCatchUser(user_id)
@@ -54,7 +57,7 @@ def getByCatchUser():
     # current_app.logger.debug(item)
     return jsonify({'state': True, 'entries': koe_schema.dump(koes)})
 
-@bp.route('/item', methods=['get'])
+@koe_bp.route('/item', methods=['get'])
 def getByItem():
     item_id = request.args.get('id')
     koes = Koe.getRecordsByItem(item_id)
@@ -63,7 +66,7 @@ def getByItem():
     return jsonify({'state': True, 'entries': koe_schema.dump(koes)})
 
 
-@bp.route('/', methods=['post'])
+@koe_bp.route('/', methods=['post'])
 def post():
     jsonData = json.dumps(request.json)
     userData = json.loads(jsonData)

@@ -1,36 +1,94 @@
-from flask import Blueprint, request, jsonify
-from flask_jwt import JWT, jwt_required, current_identity, current_app
+from flask import Blueprint, request, jsonify, current_app
+from flask_jwt import JWT, jwt_required, current_identity
 import logging
 import json
-from api.models import User, Auth, Item, Category, ItemImage
-from api.schemas import ItemSchema
-from api.database.database import db
-from api.plugin.aws_s3 import item_image_bucket
+import sys
+import os
+import decimal
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from models import User, Auth, Item, Category, ItemImage
+from schemas import ItemSchema, ItemWithSetCountSchema
+from database.database import db
+from plugin.aws_s3 import item_image_bucket
 import io
 
-bp = Blueprint('item', __name__, url_prefix='/item')
+item_bp = Blueprint('item', __name__, url_prefix='/item')
 
 
-@bp.route('/', methods=['get'])
+@item_bp.route('/', methods=['get'])
 def get():
     item_id = request.args.get('id')
-    item = Item.getProductById(item_id)
+    user_id = request.args.get('user_id')
+    current_app.logger.debug(user_id)
+    item = Item.getProductById(item_id=item_id, user_id=user_id)
     item_schema = ItemSchema()
-    # current_app.logger.debug(item)
     current_app.logger.debug(item)
-    current_app.logger.debug(item_schema.dump(item))
-    return jsonify({'state': True, 'entries': item_schema.dump(item)})
+    return_item = {
+        'item': item_schema.dump(item[0]),
+        'favorite': item[1],
+        'set_count': 0 if item[2] is None else int(item[2])
+    }
+    return jsonify({'state': True, 'entries': return_item})
 
-@bp.route('/new', methods=['get'])
-def getNew():
-    items = Item.getItemsByNew()
-    items_schema = ItemSchema(many=True)
-    # current_app.logger.debug(item)
+
+@item_bp.route('/user', methods=['get'])
+def getByUserId():
+    user_id = request.args.get('user_id')
+    current_app.logger.debug(user_id)
+    items = Item.getItemsByUserId(user_id=user_id)
+    item_schema = ItemSchema()
     current_app.logger.debug(items)
-    return jsonify({'state': True, 'entries': items_schema.dump(items)})
+    result = []
+    for value in items:
+        favorite = value[1]
+        set_count = value[2]
+        result.append({
+            'item': ItemSchema().dump(value[0]),
+            'favorite': favorite,
+            'set_count': 0 if set_count is None else int(set_count)
+        })
+    current_app.logger.debug(result)
+    return jsonify({'state': True, 'entries': result})
 
 
-@bp.route('/', methods=['post'])
+
+@item_bp.route('/new', methods=['get'])
+def getNew():
+    user_id = request.args.get('user_id')
+    current_app.logger.debug(user_id)
+    items = Item.getItemsByNew(user_id=user_id)
+    result = []
+    for value in items:
+        favorite = value[1]
+        set_count = value[2]
+        result.append({
+            'item': ItemSchema().dump(value[0]),
+            'favorite': favorite,
+            'set_count': 0 if set_count is None else int(set_count)
+        })
+    current_app.logger.debug(result)
+    return jsonify({'state': True, 'entries': result})
+
+@item_bp.route('/favorite', methods=['get'])
+def getFavorite():
+    user_id = request.args.get('user_id')
+    current_app.logger.debug(user_id)
+    items = Item.getItemsByFavorite(user_id=user_id)
+    result = []
+    for value in items:
+        favorite = value[1]
+        set_count = value[2]
+        result.append({
+            'item': ItemSchema().dump(value[0]),
+            'favorite': favorite,
+            'set_count': 0 if set_count is None else int(set_count)
+        })
+    current_app.logger.debug(result)
+    return jsonify({'state': True, 'entries': result})
+
+
+@item_bp.route('/', methods=['post'])
 def post():
     jsonData = json.dumps(request.json)
     userData = json.loads(jsonData)
@@ -67,6 +125,5 @@ def post():
         )
         item_image = ItemImage(current_app.config['ITEM_IMAGE_BASE'] + response.key, item.id)
         item_image.postRecord()
-
 
     return jsonify({'state': True})
