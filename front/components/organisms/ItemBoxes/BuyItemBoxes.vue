@@ -8,7 +8,7 @@
             :price="item.item.price"
             :item-id="item.item.id"
             :name="item.item.name"
-            :image="item.item.images[0].url"
+            :image="item.item.images.length ? record.item.images[0].url : ''"
             :state="item.state"
             :area="item.item.area"
             :set_count="item.set_count"
