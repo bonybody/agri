@@ -246,7 +246,9 @@ export default {
       }
 
       this.$api['item'].post(formData).then(({data}) => {
-        console.log(data)
+        if (data.state) {
+          this.$router.push({path: '/item/' + data.entries.item.id})
+        }
       }).catch((e) => {
         console.log(e)
       });

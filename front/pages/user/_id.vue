@@ -1,18 +1,20 @@
 <template>
   <div class="user-id">
-    <user-detail/>
+    <user-detail
+    />
   </div>
 </template>
 
 <script>
-import UserProfile from "~/components/molecules/user/UserProfile";
 import UserDetail from "~/components/organisms/user/UserDetail";
 
 export default {
   name: "_id",
-  components: {UserDetail, UserProfile},
+  components: {UserDetail},
   auth: false,
-
+  async asyncData({ $api, $myAuth, param }) {
+    const res = $api['user'].get
+  }
 }
 </script>
 

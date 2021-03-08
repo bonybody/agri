@@ -10,7 +10,7 @@
         </p>
         <div class="flex-vertical-wrap">
           <p class="user-name">{{ userName }}</p>
-          <p class="post-day">{{ postDay }}</p>
+          <p class="post-day">{{ postDay.slice(0, 10) }}</p>
         </div>
       </div>
       <div class="heading__right">
@@ -85,7 +85,7 @@ export default {
     favorite: {
       type: Boolean,
       default: false
-    }
+    },
   },
   methods: {
     itemLink: function () {

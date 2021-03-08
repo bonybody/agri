@@ -1,7 +1,9 @@
 <template>
   <div class="user-detail">
     <div class="user-detail__profile">
-      <user-profile/>
+      <user-profile
+
+      />
     </div>
     <div class="user-detail__tabs">
       <div class="user-detail__tab">

@@ -49,7 +49,9 @@ export default {
         item_id: this.itemId,
         user_id: this.$myAuth.user().id
       }).then(({data}) => {
-        console.log(data)
+        if (data.state) {
+          this.$router.push({path: '/mypage/post_koe'})
+        }
       })
     },
     edit() {

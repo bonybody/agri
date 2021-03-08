@@ -10,6 +10,7 @@
             :item-name="koe.itemName"
             :koe-title="koe.title"
             :koe-text="koe.text"
+            :post-day="koe.created_at"
         />
       </div>
     </template>

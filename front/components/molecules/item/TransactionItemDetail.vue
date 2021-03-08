@@ -77,14 +77,14 @@ export default {
     receive() {
       this.$api['item-transaction'].receive(this.id).then(
           ({data}) => {
-            console.log(data)
+            location.reload()
           }
       )
     },
     shipment() {
       this.$api['item-transaction'].shipment(this.id).then(
           ({data}) => {
-            console.log(data)
+            location.reload()
           }
       )
 
