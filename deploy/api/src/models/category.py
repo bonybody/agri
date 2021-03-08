@@ -7,15 +7,15 @@ from database.database import db, ma
 
 class Category(db.Model):
     __tablename__ = 'category'
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now, onupdate=datetime.now)
     items = db.relationship('Item', backref='category')
 
-    def __init__(self, name=''):
+    def __init__(self, name='', category_id=1):
         self.name = name
-
+        self.id = category_id
     def setAttr(self, name=''):
         self.name = name
 
@@ -32,9 +32,9 @@ class Category(db.Model):
     @classmethod
     def addTestData(cls):
         categories = []
-        data_lists = ['grain', 'vegetable', 'fruit', 'other']
-        for data in data_lists:
-            categories.append(cls(data))
+        data_lists = {1: '米・穀物', 2:'野菜', 3:'果物', 4:'その他'}
+        for k,v in data_lists.items():
+            categories.append(cls(name=v, category_id=k))
 
         db.session.add_all(categories)
         db.session.commit()
