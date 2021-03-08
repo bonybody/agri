@@ -29,7 +29,9 @@
           @clickCheckbox="clickCheckbox"
           :require="period.require"
           :error="period.error"
+          :date="periodDate"
       />
+
     </div>
     <div class="product-up-form__form">
       <item-remaining-form
@@ -47,13 +49,6 @@
           v-model="category.value"
           :require="category.require"
           :error="category.error"
-      />
-    </div>
-    <div class="product-up-form__form">
-      <delivery-fee-form
-          v-model="deliveryFee"
-          :require="deliveryFee.require"
-          :error="deliveryFee.error"
       />
     </div>
     <div class="product-up-form__form">
@@ -104,6 +99,7 @@ import ItemShipmentForm from "~/components/molecules/forms/ItemShipmentForm";
 import ProductNameForm from "~/components/molecules/forms/ProductNameForm";
 import AreaForm from "~/components/molecules/forms/AreaForm";
 import ItemVolumeForm from "~/components/molecules/forms/ItemVolumeForm";
+import dateFormat from "@/functions/format/dateFormat";
 
 
 export default {
@@ -127,7 +123,6 @@ export default {
     return {
       images: {
         value: null,
-
         error: '',
         require: false
       },
@@ -166,11 +161,6 @@ export default {
         require: true,
         value: ''
       },
-      deliveryFee: {
-        error: '',
-        require: true,
-        value: ''
-      },
       shipment: {
         error: '',
         require: true,
@@ -192,7 +182,17 @@ export default {
         require: true,
         error: ''
       }
-
+    }
+  },
+  computed: {
+    periodDate() {
+      console.log(this.period.value)
+      if (this.period.value === 0) {
+        return ''
+      }
+      const date = new Date()
+      date.setDate(date.getDate() + this.period.value)
+      return dateFormat(date)
     }
   },
   methods: {
@@ -259,6 +259,9 @@ export default {
 <style scoped lang="scss">
 .product-up-form {
   @include form-box-style();
+  &__form {
+    margin-bottom: $semi-large-margin;
+  }
 }
 
 .user-name {

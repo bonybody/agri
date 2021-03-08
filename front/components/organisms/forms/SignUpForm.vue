@@ -1,15 +1,22 @@
 <template>
   <div class="sign-up-form">
     <app-form-heading>新規登録</app-form-heading>
-    <div class="image">
+    <div class="image sign-up-form__form">
       <user-image-form v-model="image.value"/>
     </div>
-
-    <display-name-form v-model="displayName.value" :require="displayName.require" :error="displayName.error"/>
-    <email-form v-model="email.value" :require="email.require" :error="email.error"/>
-    <password-form v-model="password.value" :require="password.require" :error="password.error"/>
+    <div class="sign-up-form__form">
+      <display-name-form v-model="displayName.value" :require="displayName.require" :error="displayName.error"/>
+    </div>
+    <div class="sign-up-form__form">
+      <email-form v-model="email.value" :require="email.require" :error="email.error"/>
+    </div>
+    <div class="sign-up-form__form">
+      <password-form v-model="password.value" :require="password.require" :error="password.error"/>
+    </div>
+    <div class="sign-up-form__form">
     <app-separation/>
-    <div class="user-name">
+    </div>
+    <div class="user-name sign-up-form__form">
       <div class="user-name__label">
         <app-form-label>氏名</app-form-label>
         <app-require-mark v-show="userName.require"/>
@@ -24,7 +31,7 @@
         <given-name-ruby-form v-model="userName.value.givenNameRuby"/>
       </div>
     </div>
-    <div class="birthday">
+    <div class="birthday sign-up-form__form">
       <div class="birthday__label">
         <app-form-label>生年月日</app-form-label>
         <app-require-mark v-show="birthday.require"/>
@@ -159,6 +166,9 @@ export default {
 <style scoped lang="scss">
 .sign-up-form {
   @include form-box-style();
+  &__form {
+    margin-bottom: $semi-large-margin;
+  }
 }
 
 .user-name {
@@ -169,6 +179,7 @@ export default {
   &__line {
     width: 100%;
     display: flex;
+    margin-bottom: $medium-parts-margin;
 
     div:first-child {
       margin-right: 30px;

@@ -1,36 +1,39 @@
 <template>
-  <div  class="item-box">
+  <div class="item-box">
+    <div>
+      <login-require-window
+          :show-modal="notLoggedInModal"
+          @close-modal="closeModal"
+      />
+    </div>
     <p class="item-box__state">
       残り{{ period }}日
     <p/>
     <div class="item-box__content-wrap">
-      <nuxt-link :to="getItemDetailLink" class="item-box__image-area">
-        <p class="item-box__item-image-wrap">
+      <div class="item-box__image-area">
+        <nuxt-link :to="getItemDetailLink" class="item-box__item-image-wrap">
           <img v-if="image" class="item-box__item-image" :src="image" :alt="name">
-        </p>
+        </nuxt-link>
         <div class="item-box__user-image-wrap">
-          <user-icon :image="userImage" />
+          <user-icon :image="userImage"/>
         </div>
-      </nuxt-link>
+      </div>
       <div class="item-box__text-wrap">
         <div class="line-wrap">
-          <p class="item-box__address">
+          <div class="item-box__address">
             <map-icon></map-icon>
             {{ address }}
-          </p>
+          </div>
           <div class="item-box__favorite-button">
-            <favorite-button :state="getFavorite" @myClick="favoriteClick()"></favorite-button>
+            <favorite-button :state="getFavorite" @myClick="changeFavorite"></favorite-button>
           </div>
         </div>
-        <div class="line-wrap" >
-          <nuxt-link :to="getItemDetailLink" class="item-box__name" ><span v-line-clamp="2">{{ name }}</span></nuxt-link>
+        <div class="line-wrap">
+          <nuxt-link :to="getItemDetailLink" class="item-box__name"><span v-line-clamp="2">{{ name }}</span></nuxt-link>
         </div>
         <div class="line-wrap">
           <p class="item-box__price">&yen;{{ price }}~</p>
           <p class="item-box__format">{{ getRemaining }}</p>
-        </div>
-        <div class="tags">
-          <p class="tag"></p>
         </div>
       </div>
 
@@ -44,13 +47,18 @@ import HeartIcon from "~/components/icons/HeartIcon";
 import FavoriteButton from "~/components/atoms/buttons/FavoriteButton";
 import PasswordForm from "~/components/molecules/forms/PasswordForm";
 import UserIcon from "~/components/icons/UserIcon";
+import LoginRequireWindow from "@/components/organisms/modal_windows/LoginRequireWindow";
 
 export default {
   name: "ItemBox",
-  components: {UserIcon, PasswordForm, FavoriteButton, HeartIcon, MapIcon},
+  components: {LoginRequireWindow, UserIcon, PasswordForm, FavoriteButton, HeartIcon, MapIcon},
   data() {
     return {
-      thisFavorite: false
+      thisFavorite: {
+        state: false,
+        value: false
+      },
+      notLoggedInModal: false
     }
   },
   props: {
@@ -68,7 +76,7 @@ export default {
     },
     favorite: {
       type: Boolean,
-      default: true
+      default: false
     },
     remaining: {
       type: Number,
@@ -103,17 +111,38 @@ export default {
       default: () => {
         return {}
       }
+    },
+    setCount: {
+      type: Number,
+      require: true
     }
   },
   methods: {
-    favoriteClick() {
-      console.log('クリック')
-      this.favorite = !this.favorite
+    changeFavorite() {
+      if (!this.$myAuth.loggedIn()) {
+        this.notLoggedInModal = true
+        return
+      }
+      if (this.thisFavorite.state === false) {
+        this.thisFavorite.value = !this.favorite
+        this.thisFavorite.state = true
+      } else {
+        this.thisFavorite.value = !this.thisFavorite.value
+      }
+      this.$api['favorite'].changeFavorite(this.$myAuth.user().id, this.itemId)
+    },
+    closeModal() {
+      this.notLoggedInModal = !this.notLoggedInModal
     }
   },
   computed: {
     getFavorite() {
-      return this.favorite
+      if (!this.thisFavorite.state) {
+        return this.favorite
+      }
+      if (this.thisFavorite.state) {
+        return this.thisFavorite.value
+      }
     },
     getItemDetailLink() {
       return {
@@ -127,18 +156,18 @@ export default {
     },
     getRemaining() {
       let remaining_text = ''
-      switch (this.remaining_format){
+      switch (this.remaining_format) {
         case 'whole':
-          remaining_text = '全期間残り：' + this.remaining + '個'
+          remaining_text = '全期間残り：' + String(this.remaining - this.setCount) + '個'
           break
         case 'day':
-          remaining_text = '本日残り：' + this.remaining + '個'
+          remaining_text = '本日残り：' + (this.remaining - this.setCount) + '個'
           break
         case 'week':
-          remaining_text = '今週残り：' + this.remaining + '個'
+          remaining_text = '今週残り：' + (this.remaining - this.setCount) + '個'
           break
         case 'month':
-          remaining_text = '今月残り：' + this.remaining + '個'
+          remaining_text = '今月残り：' + (this.remaining - this.setCount) + '個'
           break
       }
       return remaining_text
@@ -184,9 +213,6 @@ export default {
     color: $primary-on-font-color;
     position: relative;
 
-    &:hover {
-      opacity: $hover-opacity;
-    }
   }
 
   &__item-image {
@@ -198,11 +224,16 @@ export default {
   }
 
   &__item-image-wrap {
+    display: block;
     border-radius: 4px 0 0 0;
     background-color: $shadow-color;
     color: $primary-on-font-color;
     width: 180px;
     height: 180px;
+
+    &:hover {
+      opacity: $hover-opacity;
+    }
 
   }
 
@@ -219,6 +250,10 @@ export default {
     width: 30px;
     height: 30px;
     background-color: $primary-color;
+
+    &:hover {
+      opacity: $hover-opacity;
+    }
   }
 
   &__address {

@@ -1,5 +1,9 @@
 from datetime import datetime
-from api.database.database import db, ma
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from database.database import db, ma
 
 
 class ItemImage(db.Model):

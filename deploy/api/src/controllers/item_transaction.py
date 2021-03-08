@@ -2,16 +2,18 @@ from flask import Blueprint, request, jsonify
 from flask_jwt import JWT, jwt_required, current_identity, current_app
 import logging
 import json
-from api.models import ItemTransaction
-from api.shemas import ItemTransactionSchema
-from api.database.database import db
-from api.plugin.aws_s3 import item_image_bucket
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from models import ItemTransaction, Item
+from schemas import ItemTransactionSchema
+from database.database import db
 import io
 
-bp = Blueprint('item-transaction', __name__, url_prefix='/item-transaction')
+item_transaction_bp = Blueprint('item-transaction', __name__, url_prefix='/item-transaction')
 
 
-@bp.route('/', methods=['get'])
+@item_transaction_bp.route('/', methods=['get'])
 def getById():
     transaction_id = request.args.get('id')
     record = ItemTransaction.getRecordById(transaction_id)
@@ -20,7 +22,7 @@ def getById():
     return jsonify({'state': True, 'entries': item_transaction_schema.dump(record)})
 
 
-@bp.route('/buyer', methods=['get'])
+@item_transaction_bp.route('/buyer', methods=['get'])
 def getByBuyerId():
     seller_id = request.args.get('id')
     records = ItemTransaction.getRecordsByBuyerId(seller_id)
@@ -28,7 +30,31 @@ def getByBuyerId():
     item_transaction_schema = ItemTransactionSchema(many=True)
     return jsonify({'state': True, 'entries': item_transaction_schema.dump(records)})
 
-@bp.route('/receive', methods=['patch'])
+@item_transaction_bp.route('/seller', methods=['get'])
+def getBySellerId():
+    seller_id = request.args.get('id')
+    records = ItemTransaction.getRecordsBySellerId(seller_id)
+    current_app.logger.debug(records)
+    item_transaction_schema = ItemTransactionSchema(many=True)
+    return jsonify({'state': True, 'entries': item_transaction_schema.dump(records)})
+
+@item_transaction_bp.route('/seller/detail', methods=['get'])
+def getSalesDetailBySellerId():
+    seller_id = request.args.get('id')
+    record = ItemTransaction.getSalesDetailBySellerId(seller_id=seller_id, item_model=Item)
+    current_app.logger.debug(record)
+    item_transaction_schema = ItemTransactionSchema()
+    return jsonify({'state': True, 'entries': int(record[0])})
+
+@item_transaction_bp.route('/seller/sold', methods=['get'])
+def getBySellerIdStateSold():
+    seller_id = request.args.get('id')
+    records = ItemTransaction.getRecordsBySellerIdStateSold(seller_id)
+    current_app.logger.debug(records)
+    item_transaction_schema = ItemTransactionSchema(many=True)
+    return jsonify({'state': True, 'entries': item_transaction_schema.dump(records)})
+
+@item_transaction_bp.route('/receive', methods=['patch'])
 def patchStateReceive():
     transaction_id = request.json['id']
     record = ItemTransaction.getRecordById(transaction_id)
@@ -37,7 +63,7 @@ def patchStateReceive():
     return jsonify({'state': True})
 
 
-@bp.route('/shipment', methods=['patch'])
+@item_transaction_bp.route('/shipment', methods=['patch'])
 def patchStateShipment():
     transaction_id = request.json['id']
     record = ItemTransaction.getRecordById(transaction_id)
@@ -54,7 +80,7 @@ def patchStateShipment():
 #     return jsonify({'state': True})
 #
 
-@bp.route('/', methods=['post'])
+@item_transaction_bp.route('/', methods=['post'])
 def postTransaction():
     current_app.logger.debug(request.json)
     item_id = request.json['item_id']
@@ -66,4 +92,4 @@ def postTransaction():
     # app.logger.debug(json_dict)
     # app.logger.debug(request.files)
 
-    return jsonify({'state': True})
+    return jsonify({'state': True , 'id': transaction.id})

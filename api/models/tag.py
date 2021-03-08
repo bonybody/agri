@@ -1,6 +1,9 @@
 from datetime import datetime
-from api.database.database import db
-from api.app import ma
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from database.database import db
 
 class Tag(db.Model):
     __tablename__ = 't_tag'

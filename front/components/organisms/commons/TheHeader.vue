@@ -8,7 +8,7 @@
           <span class="title__text">アグリー</span>
         </h1>
       </nuxt-link>
-      <search-bar></search-bar>
+      <search-bar @click="search()" v-model="text"></search-bar>
 
       <div v-if="getLoggedIn" class="logged-in">
         <nuxt-link to="/notifications" class="notifications logged-in__item">
@@ -39,7 +39,7 @@
 <script>
 
 import AppButtonHeader from "~/components/atoms/buttons/AppButtonHeader";
-import SearchBar from "~/components/molecules/searchBar";
+import SearchBar from "@/components/molecules/SearchBar";
 import NotificationIcon from "~/components/icons/NotificationIcon";
 import NoUserImageIcon from "~/components/icons/NoUserImageIcon";
 import SiteIcon from "~/components/icons/SiteIcon";
@@ -54,7 +54,8 @@ export default {
         login: '/login',
         signUp: '/signup'
       },
-      notification: 0
+      notification: 0,
+      text: null
     }
   },
   computed: {
@@ -70,6 +71,9 @@ export default {
   methods: {
     async logout() {
       await this.$myAuth.logout()
+    },
+    search() {
+      this.$router.push('/search')
     }
   }
 }

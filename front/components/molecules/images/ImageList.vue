@@ -38,14 +38,14 @@ export default {
 
 <style scoped lang="scss">
 .image-list {
-  width: 400px;
+  width: 500px;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
 
   &__no-image {
-    width: 400px;
-    height: 400px;
+    width: 500px;
+    height: 500px;
     margin-bottom: 20px;
     background-color: $weak-font-color;
     text-align: center;
@@ -58,8 +58,8 @@ export default {
     height: 80px;
 
     &--first {
-      width: 400px;
-      height: 400px;
+      width: 500px;
+      height: 500px;
       margin-bottom: 20px;
 
     }

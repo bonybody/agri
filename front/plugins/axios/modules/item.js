@@ -5,16 +5,38 @@ export default class Item {
     console.log(this.api);
   }
 
-  async getById(id) {
+  async getById(id, user_id) {
     const res = await this.api.get(this.prefix, {
       params: {
-        id: id
+        id: id,
+        user_id: user_id
       }
     })
     return res
   }
-  async getNewItems() {
-    const res = await this.api.get(this.prefix + 'new')
+  async getItemsByUserId(user_id) {
+    const res = await this.api.get(this.prefix + 'user', {
+      params: {
+        user_id: user_id
+      }
+    })
+    return res
+  }
+  async getNewItems(user_id) {
+    const res = await this.api.get(this.prefix + 'new', {
+      params: {
+        user_id: user_id
+      }
+    })
+    return res
+  }
+
+  async getFavoriteItems(user_id) {
+    const res = await this.api.get(this.prefix + 'favorite', {
+      params: {
+        user_id: user_id
+      }
+    })
     return res
   }
 

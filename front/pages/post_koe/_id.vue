@@ -1,31 +1,25 @@
 <template>
   <div class="koe-post">
     <div class="koe-post__item">
-      <item-about
-          :item-id="item.id"
-          :item-name="item.name"
-          :item-image="item.images[0].url"
-          :volume="item.volume"
-          :period="item.period"
-          :price="item.price"
-          :remaining_days="item.remaining_days"
-          :remaining_format="item.remaining_format.name"
-          :description="item.description"
-          :set-count.sync="setCount"
-          :category-id="item.category.id"
-          :category-name="item.category.name"
-          :address="item.area"
-          :user-name="item.user.display_name"
-          :user-id="item.user.id"
-          :user-image="item.user.image"
-          @edit="edit()"
+      <item-box
+          :item-id="record.item.id"
+          :image="record.item.images[0].url"
+          :name="record.item.name"
+          :address="record.item.area"
+          :price="record.item.price"
+          :remaining="record.item.remaining_days"
+          :remaining_format="record.item.remaining_format.name"
+          :period="record.item.period"
+          :set-count="record.set_count"
+          :favorite="Boolean(record.favorite)"
       />
     </div>
     <div class="koe-post__form">
       <koe-post-form
-          :item-id="item.id"
+          :item-id="record.item.id"
       />
     </div>
+
   </div>
 </template>
 
@@ -33,30 +27,41 @@
 import KoePostForm from "~/components/organisms/forms/KoePostForm";
 import ItemText from "~/components/molecules/item/ItemText";
 import ItemAbout from "~/components/molecules/item/ItemAbout";
+import ItemDetail from "@/components/organisms/items/ItemDetail";
+import ItemBox from "@/components/molecules/ItemBox";
+
 export default {
-  components: {ItemAbout, ItemText, KoePostForm},
+  components: {ItemBox, ItemDetail, ItemAbout, ItemText, KoePostForm},
+  layout: 'mypage',
   async asyncData({params, $api}) {
-    let item = {}
+    let record = {}
     const res = await $api['item'].getById(params.id).then(
         ({data}) => {
           console.log(data)
-          item = data.entries
+          record = data.entries
         }
     )
-    return {item: item}
+    return {record: record}
   },
-
+  data() {
+    return {
+      record: {}
+    }
+  }
 }
 </script>
 
 <style scoped lang="scss">
 .koe-post {
-  width: 1024px;
-  margin: 0 auto;
   display: flex;
   justify-content: space-around;
+
+  &__item {
+  }
+
   &__form {
     width: 400px;
+    margin-bottom: $large-margin;
   }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <button class="form-button" type="submit" @click="myClick()">
+    <button class="form-button" :class="{disable: disabled}" type="submit" @click="myClick()">
       <slot></slot>
     </button>
 </template>
@@ -7,6 +7,12 @@
 <script>
 export default {
   name: "AppFormButton",
+  props: {
+    disabled: {
+      type: Boolean,
+      default: false
+    }
+  },
   methods: {
     myClick() {
       this.$emit('my-click')
@@ -27,5 +33,10 @@ export default {
   &:hover {
     opacity: $hover-opacity;
   }
+}
+
+.disable {
+  pointer-events: none;
+  background-color: $weak-font-color;
 }
 </style>

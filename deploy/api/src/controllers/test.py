@@ -2,13 +2,17 @@ from flask import Blueprint, request, jsonify
 from flask_jwt import JWT, jwt_required, current_identity, current_app
 import logging
 import json
-from api.models import User, Auth, Category, RemainingFormat
-from api.plugin.aws_s3 import getS3Buckets
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-bp = Blueprint('test', __name__, url_prefix='/test')
+from models import User, Auth, Category, RemainingFormat
+from plugin.aws_s3 import getS3Buckets
+
+test_bp = Blueprint('test', __name__, url_prefix='/test')
 
 
-@bp.route('/', methods=['post'])
+@test_bp.route('/', methods=['post'])
 def postTest():
     for num in range(5):
         user = User(
@@ -32,7 +36,7 @@ def postTest():
     return jsonify({'state': True})
 
 
-@bp.route('/user', methods=['post'])
+@test_bp.route('/user', methods=['post'])
 def postUser():
     for num in range(5):
         user = User(
@@ -52,19 +56,19 @@ def postUser():
     return jsonify({'state': True})
 
 
-@bp.route('/category', methods=['post'])
+@test_bp.route('/category', methods=['post'])
 def postCategory():
     Category.addTestData()
     return jsonify({'state': True})
 
 
-@bp.route('/remaining_format', methods=['post'])
+@test_bp.route('/remaining_format', methods=['post'])
 def postRemainingFormat():
     RemainingFormat.addTestData()
     return jsonify({'state': True})
 
 
-@bp.route('/s3', methods=['get'])
+@test_bp.route('/s3', methods=['get'])
 def getS3Bucket():
     getS3Buckets(current_app)
     return jsonify({'state': True})

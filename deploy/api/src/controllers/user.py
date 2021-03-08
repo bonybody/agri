@@ -2,15 +2,19 @@ from flask import Blueprint, request, jsonify
 from flask_jwt import JWT, jwt_required, current_identity, current_app
 import logging
 import json
-from api.models import User, Auth
-from api.database.database import db
-from api.plugin.aws_s3 import item_image_bucket
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from models import User, Auth
+from database.database import db
+from plugin.aws_s3 import item_image_bucket
 import io
 
-bp = Blueprint('user', __name__, url_prefix='/user')
+user_bp = Blueprint('user', __name__, url_prefix='/user')
 
 
-@bp.route('/', methods=['get'])
+@user_bp.route('/', methods=['get'])
 @jwt_required()
 def get():
     print(current_identity)
@@ -21,7 +25,7 @@ def get():
     return jsonify(user_dict)
 
 
-@bp.route('/', methods=['post'])
+@user_bp.route('/', methods=['post'])
 def post():
     user_data = json.loads(request.form['params'])
     image = ''

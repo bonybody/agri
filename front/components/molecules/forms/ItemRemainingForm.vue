@@ -62,7 +62,7 @@ export default {
         return this.picked
       },
       set(value){
-        this.$emit('changeRadio', value)
+        this.$emit('changeRadio', Number(value))
       }
     },
     days: {

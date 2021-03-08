@@ -1,16 +1,18 @@
 <template>
-  <div class="new-items">
-    <template v-for="item in items" v-if="items !== []">
-      <div class="new-items__item">
+  <div class="items">
+    <template v-for="record in records" v-if="records">
+      <div class="items__item">
         <item-box
-            :item-id="item.id"
-            :image="item.images[0].url"
-            :name="item.name"
-            :address="item.area"
-            :price="item.price"
-            :remaining="item.remaining_days"
-            :remaining_format="item.remaining_format.name"
-            :period="item.period"
+            :item-id="record.item.id"
+            :image="record.item.images[0].url"
+            :name="record.item.name"
+            :address="record.item.area"
+            :price="record.item.price"
+            :remaining="record.item.remaining_days"
+            :remaining_format="record.item.remaining_format.name"
+            :period="record.item.period"
+            :set-count="record.set_count"
+            :favorite="Boolean(record.favorite)"
         />
       </div>
     </template>
@@ -25,14 +27,14 @@ export default {
   components: {ItemBox},
   data() {
     return {
-      items: null
+      records: null
     }
   },
   async fetch() {
-    const res = await this.$api['item'].getNewItems().then(({data}) => {
-      this.items = data.entries
+    const res = await this.$api['item'].getNewItems(this.$myAuth.user().id).then(({data}) => {
+      this.records = data.entries
       this.state = data.state
-      console.log(data.entries[0])
+      console.log(data.entries)
       // console.log(data.entries[0].images[0])
     })
   },
@@ -40,7 +42,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.new-items {
+.items {
   display: flex;
   flex-wrap: wrap;
   justify-content: left;

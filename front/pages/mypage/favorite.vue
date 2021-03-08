@@ -40,6 +40,9 @@ export default {
   name: "favorite",
   components: {FavoriteKoeBoxes, FavoriteItemBoxes, AppTabButton, AppHeading},
   layout: 'mypage',
+  async asyncData() {
+
+  },
   data() {
     return {
       tabs: {

@@ -1,16 +1,19 @@
 <template>
   <div class="searchBar">
-    <input v-model="text" class="searchBar__text" type="text" name="text" placeholder="文字を入力してください" maxlength="30">
-    <nuxt-link class="searchBar__button" :to="searchTo">
+    <input v-model="inputValue" class="searchBar__text" type="text" name="text" placeholder="文字を入力してください" maxlength="30">
+    <div @click="$emit('click')" class="searchBar__button">
       <img src="@/assets/images/icon/search_icon.svg">
-    </nuxt-link>
+    </div>
   </div>
 </template>
 
 <script>
 
+import input from "@/mixins/input";
+
 export default {
-  name: "searchForm",
+  name: "SearchBar",
+  mixins: [input],
   data() {
     return {
       text: '',
@@ -27,6 +30,9 @@ export default {
       }
       return searchParam
     }
+  },
+  methods: {
+
   }
 }
 </script>
@@ -34,13 +40,13 @@ export default {
 <style scoped lang="scss">
 
 .searchBar {
-  width: 400px;
-
+  max-width: 400px;
+  background-color: $main-background-color;
   letter-spacing: -.4em;
 }
 .searchBar__text {
   display: inline-block;
-  width: 370px;
+  width: calc(100% - 30px);
   height: 30px;
   font-size: 14px;
 

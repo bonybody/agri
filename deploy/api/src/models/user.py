@@ -1,8 +1,13 @@
 from datetime import datetime
-from api.database.database import db, ma
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from database.database import db, ma
 
 class User(db.Model):
     __tablename__ = 'user'
+    __table_args__ = {'extend_existing': True}
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     display_name = db.Column(db.String(15), nullable=False)
     image = db.Column(db.String(255))
@@ -15,7 +20,8 @@ class User(db.Model):
     auth = db.relationship('Auth', backref='user')
     items = db.relationship('Item', backref='user')
     koes = db.relationship('Koe', backref='user')
-
+    item_favorites = db.relationship('ItemFavorite', backref='user')
+    koe_favorites = db.relationship('KoeFavorite', backref='user')
 
     def __init__(self, display_name='', image='', name='', name_ruby='', birthday='', payment=''):
         self.display_name = display_name

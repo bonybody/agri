@@ -6,6 +6,8 @@
       v-model="inputValue"
       :placeholder="placeholder"
       :disabled="disabled"
+      :max="max"
+      :min="min"
   >
 </template>
 
@@ -32,6 +34,13 @@ export default {
     disabled: {
       type: Boolean,
       default: false
+    },
+    max: {
+      type: Number
+    },
+    min: {
+      type: Number,
+      default: 0
     }
   },
   computed: {
