@@ -64,7 +64,7 @@ class ItemTransaction(db.Model):
     def getSalesDetailBySellerId(cls, seller_id, item_model):
         record = db.session.query(func.sum(item_model.price * cls.set_count)).\
             select_from(cls).\
-            filter_by(seller_id=seller_id).\
+            filter(and_(seller_id==seller_id, cls.state==2)).\
             outerjoin(item_model, item_model.id == cls.item_id).\
             group_by(cls.buyer_id).\
             first()
