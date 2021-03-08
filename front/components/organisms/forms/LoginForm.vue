@@ -1,9 +1,17 @@
 <template>
   <div class="login-form">
-    <app-form-heading>ログイン</app-form-heading>
-    <email-form v-model="email"/>
-    <password-form v-model="password"/>
-    <app-form-button @my-click="login()">ログイン</app-form-button>
+    <div>
+      <app-form-heading>ログイン</app-form-heading>
+    </div>
+    <div class="login-form__form">
+      <email-form v-model="email"/>
+    </div>
+    <div class="login-form__form">
+      <password-form v-model="password"/>
+    </div>
+    <div class="login-form__button">
+      <app-form-button @my-click="login()">ログイン</app-form-button>
+    </div>
   </div>
 </template>
 
@@ -35,5 +43,8 @@ export default {
 <style lang="scss" scoped>
 .login-form {
   @include form-box-style;
+  &__form {
+    margin-bottom: $semi-large-margin;
+  }
 }
 </style>

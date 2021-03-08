@@ -3,7 +3,7 @@ from flask_jwt import JWT, jwt_required, current_identity, current_app
 import logging
 import json
 from api.models import ItemTransaction
-from api.shemas import ItemTransactionSchema
+from api.schemas import ItemTransactionSchema
 from api.database.database import db
 from api.plugin.aws_s3 import item_image_bucket
 import io

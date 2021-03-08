@@ -1,7 +1,20 @@
 <template>
   <div class="modal-window" v-show="show">
     <div class="modal-window__content">
-      <slot></slot>
+      <div class="modal-window__heading">
+        <app-heading>
+          <slot name="heading"></slot>
+        </app-heading>
+      </div>
+      <div class="modal-window__text">
+        <slot name="text"></slot>
+      </div>
+      <div class="modal-window__separate">
+        <app-separation/>
+      </div>
+      <div v-for="button in buttonsLength" class="modal-window__buttons">
+        <slot :name="'buttons' + button"></slot>
+      </div>
       <div class="modal-window__close">
         <app-button @myClick="$emit('close-modal')">閉じる</app-button>
       </div>
@@ -11,13 +24,20 @@
 
 <script>
 import AppButton from "~/components/atoms/buttons/AppButton";
+import AppHeading from "@/components/atoms/headings/AppHeading";
+import AppSeparation from "@/components/atoms/separations/AppSeparation";
+
 export default {
   name: "ModalWindow",
-  components: {AppButton},
+  components: {AppSeparation, AppHeading, AppButton},
   props: {
     show: {
-      type: false,
+      type: Boolean,
       default: false,
+    },
+    buttonsLength: {
+      type: Number,
+      default: 0
     }
   }
 }
@@ -26,7 +46,7 @@ export default {
 <style scoped lang="scss">
 .modal-window {
   /*　要素を重ねた時の順番　*/
-  z-index: 1;
+  z-index: 10000;
 
   /*　画面全体を覆う設定　*/
   position: fixed;
@@ -42,13 +62,37 @@ export default {
   justify-content: center;
 
   &__content {
-    width: 300px;
-    height: 200px;
+    border-radius: $box-border-radius;
+    box-sizing: border-box;
+    padding: $medium-parts-margin;
+    width: 400px;
     background-color: $main-background-color;
   }
+
+  &__heading {
+    text-align: center;
+    margin-bottom: $medium-parts-margin;
+  }
+
+  &__text {
+    text-align: center;
+    margin-bottom: $semi-large-margin;
+  }
+
+  &__separate {
+    margin-bottom: $medium-parts-margin;
+  }
+
+  &__buttons {
+    height: 35px;
+    width: 200px;
+    margin: 0 auto $medium-parts-margin auto;
+  }
+
   &__close {
     height: 35px;
-    width: 100px;
+    width: 200px;
+    margin: 0 auto;
   }
 }
 </style>

@@ -1,5 +1,10 @@
 from datetime import datetime
-from api.database.database import db
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from flask import current_app
+from database.database import db
+from sqlalchemy import or_, desc
 
 
 class Koe(db.Model):
@@ -12,6 +17,7 @@ class Koe(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id', onupdate='CASCADE', ondelete='CASCADE'))
     item_id = db.Column(db.Integer, db.ForeignKey('item.id', onupdate='CASCADE', ondelete='CASCADE'))
     item = db.relationship('Item', primaryjoin='Koe.item_id==Item.id', backref='koes')
+    favorites = db.relationship('KoeFavorite', backref='koe')
 
     def __init__(self, title='', text='', user_id='', item_id=''):
         self.title = title
@@ -28,6 +34,24 @@ class Koe(db.Model):
     def getRecordById(cls, koe_id):
         record = cls.query.filter_by(id=koe_id).first()
         return record
+
+    @classmethod
+    def getRecordsBySearch(cls, args):
+        records = cls.query
+        for k, v in args.items():
+            if (k == 'text'):
+                records = records.filter(or_(cls.title.like('%' + v + '%'),
+                                  cls.text.like('%' + v + '%')))
+            if (k == 'order_by'):
+                order_by = v
+
+                if (int(v) == 1):
+                    current_app.logger.debug(order_by)
+                    records = records.order_by(desc(cls.updated_at))
+
+
+        records = records.all()
+        return records
 
     @classmethod
     def getRecordsByItem(cls, item_id):

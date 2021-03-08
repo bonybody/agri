@@ -64,7 +64,7 @@ export default {
   @include form-box-style;
 
   &__section {
-    @include form-section-mixin;
+    margin-bottom: $semi-large-margin;
   }
 }
 

@@ -5,11 +5,11 @@
         <app-form-label :name="'item_category'">カテゴリ</app-form-label>
       </div>
       <div class="item-categories-form__label__require">
-        <app-require-mark v-show="require"/>
+        <app-require-mark v-show="!require"/>
       </div>
     </div>
     <div class="item-categories-form__input">
-      <app-select v-model="inputValue" :options="categories" :name="'item_category'"></app-select>
+      <app-select v-model="inputValue" :options="getCategories" :name="'item_category'"></app-select>
     </div>
     <div class="item-categories-form__error">
       <app-error-message>{{ error }}</app-error-message>
@@ -36,25 +36,40 @@ export default {
         {value: 3, label: '果物'},
         {value: 4, label: 'その他'}
       ],
-      require: {
-        type: Boolean,
-        default: false
-      },
     }
   },
   props: {
     error: {
       type: String,
       require: true,
+    },
+    require: {
+      type: Boolean,
+      default: false
+    },
+    selectNull: {
+      type: Boolean,
+      default: false
     }
-
+  },
+  computed: {
+    getCategories() {
+      const result = this.categories
+      if (this.selectNull) {
+        result.push({
+          value: null,
+          label: '選択なし'
+        })
+      }
+      return result
+    }
   }
 }
 </script>
 
 <style scoped lang="scss">
 .item-categories-form {
-  @include form-section-mixin
+  @include form-section-mixin;
 
   &__header {
     @include left-right-alignment-mixin

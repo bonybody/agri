@@ -23,15 +23,11 @@
       <p class="bony__text">{{ koeText }}</p>
     </div>
     <div class="footer">
-      <p class="footer__info" v-line-clamp="2">{{ itemName }}</p>
       <div class="separation">
         <app-separation/>
       </div>
-      <div class="footer__detail">
-        <div class="favorite">
-          <favorite-button :state="favorite"/>
-        </div>
-      </div>
+      <p class="footer__info" v-line-clamp="2">{{ itemName }}</p>
+
       <p class="footer__bottom">
         <app-form-button @my-click="itemLink">商品を見に行く</app-form-button>
       </p>
@@ -88,7 +84,7 @@ export default {
     },
     favorite: {
       type: Boolean,
-      default: true
+      default: false
     }
   },
   methods: {

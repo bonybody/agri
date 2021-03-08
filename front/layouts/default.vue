@@ -9,7 +9,7 @@
 
 <style scoped lang="scss">
 .header {
-  margin-bottom: 30px;
+  margin-bottom: $large-margin;
 }
 </style>
 <script>

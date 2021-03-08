@@ -1,7 +1,7 @@
 <template>
   <div class="buy-item-boxes">
     <template v-for="item in items">
-      <div class="buy-item-boxes__item">
+      <div v-if="showBoolean(item.state)" class="buy-item-boxes__item">
         <transaction-item-box
             :id="item.id"
             :volume="item.item.volume"
@@ -28,8 +28,24 @@ export default {
     items: {
       type: Array,
       require: true
+    },
+    show: {
+      type: Number,
+      default: 100
     }
   },
+  computed: {
+    showBoolean() {
+      return function (state) {
+        if (this.show === state) {
+          return true
+        }
+        if (this.show > 2) {
+          return true
+        }
+      }
+    }
+  }
 
 }
 </script>

@@ -55,6 +55,7 @@ export default {
       this.tabs.koe.state = !this.tabs.koe.state
     }
   }
+
 }
 </script>
 

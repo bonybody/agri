@@ -25,7 +25,10 @@ class MyAuth {
   }
 
   user() {
-    return this.auth.user
+    if (this.loggedIn()) {
+      return this.auth.user
+    }
+    return {id: 0, name: 'guest'}
   }
 
   loggedIn() {

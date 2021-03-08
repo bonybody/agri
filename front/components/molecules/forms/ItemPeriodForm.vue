@@ -4,14 +4,22 @@
       <app-form-label :name="'period'">販売期間（日単位）</app-form-label>
       <app-require-mark v-show="require"/>
     </div>
-    <div class="item-period-form__input-number">
+    <div v-show="value !== 0" class="item-period-form__input-number">
       <app-input-text
           :type="'number'"
           :name="'period'"
           :placeholder="'据え置き'"
-          :value="getInputNumber"
           :disabled="value === 0"
-          @input="$emit('input', value)"
+          v-model="inputValue"
+      />
+    </div>
+    <div v-show="value === 0" class="item-period-form__input-number">
+      <app-input-text
+          :type="'number'"
+          :name="'period'"
+          :placeholder="'据え置き'"
+          :disabled="true"
+          :value="null"
       />
     </div>
     <div class="item-period-form__check-deferred">
@@ -22,6 +30,9 @@
             @input="$emit('clickCheckbox', value)"
         />
       </div>
+    </div>
+    <div class="item-period-form" v-if="value !== 0">
+      {{date}}まで
     </div>
     <div class="item-period-form__error">
       <app-error-message>{{ error }}</app-error-message>
@@ -35,16 +46,13 @@ import AppRequireMark from "~/components/atoms/forms/marks/AppRequireMark";
 import AppInputText from "~/components/atoms/forms/input/AppInputText";
 import AppInputCheckbox from "~/components/atoms/forms/input/AppInputCheckbox";
 import AppErrorMessage from "~/components/atoms/forms/error/AppErrorMessage";
+import input from "@/mixins/input";
 
 export default {
   name: "ItemPeriodForm",
   components: {AppErrorMessage, AppInputCheckbox, AppInputText, AppRequireMark, AppFormLabel},
+  mixins: [input],
   props: {
-    value: {
-      type: Number,
-      default: ''
-    },
-
     require: {
       type: Boolean,
       default: false
@@ -52,11 +60,12 @@ export default {
     error: {
       type: String,
       default: ''
-    }
+    },
+    date: {}
   },
   computed: {
     getInputNumber() {
-      if (this.value == 0) {
+      if (this.value === 0) {
         return null
       }
       return this.value

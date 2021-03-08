@@ -1,12 +1,12 @@
 <template>
-  <nuxt-link :to="getToLink" class="user-profile-link">
-    <div class="user-icon" :class="{'image': image, 'noImage': !image}">
-      <img v-if="image" class="user-icon__icon user-icon__icon--image" :src="image" alt="ユーザー画像">
-      <div class="user-icon__icon user-icon__icon--no-image">
-        <no-user-image-icon v-if="!image"/>
+    <div @click="toUserPage" :to="getToLink" class="user-profile-link">
+      <div class="user-icon" :class="{'image': image, 'noImage': !image}">
+        <img v-if="image" class="user-icon__icon user-icon__icon--image" :src="image" alt="ユーザー画像">
+        <div class="user-icon__icon user-icon__icon--no-image">
+          <no-user-image-icon v-if="!image"/>
+        </div>
       </div>
     </div>
-  </nuxt-link>
 </template>
 
 <script>
@@ -31,6 +31,11 @@ export default {
     getToLink: function () {
       return '/user/' + this.id
     }
+  },
+  methods: {
+    toUserPage() {
+      this.$router.push('/user/' + this.id)
+    }
   }
 }
 </script>
@@ -47,12 +52,16 @@ export default {
 .user-icon {
   height: 100%;
   width: 100%;
+
   &__icon {
+    display: block;
     height: 100%;
     width: 100%;
+
     &--image {
 
     }
+
     &--no-image {
       svg {
         fill: $main-background-color;

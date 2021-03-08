@@ -45,4 +45,34 @@ export default class ItemTransaction {
     console.log(res);
     return res
   }
+  async getBySellerId(seller_id) {
+    console.log(seller_id);
+    const res = await this.api.get(this.prefix + 'seller', {
+      params: {
+        id: seller_id
+      }
+    });
+    console.log(res);
+    return res
+  }
+  async getSalesDetailBySellerId(seller_id) {
+    console.log(seller_id);
+    const res = await this.api.get(this.prefix + 'seller/detail', {
+      params: {
+        id: seller_id
+      }
+    });
+    console.log(res);
+    return res
+  }
+  async getBySellerIdStateSold(seller_id) {
+    console.log(seller_id);
+    const res = await this.api.get(this.prefix + 'seller/sold', {
+      params: {
+        id: seller_id
+      }
+    });
+    console.log(res);
+    return res
+  }
 }

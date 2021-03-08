@@ -16,12 +16,14 @@
     <div class="tran-item-detail__actions button tran-item-detail__section">
       <template v-if="getCurrentUser === buyer_id">
         <div class="actions__button">
-          <app-button :none="state === 2" @myClick="receive()">商品受け取り完了</app-button>
+          <app-button v-if="state === 0" :none="state === 0" @myClick="receive()">商品発送までお待ち下さい</app-button>
+          <app-button v-if="state === 1" @myClick="receive()">商品受け取り完了</app-button>
+          <app-button v-if="state === 2" :none="state === 2" @myClick="receive()">取引完了</app-button>
         </div>
       </template>
       <template v-if="getCurrentUser === seller_id">
         <div class="actions__button">
-          <app-button :none="state => 1" @myClick="shipment()">商品発送完了</app-button>
+          <app-button :none="state >= 1" @myClick="shipment()">商品発送完了</app-button>
         </div>
       </template>
     </div>

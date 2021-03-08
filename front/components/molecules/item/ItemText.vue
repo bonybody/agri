@@ -2,10 +2,10 @@
   <div class="item-text">
     <div class="line-wrap line-wrap__between">
       <p class="remaining-and-period">{{ getRemainingAndPeriod }}</p>
-      <p class="address">
+      <div class="address">
         <map-icon/>
         {{ address }}
-      </p>
+      </div>
     </div>
     <div class="line-wrap">
       <p class="name">{{ itemName }}</p>
@@ -47,7 +47,13 @@
       <div class="cart">
         <div class="set-count">
           <div class="set-count__input">
-            <app-input-text type="number" name="set_count" v-model="inputSetCount"/>
+            <app-input-text
+                type="number"
+                name="set_count"
+                v-model="inputSetCount"
+                :max="(remainingSets - remainingSetCount)"
+                :min="1"
+            />
           </div>
           <label class="set-count__label" for="set_count">セット購入</label>
         </div>
@@ -72,8 +78,8 @@
       </div>
     </div>
     <div class="line-wrap">
-      <app-form-button v-if="Number(this.$myAuth.user.id) !== userId" @my-click="$emit('buy')">購入する</app-form-button>
-      <app-form-button v-if="Number(this.$myAuth.user.id) === userId" @my-click="$emit('edit')">内容を編集する
+      <app-form-button :disabled="disableBuyButton" v-if="getCurrentUser !== userId" @my-click="$emit('buy')">購入する</app-form-button>
+      <app-form-button v-if="getCurrentUser === userId" @my-click="$emit('edit')">内容を編集する
       </app-form-button>
     </div>
   </div>
@@ -95,13 +101,17 @@ export default {
       type: Number,
       default: 3
     },
-    remaining_days: {
+    remainingSets: {
       type: Number,
-      default: '今週残り4個'
+      require: true
     },
     remaining_format: {
       type: String,
       default: '週'
+    },
+    remainingSetCount: {
+      type: Number,
+      require: true
     },
     address: {
       type: String,
@@ -172,20 +182,27 @@ export default {
       } else {
         result.period = '残り' + this.period + '日';
       }
+      const remainingSets = this.remainingSets - this.remainingSetCount
       switch (this.remaining_format) {
         case 'whole':
-          result.remaining = '全期間残り：' + this.remaining_days
+          result.remaining = '全期間残り：' + remainingSets
           break
         case 'day':
-          result.remaining = '本日残り：' + this.remaining_days
+          result.remaining = '本日残り：' + remainingSets
           break
         case 'week':
-          result.remaining = '今週残り：' + this.remaining_days
+          result.remaining = '今週残り：' + remainingSets
           break
         case 'month':
-          result.remaining = '今月残り：' + this.remaining_days
+          result.remaining = '今月残り：' + remainingSets
       }
       return result.period + '：' + result.remaining
+    },
+    disableBuyButton() {
+      if (this.remainingSets - this.remainingSetCount === 0) {
+        return true
+      }
+      return false
     },
     inputSetCount: {
       get() {
@@ -197,6 +214,12 @@ export default {
     },
     getHostFrontEnv() {
       return process.env.HostFrontUrl
+    },
+    getCurrentUser() {
+      if (this.$myAuth.loggedIn()) {
+        return this.$myAuth.user().id
+      }
+      return false
     }
   }
 }
