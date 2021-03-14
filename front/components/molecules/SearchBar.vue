@@ -1,6 +1,7 @@
 <template>
   <div class="searchBar">
-    <input v-model="inputValue" class="searchBar__text" type="text" name="text" placeholder="文字を入力してください" maxlength="30">
+    <input v-model="inputValue" class="searchBar__text" type="text" name="text" placeholder="文字を入力してください"
+           maxlength="30">
     <div @click="$emit('click')" class="searchBar__button">
       <img src="@/assets/images/icon/search_icon.svg">
     </div>
@@ -26,14 +27,12 @@ export default {
       searchParam.path = '/search';
 
       if (this.text) {
-        searchParam.query = { text: this.text }
+        searchParam.query = {text: this.text}
       }
       return searchParam
     }
   },
-  methods: {
-
-  }
+  methods: {}
 }
 </script>
 
@@ -44,6 +43,7 @@ export default {
   background-color: $main-background-color;
   letter-spacing: -.4em;
 }
+
 .searchBar__text {
   display: inline-block;
   width: calc(100% - 30px);
@@ -58,6 +58,7 @@ export default {
 
   letter-spacing: normal;
 }
+
 .searchBar__button {
   display: inline-block;
   height: 30px;
@@ -72,6 +73,7 @@ export default {
   letter-spacing: normal;
 
 }
+
 .searchBar__button img {
   width: 20px;
   height: 20px;

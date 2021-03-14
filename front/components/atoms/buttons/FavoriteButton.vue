@@ -1,5 +1,5 @@
 <template>
-  <button class="favorite-button" :class="{'favorite': state, 'no-favorite': !state}" @click="$emit('myClick')">
+  <button type="button" class="favorite-button" :class="{'favorite': state, 'no-favorite': !state}" @click="$emit('myClick')">
     <heart-icon></heart-icon>
   </button>
 </template>

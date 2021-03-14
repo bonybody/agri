@@ -1,5 +1,5 @@
 <template>
-  <button v-if="!state" class="tab-button" @click="$emit('myClick')">
+  <button type="button" v-if="!state" class="tab-button" @click="$emit('myClick')">
     <slot></slot>
   </button>
   <button v-else="state" class="tab-button active" disabled>
