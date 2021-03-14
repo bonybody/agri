@@ -1,5 +1,6 @@
 <template>
   <button
+      type="button"
       @click="$emit('myClick')"
       class="user-follow-button"
       :class="{ 'follow': state, 'not-follow': !state }"

@@ -9,7 +9,9 @@
         </h1>
       </nuxt-link>
       <div class="header__search-bar">
+        <form action="/search" method="get">
         <search-bar @click="search()" v-model="text"></search-bar>
+        </form>
       </div>
 
       <div v-if="getLoggedIn" class="logged-in">

@@ -1,5 +1,6 @@
 <template>
   <button
+      type="button"
       class="link-button"
       :class="{ 'none': none }"
       @click="$emit('myClick')"

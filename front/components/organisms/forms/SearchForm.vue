@@ -1,11 +1,14 @@
 <template>
   <div class="search">
-    <div class="search__text">
-      <search-bar @click="$emit('search', {
+    <form action="/search" method="get">
+      <div class="search__text">
+        <search-bar @click="$emit('search', {
         text: text.value,
         category: category.value,
         orderBy: orderBy.value })" v-model="text.value"/>
-    </div>
+      </div>
+    </form>
+
     <div class="search__select">
       <item-category-form v-model="category.value" :select-null="true" :require="false"/>
     </div>

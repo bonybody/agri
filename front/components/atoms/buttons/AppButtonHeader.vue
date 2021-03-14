@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button v-if="type === 'button'" @click="$emit('myClick')" class="link"
+    <button type="button" v-if="type === 'button'" @click="$emit('myClick')" class="link"
             :class="{'primary': primary, 'notPrimary': !primary }">
       <slot></slot>
     </button>
