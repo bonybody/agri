@@ -6,8 +6,8 @@
           @close-modal="closeModal"
       />
     </div>
-    <p class="item-box__state">
-      残り{{ period }}日
+    <p class="item-box__period">
+      {{ getPeriod }}
     <p/>
     <div class="item-box__content-wrap">
       <div class="item-box__image-area">
@@ -136,6 +136,15 @@ export default {
     }
   },
   computed: {
+    getPeriod: function () {
+      const result = {}
+      if (this.period === 0) {
+        result.period = '据え置き';
+      } else {
+        result.period = '残り' + this.period + '日';
+      }
+      return result.period
+    },
     getFavorite() {
       if (!this.thisFavorite.state) {
         return this.favorite
@@ -183,7 +192,7 @@ export default {
   text-align: right;
 
 
-  &__state {
+  &__period {
     display: inline-block;
     position: relative;
     z-index: 100;

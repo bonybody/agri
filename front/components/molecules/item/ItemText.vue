@@ -168,7 +168,7 @@ export default {
   computed: {
     getRemainingAndPeriod: function () {
       const result = {}
-      if (this.period === 0) {
+      if (this.period == 0) {
         result.period = '据え置き';
       } else {
         result.period = '残り' + this.period + '日';
