@@ -1,6 +1,7 @@
 import boto3
+import os
 
-s3 = boto3.resource('s3', aws_access_key_id='AKIAJZH4JAE5WA3CUOVQ', aws_secret_access_key='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')
+s3 = boto3.resource('s3', aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'], aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'])
 item_image_bucket = s3.Bucket('agri-item-images')
 
 def getS3Buckets(app):

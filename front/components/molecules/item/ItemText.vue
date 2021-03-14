@@ -68,9 +68,10 @@
       </div>
     </div>
     <div class="line-wrap">
-      <app-form-button :disabled="disableBuyButton" v-if="getCurrentUser !== userId" @my-click="$emit('buy')">購入する</app-form-button>
-      <app-form-button v-if="getCurrentUser === userId" @my-click="$emit('edit')">内容を編集する
+      <app-form-button :disabled="disableBuyButton" @my-click="$emit('buy')">購入する
       </app-form-button>
+      <!--      <app-form-button v-if="getCurrentUser === userId" @my-click="$emit('edit')">内容を編集する-->
+<!--      </app-form-button>-->
     </div>
   </div>
 </template>
@@ -190,6 +191,9 @@ export default {
     },
     disableBuyButton() {
       if (this.remainingSets - this.remainingSetCount === 0) {
+        return true
+      }
+      if (this.getCurrentUser === this.userId) {
         return true
       }
       return false

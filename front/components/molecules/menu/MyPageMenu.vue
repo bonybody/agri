@@ -39,9 +39,9 @@ export default {
           name: '一般',
           links: [
             {id: 1, text: 'マイページ', link: {path: '/mypage'}},
-            {id: 2, text: 'プロフィール', link: {path: '/user/' + this.$myAuth.user().id}},
+            // {id: 2, text: 'プロフィール', link: {path: '/user/' + this.$myAuth.user().id}},
             {id: 3, text: 'お気に入り', link: {path: '/mypage/favorite'}},
-            {id: 5, text: 'フォローユーザー', link: {path: '/mypage/follow'}},
+            // {id: 5, text: 'フォローユーザー', link: {path: '/mypage/follow'}},
           ]
         },
         {

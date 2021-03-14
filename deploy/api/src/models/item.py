@@ -80,6 +80,8 @@ class Item(db.Model):
             ItemTransaction,
             and_(ItemTransaction.item_id == cls.id,
                  or_(
+                     cls.remaining_format.has(name='whole'),
+
                      and_(cls.remaining_format.has(name='week'),
                           ItemTransaction.created_at >= monday,
                           ItemTransaction.created_at <= sunday
@@ -111,7 +113,8 @@ class Item(db.Model):
         for k, v in args.items():
             if (k == 'text'):
                 records = records.filter(or_(cls.name.like('%' + v + '%'),
-                                  cls.description.like('%' + v + '%')))
+                                  cls.description.like('%' + v + '%'),
+                                             cls.area.like('%' + v + '%')))
             if (k == 'category'):
                 records = records.filter(cls.category_id == v)
 
@@ -126,6 +129,7 @@ class Item(db.Model):
             ItemTransaction,
             and_(ItemTransaction.item_id == cls.id,
                  or_(
+                     cls.remaining_format.has(name='whole'),
                      and_(cls.remaining_format.has(name='week'),
                           ItemTransaction.created_at >= monday,
                           ItemTransaction.created_at <= sunday
@@ -143,7 +147,7 @@ class Item(db.Model):
         ).outerjoin(
             ItemFavorite,
             and_(ItemFavorite.item_id == cls.id, ItemFavorite.user_id == user_id)
-        ).group_by(cls.id).all()
+        ).group_by(cls.id).order_by(desc(cls.updated_at)).all()
 
         return records
 
@@ -156,6 +160,7 @@ class Item(db.Model):
             ItemTransaction,
             and_(ItemTransaction.item_id == cls.id,
                  or_(
+                     cls.remaining_format.has(name='whole'),
                      and_(cls.remaining_format.has(name='week'),
                           ItemTransaction.created_at >= monday,
                           ItemTransaction.created_at <= sunday
@@ -173,7 +178,7 @@ class Item(db.Model):
         ).outerjoin(
             ItemFavorite,
             and_(ItemFavorite.item_id == cls.id, ItemFavorite.user_id == user_id)
-        ).group_by(cls.id).all()
+        ).group_by(cls.id).order_by(desc(cls.updated_at)).all()
 
         return records
 
@@ -186,6 +191,7 @@ class Item(db.Model):
             ItemTransaction,
             and_(ItemTransaction.item_id == cls.id,
                  or_(
+                     cls.remaining_format.has(name='whole'),
                      and_(cls.remaining_format.has(name='week'),
                           ItemTransaction.created_at >= monday,
                           ItemTransaction.created_at <= sunday
@@ -203,7 +209,7 @@ class Item(db.Model):
         ).outerjoin(
             ItemFavorite,
             and_(ItemFavorite.item_id == cls.id, ItemFavorite.user_id == user_id)
-        ).group_by(cls.id).all()
+        ).group_by(cls.id).order_by(desc(cls.updated_at)).all()
 
         return records
 
@@ -216,6 +222,8 @@ class Item(db.Model):
             ItemTransaction,
             and_(ItemTransaction.item_id == cls.id,
                  or_(
+                     cls.remaining_format.has(name='whole'),
+
                      and_(cls.remaining_format.has(name='week'),
                           ItemTransaction.created_at >= monday,
                           ItemTransaction.created_at <= sunday
@@ -233,6 +241,6 @@ class Item(db.Model):
         ).outerjoin(
             ItemFavorite,
             and_(ItemFavorite.item_id == cls.id, ItemFavorite.user_id == user_id)
-        ).group_by(cls.id).all()
+        ).group_by(cls.id).order_by(desc(cls.updated_at)).all()
 
         return records

@@ -55,22 +55,22 @@ class Koe(db.Model):
 
     @classmethod
     def getRecordsByItem(cls, item_id):
-        record = cls.query.filter_by(item_id=item_id).all()
+        record = cls.query.filter_by(item_id=item_id).order_by(desc(cls.updated_at)).all()
         return record
 
     @classmethod
     def getRecordsByPostUser(cls, user_id):
-        record = cls.query.filter_by(user_id=user_id).all()
+        record = cls.query.filter_by(user_id=user_id).order_by(desc(cls.updated_at)).all()
         return record
 
     @classmethod
     def getRecordsByCatchUser(cls, user_id):
-        record = cls.query.filter(cls.item.has(user_id=user_id)).all()
+        record = cls.query.filter(cls.item.has(user_id=user_id)).order_by(desc(cls.updated_at)).all()
         return record
 
     @classmethod
     def getRecordsByNew(cls):
-        record = cls.query.all()
+        record = cls.query.order_by(desc(cls.updated_at)).all()
         return record
 
     @classmethod

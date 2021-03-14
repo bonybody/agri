@@ -147,7 +147,7 @@ class Item(db.Model):
         ).outerjoin(
             ItemFavorite,
             and_(ItemFavorite.item_id == cls.id, ItemFavorite.user_id == user_id)
-        ).group_by(cls.id).all()
+        ).group_by(cls.id).order_by(desc(cls.updated_at)).all()
 
         return records
 
@@ -178,7 +178,7 @@ class Item(db.Model):
         ).outerjoin(
             ItemFavorite,
             and_(ItemFavorite.item_id == cls.id, ItemFavorite.user_id == user_id)
-        ).group_by(cls.id).all()
+        ).group_by(cls.id).order_by(desc(cls.updated_at)).all()
 
         return records
 
@@ -209,7 +209,7 @@ class Item(db.Model):
         ).outerjoin(
             ItemFavorite,
             and_(ItemFavorite.item_id == cls.id, ItemFavorite.user_id == user_id)
-        ).group_by(cls.id).all()
+        ).group_by(cls.id).order_by(desc(cls.updated_at)).all()
 
         return records
 
@@ -241,6 +241,6 @@ class Item(db.Model):
         ).outerjoin(
             ItemFavorite,
             and_(ItemFavorite.item_id == cls.id, ItemFavorite.user_id == user_id)
-        ).group_by(cls.id).all()
+        ).group_by(cls.id).order_by(desc(cls.updated_at)).all()
 
         return records
