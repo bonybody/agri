@@ -1,7 +1,6 @@
 FROM python:3.7
 
 ADD entrypoint.sh /entrypoint.sh
-ADD .aws /root/.aws
 ADD src /api
 WORKDIR /api
 RUN apt-get update

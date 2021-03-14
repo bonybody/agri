@@ -19,11 +19,11 @@
             :state="userFollow"
         />
       </div>
-      <div class="user-profile__button user-profile__edit"
-           v-if="verifyUserId"
-      >
-        <app-link-button :link="'/setting/profile'">プロフィールを編集する</app-link-button>
-      </div>
+<!--      <div class="user-profile__button user-profile__edit"-->
+<!--           v-if="verifyUserId"-->
+<!--      >-->
+<!--        <app-link-button :link="'/setting/profile'">プロフィールを編集する</app-link-button>-->
+<!--      </div>-->
     </div>
     <p class="user-profile__description">{{ userDescription }}</p>
     <div class="sns-share">
