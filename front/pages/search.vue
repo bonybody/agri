@@ -85,7 +85,6 @@ export default {
         values.orderBy ? query.orderBy = values.orderBy : ''
       }
       const params = query
-      params.user_id = this.$myAuth.user().id
       const res = await this.$api['search'].getByParams(params).then(({data}) => {
         return data
       })

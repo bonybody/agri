@@ -1,20 +1,20 @@
 <template>
   <div class="search">
-    <form action="/search" method="get">
-      <div class="search__text">
-        <search-bar @click="$emit('search', {
+    <form @submit.prevent="$emit('search', {
         text: text.value,
         category: category.value,
-        orderBy: orderBy.value })" v-model="text.value"/>
+        orderBy: orderBy.value })">
+      <div class="search__text">
+        <search-bar @click="" v-model="text.value"/>
+      </div>
+      <div class="search__select">
+        <item-category-form v-model="category.value" :select-null="true" :require="false"/>
+      </div>
+      <div class="search__select">
+        <order-by-form v-model="orderBy.value" :require="false"/>
       </div>
     </form>
 
-    <div class="search__select">
-      <item-category-form v-model="category.value" :select-null="true" :require="false"/>
-    </div>
-    <div class="search__select">
-      <order-by-form v-model="orderBy.value" :require="false"/>
-    </div>
   </div>
 </template>
 
@@ -54,7 +54,6 @@ export default {
       },
     }
   },
-
 }
 </script>
 

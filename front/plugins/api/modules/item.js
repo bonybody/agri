@@ -1,19 +1,21 @@
 export default class Item {
-  constructor(axios) {
+  constructor(axios, $myAuth) {
     this.api = axios;
+    this.auth = $myAuth
     this.prefix = '/item/';
-    console.log(this.api);
+    // console.log(this.api);
   }
 
   async getById(id, user_id) {
     const res = await this.api.get(this.prefix, {
       params: {
         id: id,
-        user_id: user_id
+        user_id: this.auth.user().id
       }
     })
     return res
   }
+
   async getItemsByUserId(user_id) {
     const res = await this.api.get(this.prefix + 'user', {
       params: {
@@ -22,10 +24,11 @@ export default class Item {
     })
     return res
   }
+
   async getNewItems(user_id) {
     const res = await this.api.get(this.prefix + 'new', {
       params: {
-        user_id: user_id
+        user_id: this.auth.user().id
       }
     })
     return res
@@ -34,7 +37,7 @@ export default class Item {
   async getFavoriteItems(user_id) {
     const res = await this.api.get(this.prefix + 'favorite', {
       params: {
-        user_id: user_id
+        user_id: this.auth.user().id
       }
     })
     return res
@@ -44,9 +47,7 @@ export default class Item {
   async post(params) {
     this.api.setHeader('Content-Type', 'multipart/form-data')
     this.api.setHeader('Accept', 'application/json')
-    console.log(params);
     const res = await this.api.post(this.prefix, params);
-    console.log(res);
     return res
   }
 }
