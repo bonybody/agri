@@ -9,8 +9,8 @@
         </h1>
       </nuxt-link>
       <div class="header__search-bar">
-        <form action="/search" method="get">
-        <search-bar @click="search()" v-model="text"></search-bar>
+        <form @submit.prevent="search()">
+          <search-bar @click="search()" v-model="text"></search-bar>
         </form>
       </div>
 
@@ -69,9 +69,11 @@ export default {
       await this.$myAuth.logout()
     },
     search() {
-      this.$router.push({path: '/search', query: {
-        text: this.text
-        }})
+      this.$router.push({
+        path: '/search', query: {
+          text: this.text
+        }
+      })
     }
   }
 }
@@ -84,9 +86,11 @@ header {
   background-color: $main-background-color;
   box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.3);
 }
+
 .header__search-bar {
   width: 500px;
 }
+
 .header__content {
   max-width: 1024px;
   height: 45px;
