@@ -15,7 +15,7 @@
       </div>
 
       <div v-if="getLoggedIn" class="logged-in">
-        <nuxt-link to="/mypage" class="logged-in__item">
+        <nuxt-link :aria-label="'マイページへ'" to="/mypage" class="logged-in__item">
           <div class="profile__img" :class="{'image': getUserImage, 'noImage': !getUserImage}">
             <img v-if="getUserImage" :src="getUserImage" alt="ユーザー画像">
             <no-user-image-icon v-if="!getUserImage"/>

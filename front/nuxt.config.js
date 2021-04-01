@@ -9,16 +9,18 @@ export default {
   ssr: true,
   head: {
     title: 'agri',
+    htmlAttrs: {
+      lang: 'ja'
+    },
     meta: [
       {charset: 'utf-8'},
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-      {hid: 'description', name: 'description', content: ''}
+      {hid: 'description', name: 'description', content: '農産物専門のフリマサイト「アグリー」'}
     ],
     link: [
       {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
     ]
   },
-
   router: {
     middleware: ['auth']
   },

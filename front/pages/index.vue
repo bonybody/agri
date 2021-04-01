@@ -12,7 +12,7 @@
                 query: { category: category.id }
               }"
           >
-            <img class="category__image" :src="category.image" :alt="category.name">
+            <img rel="prefetch" class="category__image" :src="category.image" :alt="category.name">
             <span class="category__name">{{ category.name }}</span>
           </nuxt-link>
         </template>

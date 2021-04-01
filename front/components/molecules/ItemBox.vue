@@ -11,8 +11,8 @@
     <p/>
     <div class="item-box__content-wrap">
       <div class="item-box__image-area">
-        <nuxt-link :to="getItemDetailLink" class="item-box__item-image-wrap">
-          <img v-if="image" class="item-box__item-image" :src="image" :alt="name">
+        <nuxt-link :aria-label="name" :to="getItemDetailLink" class="item-box__item-image-wrap">
+          <img rel="prefetch" v-if="image" class="item-box__item-image" :src="image" :alt="name">
         </nuxt-link>
         <div class="item-box__user-image-wrap">
           <user-icon :image="userImage"/>
@@ -43,15 +43,13 @@
 
 <script>
 import MapIcon from "~/components/icons/MapIcon";
-import HeartIcon from "~/components/icons/HeartIcon";
 import FavoriteButton from "~/components/atoms/buttons/FavoriteButton";
-import PasswordForm from "~/components/molecules/forms/PasswordForm";
 import UserIcon from "~/components/icons/UserIcon";
 import LoginRequireWindow from "@/components/organisms/modal_windows/LoginRequireWindow";
 
 export default {
   name: "ItemBox",
-  components: {LoginRequireWindow, UserIcon, PasswordForm, FavoriteButton, HeartIcon, MapIcon},
+  components: {LoginRequireWindow, UserIcon, FavoriteButton, MapIcon},
   data() {
     return {
       thisFavorite: {
