@@ -186,13 +186,15 @@ export default {
   },
   computed: {
     periodDate() {
-      console.log(this.period.value)
       if (this.period.value === 0) {
         return ''
       }
       const date = new Date()
-      date.setDate(date.getDate() + this.period.value)
-      return dateFormat(date)
+      date.setDate(date.getDate() + Number(this.period.value))
+      const yy = date.getFullYear()
+      const mm = date.getMonth() + 1
+      const dd = date.getDate()
+      return `${yy}-${mm}-${dd}`
     }
   },
   methods: {

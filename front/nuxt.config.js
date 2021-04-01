@@ -9,16 +9,18 @@ export default {
   ssr: true,
   head: {
     title: 'agri',
+    htmlAttrs: {
+      lang: 'ja'
+    },
     meta: [
       {charset: 'utf-8'},
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-      {hid: 'description', name: 'description', content: ''}
+      {hid: 'description', name: 'description', content: '農産物専門のフリマサイト「アグリー」'}
     ],
     link: [
       {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
     ]
   },
-
   router: {
     middleware: ['auth']
   },
@@ -38,19 +40,15 @@ export default {
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
     {
-      src: '~/plugins/axios/axios.js',
-      mode: "client"
-    },
-    {
-      src: '~/plugins/axios/axios_server.js',
-      mode: "server"
-    },
-    {
       src: '~/plugins/axios/index.js',
       mode: "client"
     },
     {
-      src: '~/plugins/axios/index_server.js',
+      src: '~/plugins/axios/client.js',
+      mode: "client"
+    },
+    {
+      src: '~/plugins/axios/server.js',
       mode: "server"
     },
     {
@@ -82,7 +80,10 @@ export default {
     'vue-social-sharing/nuxt'
   ],
   auth: {
-    plugins: ['~/plugins/my-auth/my-auth.js'],
+    plugins: [
+      '~/plugins/my-auth/my-auth.js',
+      '~/plugins/api/index.js'
+    ],
     redirect: {
       login: '/login',   // 未ログイン時に認証ルートへアクセスした際のリダイレクトURL
       logout: '/',  // ログアウト時のリダイレクトURL

@@ -1,11 +1,12 @@
 export default class Search {
-  constructor(axios) {
+  constructor(axios, $myAuth) {
     this.api = axios;
     this.prefix = '/search/';
-    console.log(this.api);
+    this.auth = $myAuth
   }
 
   async getByParams(params) {
+    params.user_id = this.auth.user().id
     const res = await this.api.get(this.prefix, {
       params: params
     })
@@ -41,9 +42,7 @@ export default class Search {
   async post(params) {
     this.api.setHeader('Content-Type', 'multipart/form-data')
     this.api.setHeader('Accept', 'application/json')
-    console.log(params);
     const res = await this.api.post(this.prefix, params);
-    console.log(res);
     return res
   }
 }

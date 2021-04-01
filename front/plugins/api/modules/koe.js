@@ -1,37 +1,17 @@
-export default class Favorite {
+export default class Koe {
   constructor(axios) {
     this.api = axios;
-    this.prefix = '/favorite/';
-    console.log(this.api);
+    this.prefix = '/koe/';
   }
 
-  async getItemsByUserId(id) {
-    const res = await this.api.get(this.prefix + 'item', {
+  async getById(id) {
+    const res = await this.api.get(this.prefix, {
       params: {
         id: id
       }
     })
     return res
   }
-  async changeFavorite(user_id, item_id) {
-    const res = await this.api.post(this.prefix + 'item', {
-      user_id: user_id,
-      item_id: item_id
-    })
-  }
-
-  async postItem(user_id, item_id) {
-    const res = await this.api.post(this.prefix + 'item',
-      {
-        user_id: user_id,
-        item_id: item_id
-      })
-  }
-
-  async postKoe(user_id, koe_id) {
-    const res = await this.api.post(this.prefix + 'koe')
-  }
-
   async getByNew() {
     const res = await this.api.get(this.prefix + 'new')
     return res
@@ -43,7 +23,6 @@ export default class Favorite {
     })
     return res
   }
-
   async shipment(id) {
     const res = await this.api.patch(this.prefix + 'shipment', {
       id: id
@@ -53,9 +32,7 @@ export default class Favorite {
 
 
   async post(params) {
-    console.log(params);
     const res = await this.api.post(this.prefix, params);
-    console.log(res);
     return res
   }
 
@@ -65,7 +42,6 @@ export default class Favorite {
         id: user_id
       }
     });
-    console.log(res);
     return res
   }
 
@@ -75,7 +51,6 @@ export default class Favorite {
         id: user_id
       }
     });
-    console.log(res);
     return res
   }
 
@@ -85,7 +60,6 @@ export default class Favorite {
         id: item_id
       }
     });
-    console.log(res);
     return res
   }
 }

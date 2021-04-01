@@ -44,8 +44,6 @@ export default {
       query.category ? params.category = query.category : ''
       query.orderBy ? params.order_by = query.orderBy : ''
     }
-    params.user_id = $myAuth.user().id
-    console.log(params)
     const res = await $api['search'].getByParams(params).then(({data}) => {
       return data
     })
@@ -84,19 +82,16 @@ export default {
         values.category ? query.category = values.category : ''
         values.orderBy ? query.orderBy = values.orderBy : ''
       }
-      const params = query
-      params.user_id = this.$myAuth.user().id
-      const res = await this.$api['search'].getByParams(params).then(({data}) => {
-        return data
-      })
-      this.items = res.entries.items
-      this.koes = res.entries.koes
-
       if (Object.keys(query).length) {
         this.$router.push({path: '/search', query: query})
       } else {
         this.$router.push({path: '/search'})
       }
+      const res = await this.$api['search'].getByParams(query).then(({data}) => {
+        return data
+      })
+      this.items = res.entries.items
+      this.koes = res.entries.koes
       return true
     }
   }

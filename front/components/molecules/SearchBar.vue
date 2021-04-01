@@ -2,9 +2,9 @@
   <div class="searchBar">
     <input v-model="inputValue" class="searchBar__text" type="text" name="text" placeholder="文字を入力してください"
            maxlength="30">
-    <div @click="$emit('click')" class="searchBar__button">
-      <img src="@/assets/images/icon/search_icon.svg">
-    </div>
+    <button class="searchBar__button">
+      <img src="@/assets/images/icon/search_icon.svg" alt="検索ボタン">
+    </button>
   </div>
 </template>
 

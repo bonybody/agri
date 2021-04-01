@@ -1,10 +1,11 @@
 from datetime import datetime
 import sys
 import os
+
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from flask import current_app
 from database.database import db
-from sqlalchemy import or_, desc
+from sqlalchemy import or_, desc, and_
 
 
 class Koe(db.Model):
@@ -41,14 +42,15 @@ class Koe(db.Model):
         for k, v in args.items():
             if (k == 'text'):
                 records = records.filter(or_(cls.title.like('%' + v + '%'),
-                                  cls.text.like('%' + v + '%')))
+                                             cls.text.like('%' + v + '%')))
+            if (k == 'category'):
+                records = records.filter(and_(cls.item.has(category_id=v)))
             if (k == 'order_by'):
                 order_by = v
 
                 if (int(v) == 1):
                     current_app.logger.debug(order_by)
                     records = records.order_by(desc(cls.updated_at))
-
 
         records = records.all()
         return records

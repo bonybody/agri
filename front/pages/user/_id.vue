@@ -9,7 +9,6 @@
 import UserDetail from "~/components/organisms/user/UserDetail";
 
 export default {
-  name: "_id",
   components: {UserDetail},
   auth: false,
   async asyncData({ $api, $myAuth, param }) {
