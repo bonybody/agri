@@ -19,4 +19,4 @@ marshmallow
 flask_marshmallow
 marshmallow-sqlalchemy
 gunicorn
-
+psycopg2
