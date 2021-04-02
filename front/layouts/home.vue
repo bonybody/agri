@@ -4,7 +4,7 @@
       <the-header></the-header>
     </div>
     <p class="heading-images">
-      <img rel="prefetch" src="~assets/images/index-swiper/swiper3.jpeg" alt="">
+      <img rel="prefetch" src="~assets/images/index-swiper/swiper3.jpg" alt="メインビジュアル">
     </p>
     <Nuxt/>
   </div>
