@@ -14,6 +14,7 @@ export default {
     },
     meta: [
       {charset: 'utf-8'},
+      {name: 'robots', content: 'noindex'},
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},
       {hid: 'description', name: 'description', content: '農産物専門のフリマサイト「アグリー」'}
     ],
