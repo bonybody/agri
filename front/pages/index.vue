@@ -36,7 +36,8 @@ import NewKoeBoxes from "~/components/organisms/koeBoxes/NewKoeBoxes";
 import ImagesSwiper from "~/components/molecules/images/ImagesSwiper";
 
 export default {
-  name: "index",
+  name: 'index',
+  transition: 'page',
   layout: 'home',
   auth: false,
   components: {ImagesSwiper, NewKoeBoxes, NewItemBoxies},

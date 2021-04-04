@@ -336,4 +336,7 @@ export default {
     height: 30px;
   }
 }
+.description {
+  word-wrap: break-word;
+}
 </style>
