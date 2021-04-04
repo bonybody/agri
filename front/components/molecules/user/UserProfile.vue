@@ -8,9 +8,6 @@
         />
       </div>
       <p class="user-profile__name">{{ userName }}</p>
-      <p class="user-profile__achievement">
-
-      </p>
       <div class="user-profile__button user-profile__follow"
            v-if="!verifyUserId"
       >
@@ -19,14 +16,14 @@
             :state="userFollow"
         />
       </div>
-<!--      <div class="user-profile__button user-profile__edit"-->
-<!--           v-if="verifyUserId"-->
-<!--      >-->
-<!--        <app-link-button :link="'/setting/profile'">プロフィールを編集する</app-link-button>-->
-<!--      </div>-->
+      <div class="user-profile__button user-profile__edit"
+           v-if="verifyUserId"
+      >
+        <app-link-button :link="{path: '/setting/profile'}">プロフィールを編集する</app-link-button>
+      </div>
     </div>
-    <p class="user-profile__description">{{ userDescription }}</p>
     <div class="sns-share">
+      <p class="sns-share__label">共有：</p>
       <div class="sns-share__icon">
         <app-twitter-share-button/>
       </div>
@@ -126,6 +123,7 @@ export default {
 .sns-share {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   &__icon {
     width: 30px;
     height: 30px;

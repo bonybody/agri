@@ -2,28 +2,7 @@
   <div class="user-detail">
     <div class="user-detail__profile">
       <user-profile
-
       />
-    </div>
-    <div class="user-detail__tabs">
-      <div class="user-detail__tab">
-        <app-tab-button
-            :state="tabs.item.state"
-            @myClick="tabChange"
-        >{{ tabs.item.value }}</app-tab-button>
-      </div>
-      <div class="user-detail__tab">
-        <app-tab-button
-            :state="tabs.koe.state"
-            @myClick="tabChange"
-        >{{ tabs.koe.value }}</app-tab-button>
-      </div>
-    </div>
-    <div v-if="tabs.item.state" class="user-detail__items">
-      <user-item-boxes/>
-    </div>
-    <div v-if="tabs.koe.state" class="user-detail__koe">
-      <user-catch-koe-boxes/>
     </div>
   </div>
 </template>

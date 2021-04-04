@@ -13,8 +13,20 @@ import io
 
 user_bp = Blueprint('user', __name__, url_prefix='/user')
 
-
 @user_bp.route('/', methods=['get'])
+def get():
+    if request.args.get('id') is not None:
+        user_id = request.args.get('id')
+    else:
+        return jsonify({})
+    user = User.getUserInfo(user_id)
+    user_dict = user.__dict__
+    user_dict.pop('_sa_instance_state')
+
+    return jsonify(user_dict)
+
+
+@user_bp.route('auth', methods=['get'])
 @jwt_required()
 def get():
     print(current_identity)
