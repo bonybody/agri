@@ -46,7 +46,7 @@ export default {
   components: {PostItemBoxes, AppHeading, BuyItemBoxes, AppTabButton},
   async asyncData({params, $api, $myAuth}) {
     let items = {}
-    const res = await $api['item'].getItemsByUserId($myAuth.user().id).then(
+    const res = await $api['item'].getByUserIdAll($myAuth.user().id).then(
         ({data}) => {
           console.log(data)
           items = data.entries

@@ -26,7 +26,7 @@ export default {
   name: "FavoriteItemBoxes",
   components: {ItemBox},
   async fetch() {
-    const res = await this.$api['item'].getItemsByUserId(this.$myAuth.user().id).then(({data}) => {
+    const res = await this.$api['item'].getByUserIdAll(this.$myAuth.user().id).then(({data}) => {
       this.records = data.entries
       this.state = data.state
       console.log(data.entries)

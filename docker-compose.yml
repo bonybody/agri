@@ -29,7 +29,7 @@ services:
       - API_URL_SERVER
       - HOST_FRONT_URL
     command: >
-      bash -c "npm run build && npm run start"
+      bash -c "npm run dev"
 
 
   api:

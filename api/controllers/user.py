@@ -26,9 +26,9 @@ def get():
     return jsonify(user_dict)
 
 
-@user_bp.route('auth', methods=['get'])
+@user_bp.route('/auth', methods=['get'])
 @jwt_required()
-def get():
+def getByAuth():
     print(current_identity)
     user = User.getUserInfo(current_identity.id)
     user_dict = user.__dict__
