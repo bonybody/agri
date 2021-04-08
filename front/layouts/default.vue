@@ -3,7 +3,9 @@
     <div class="header">
       <the-header></the-header>
     </div>
-    <Nuxt/>
+    <main>
+      <Nuxt/>
+    </main>
   </div>
 </template>
 

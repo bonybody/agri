@@ -48,7 +48,7 @@ export default {
   },
   head () {
     return {
-      title: this.item.name + "| agri",
+      title: this.item.name + " | agri",
       meta: [
         { hid: 'description', name: 'description', content: this.item.description },
         { hid: 'og:type', property: 'og:type', content: 'article' },

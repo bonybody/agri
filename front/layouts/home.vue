@@ -4,11 +4,22 @@
       <the-header></the-header>
     </div>
     <p class="heading-images">
-      <img rel="prefetch" src="~assets/images/index-swiper/swiper3.jpeg" alt="">
+      <img rel="prefetch" src="~assets/images/index-swiper/swiper3.jpg" alt="メインビジュアル">
     </p>
-    <Nuxt/>
+    <main>
+      <Nuxt/>
+    </main>
   </div>
 </template>
+
+<script>
+import TheHeader from "~/components/organisms/commons/TheHeader";
+
+export default {
+  name: "home",
+  components: {TheHeader}
+}
+</script>
 
 <style scoped lang="scss">
 .heading-images {
@@ -27,11 +38,3 @@
 }
 
 </style>
-<script>
-import TheHeader from "~/components/organisms/commons/TheHeader";
-
-export default {
-  name: 'home',
-  components: {TheHeader}
-}
-</script>

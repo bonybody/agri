@@ -9,12 +9,11 @@
 
 <script>
 import ItemPostForm from "~/components/organisms/forms/ItemPostForm";
-import SiteIcon from "~/components/icons/SiteIcon";
 import AppHeading from "@/components/atoms/headings/AppHeading";
 
 export default {
   name: "postItem",
-  components: {AppHeading, SiteIcon, ItemPostForm},
+  components: {AppHeading, ItemPostForm},
   layout: 'mypage'
 }
 </script>

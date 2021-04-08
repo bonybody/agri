@@ -12,9 +12,17 @@ JWT_EXPIRATION_DELTA = timedelta(seconds=6000)
 
 import os
 
-SQLALCHEMY_DATABASE_URI = 'mysql://{user}:{password}@{host}/{db_name}?charset=utf8'.format(**{
-    'user': os.environ['MYSQL_USER'],
-    'password': os.environ['MYSQL_PASSWORD'],
+SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://{user}:{password}@{host}/{db_name}'.format(**{
+    'user': os.environ['POSTGRES_USER'],
+    'password': os.environ['POSTGRES_PASSWORD'],
     'host': os.environ['DB_HOST'],
-    'db_name': os.environ['MYSQL_DATABASE']
+    'db_name': os.environ['POSTGRES_DATABASE']
 })
+
+#
+# SQLALCHEMY_DATABASE_URI = 'mysql://{user}:{password}@{host}/{db_name}?charset=utf8'.format(**{
+#     'user': os.environ['MYSQL_USER'],
+#     'password': os.environ['MYSQL_PASSWORD'],
+#     'host': os.environ['DB_HOST'],
+#     'db_name': os.environ['MYSQL_DATABASE']
+# })

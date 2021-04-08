@@ -7,8 +7,9 @@
 <script>
 import MyPageMenu from "~/components/molecules/menu/MyPageMenu";
 export default {
-  name: "mypage",
-  components: {MyPageMenu}
+  name: 'index',
+  components: {MyPageMenu},
+  transition: 'page'
 }
 </script>
 

@@ -16,7 +16,7 @@ export default class Item {
     return res
   }
 
-  async getItemsByUserId(user_id) {
+  async getByUserIdAll(user_id) {
     const res = await this.api.get(this.prefix + 'user', {
       params: {
         user_id: user_id
